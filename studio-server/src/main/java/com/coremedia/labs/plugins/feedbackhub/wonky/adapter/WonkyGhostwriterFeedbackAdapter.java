@@ -7,10 +7,9 @@ import com.coremedia.feedbackhub.items.FeedbackItemFactory;
 import com.coremedia.feedbackhub.items.FeedbackLinkFeedbackItem;
 import com.coremedia.feedbackhub.items.LabelFeedbackItem;
 import com.coremedia.feedbackhub.items.PercentageBarFeedbackItem;
-import com.coremedia.labs.plugins.feedbackhub.wonky.WonkyGhostWritrFeedbackCollections;
 import com.coremedia.labs.plugins.feedbackhub.wonky.WonkyGhostwritrSettings;
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.WonkyGhostWritrService;
-import com.coremedia.labs.plugins.feedbackhub.wonky.api.dto.TextsResponse;
+import com.coremedia.labs.plugins.feedbackhub.wonky.custom.items.GenerateTextFeedbackItem;
 import edu.umd.cs.findbugs.annotations.DefaultAnnotation;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
@@ -23,7 +22,8 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import static com.coremedia.labs.plugins.feedbackhub.wonky.WonkyGhostWritrFeedbackCollections.*;
+import static com.coremedia.labs.plugins.feedbackhub.wonky.WonkyGhostWritrFeedbackCollections.INTERACTIVE;
+import static com.coremedia.labs.plugins.feedbackhub.wonky.WonkyGhostWritrFeedbackCollections.SIMPLE;
 
 /**
  *
@@ -64,19 +64,22 @@ public class WonkyGhostwriterFeedbackAdapter implements TextFeedbackHubAdapter {
     items.add(FeedbackItemFactory.createEmptyItem(null));
 
     String language = locale != null ? locale.getLanguage() : FALLBACK_LANGUAGE;
-    TextsResponse textsResponse = wonkyGhostWritrService.generateTextFrom(plainText, language, settings);
+    //TextsResponse textsResponse = wonkyGhostWritrService.generateTextFrom(plainText, language, settings);
     LabelFeedbackItem generatedText = LabelFeedbackItem.builder()
-            .withLabel(textsResponse.getText())
+            .withLabel("textsResponse.getText()")
             .withCollection(SIMPLE)
             .build();
     items.add(generatedText);
 
     PercentageBarFeedbackItem confidence = PercentageBarFeedbackItem.builder()
-            .withValue(textsResponse.getConfidence() * 100)
+            // .withValue(textsResponse.getConfidence() * 100)
+            .withValue(95)
             .withLabel("Confidence")
             .withCollection(SIMPLE)
             .build();
     items.add(confidence);
+
+    items.add(new GenerateTextFeedbackItem(INTERACTIVE));
 
     return CompletableFuture.completedFuture(items);
   }

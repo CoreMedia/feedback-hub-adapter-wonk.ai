@@ -10,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class WonkyGhostwritrFeedbackAdapterFactory implements FeedbackHubAdapterFactory<WonkyGhostwritrSettings> {
 
+  public static final String TYPE = "wonkyAdapter";
+
   private final WonkyGhostWritrService wonkyGhostWritrService;
 
   public WonkyGhostwritrFeedbackAdapterFactory(WonkyGhostWritrService wonkyGhostWritrService) {

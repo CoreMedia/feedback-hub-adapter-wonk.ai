@@ -7,6 +7,7 @@
     "outDir": "../dist/src",
     "moduleResolution": "nodenext",
     "types": [
+      "@coremedia/studio-client.client-core",
       "@coremedia/studio-client.main.editor-components",
       "@jangaroo/ext-ts"
     ]

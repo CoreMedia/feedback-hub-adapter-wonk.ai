@@ -7,6 +7,7 @@ import ConfigUtils from "@jangaroo/runtime/ConfigUtils";
 import resourceManager from "@jangaroo/runtime/l10n/resourceManager";
 import CursiveTextFeedbackItem from "./CursiveTextFeedbackItem";
 import FeedbackHubWonkyGhostwritrStudioPlugin_properties from "./FeedbackHubWonkyGhostwritrStudioPlugin_properties";
+import WonkyGhostwritrItemPanel from "./custom/itemtypes/WonkyGhostwritrItemPanel";
 
 interface FeedbackHubWonkyGhostwritrStudioPluginConfig extends Config<StudioPlugin> {
 }
@@ -35,6 +36,7 @@ class FeedbackHubWonkyGhostwritrStudioPlugin extends StudioPlugin {
 
   #__initialize__(config: Config<FeedbackHubWonkyGhostwritrStudioPlugin>): void {
     feedbackService._.registerFeedbackItemPanel("cursiveText", Config(CursiveTextFeedbackItem));
+    feedbackService._.registerFeedbackItemPanel("GenerateTextFeedbackItem", Config(WonkyGhostwritrItemPanel));
   }
 }
 

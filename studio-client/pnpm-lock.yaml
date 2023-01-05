@@ -22,6 +22,10 @@ importers:
 
   apps/main/feedback-hub-adapter-wonky-ghostwritr:
     specifiers:
+      '@coremedia/studio-client.cap-rest-client': 2207.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2207.1.0
+      '@coremedia/studio-client.client-core': 2207.1.0
+      '@coremedia/studio-client.client-core-impl': 2207.1.0
       '@coremedia/studio-client.core-icons': 2207.1.0
       '@coremedia/studio-client.ext.ui-components': 2207.1.0
       '@coremedia/studio-client.main.editor-components': 2207.1.0
@@ -35,6 +39,10 @@ importers:
       eslint: 7.27.0
       rimraf: ^3.0.2
     dependencies:
+      '@coremedia/studio-client.cap-rest-client': 2207.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2207.1.0
+      '@coremedia/studio-client.client-core': 2207.1.0
+      '@coremedia/studio-client.client-core-impl': 2207.1.0
       '@coremedia/studio-client.core-icons': 2207.1.0
       '@coremedia/studio-client.ext.ui-components': 2207.1.0
       '@coremedia/studio-client.main.editor-components': 2207.1.0
