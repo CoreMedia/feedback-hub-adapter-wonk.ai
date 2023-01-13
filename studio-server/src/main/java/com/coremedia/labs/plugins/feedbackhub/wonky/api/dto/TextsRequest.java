@@ -1,10 +1,15 @@
 package com.coremedia.labs.plugins.feedbackhub.wonky.api.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
+
+import static java.util.Collections.unmodifiableList;
 
 public class TextsRequest {
 
   private String question;
+  @SerializedName(value = "target_lang")
   private String targetLanguage;
   private boolean sources;
   private List<String> allowList;
@@ -41,18 +46,18 @@ public class TextsRequest {
   }
 
   public List<String> getAllowList() {
-    return allowList;
+    return unmodifiableList(allowList);
   }
 
   public void setAllowList(List<String> allowList) {
-    this.allowList = allowList;
+    this.allowList = unmodifiableList(allowList);
   }
 
   public List<String> getDenyList() {
-    return denyList;
+    return unmodifiableList(denyList);
   }
 
   public void setDenyList(List<String> denyList) {
-    this.denyList = denyList;
+    this.denyList = unmodifiableList(denyList);
   }
 }

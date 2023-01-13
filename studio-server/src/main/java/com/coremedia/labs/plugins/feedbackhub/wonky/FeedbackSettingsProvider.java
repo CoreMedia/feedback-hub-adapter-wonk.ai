@@ -1,4 +1,4 @@
-package com.coremedia.labs.plugins.feedbackhub.wonky.custom;
+package com.coremedia.labs.plugins.feedbackhub.wonky;
 
 import com.coremedia.cap.common.CapConnection;
 import com.coremedia.cap.multisite.Site;

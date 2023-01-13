@@ -1,8 +1,8 @@
-package com.coremedia.labs.plugins.feedbackhub.wonky.custom.jobs;
+package com.coremedia.labs.plugins.feedbackhub.wonky.jobs;
 
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.WonkyGhostWritrService;
-import com.coremedia.labs.plugins.feedbackhub.wonky.custom.FeedbackSettingsProvider;
+import com.coremedia.labs.plugins.feedbackhub.wonky.FeedbackSettingsProvider;
 import com.coremedia.rest.cap.jobs.Job;
 import com.coremedia.rest.cap.jobs.JobFactory;
 import edu.umd.cs.findbugs.annotations.NonNull;

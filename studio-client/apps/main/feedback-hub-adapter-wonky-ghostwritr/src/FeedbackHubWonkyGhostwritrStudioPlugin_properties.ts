@@ -2,36 +2,35 @@ import CoreIcons_properties from "@coremedia/studio-client.core-icons/CoreIcons_
 
 /**
  * Interface values for ResourceBundle "FeedbackHubWonkyGhostwritrStudioPlugin".
- * @see FeedbackHubWonkyGhostwritrStudioPlugin_properties#INSTANCE
  */
 interface FeedbackHubWonkyGhostwritrStudioPlugin_properties {
 
 /**
- * Provider Example
+ * General
  *#######################################################################################################################
  */
-  wonkyProvider_iconCls: string;
-  wonkyProvider_title: string;
-  wonkyProvider_tooltip: string;
-  wonkyProvider_ariaLabel: string;
-  wonkyProvider_tab1_tab_title: string;
-  wonkyProvider_tab1_tab_tooltip: string;
-  wonkyProvider_tab1_tab_ariaLabel: string;
-  wonkyProvider_tab2_tab_title: string;
-  wonkyProvider_tab2_tab_tooltip: string;
-  wonkyProvider_tab2_tab_ariaLabel: string;
-  wonkyProvider_WORD_COUNTER_COMMON_ERROR_CODE: string;
-  wonkyProvider_TARGET_NOT_SET: string;
-/**
- * Adapter
- *#######################################################################################################################
- */
-  wonkyAdapter_iconCls: string;
-  wonkyAdapter_title: string;
-  wonkyAdapter_tooltip: string;
-  wonkyAdapter_ariaLabel: string;
-  wonkyAdapter_WORD_COUNTER_COMMON_ERROR_CODE: string;
-  wonkyAdapter_TARGET_NOT_SET: string;
+  ghostwritr_iconCls: string;
+  ghostwritr_title: string;
+  ghostwritr_tooltip: string;
+  ghostwritr_ariaLabel: string;
+
+  /**
+   * Custom UI
+   *#######################################################################################################################
+   */
+
+  ghoestwritr_question_label: string;
+
+  ghostwirtr_question_emptyText: string;
+
+  ghostwritr_question_blank_validation_text: string;
+
+  ghostwritr_question_submit_button_label: string;
+
+  ghostwritr_generated_text_header: string;
+
+  ghostwritr_apply_text_button_label: string;
+
 }
 
 /**
@@ -39,24 +38,16 @@ interface FeedbackHubWonkyGhostwritrStudioPlugin_properties {
  * @see FeedbackHubWonkyGhostwritrStudioPlugin_properties
  */
 const FeedbackHubWonkyGhostwritrStudioPlugin_properties: FeedbackHubWonkyGhostwritrStudioPlugin_properties = {
-  wonkyProvider_iconCls: CoreIcons_properties.pencil,
-  wonkyProvider_title: "Wonky GhostwritR",
-  wonkyProvider_tooltip: "generate text AI driven",
-  wonkyProvider_ariaLabel: "Wonky GhostwritR",
-  wonkyProvider_tab1_tab_title: "Percentage",
-  wonkyProvider_tab1_tab_tooltip: "Percentage Values",
-  wonkyProvider_tab1_tab_ariaLabel: "Percentage Values",
-  wonkyProvider_tab2_tab_title: "Count",
-  wonkyProvider_tab2_tab_tooltip: "Counted Values",
-  wonkyProvider_tab2_tab_ariaLabel: "Counted Values",
-  wonkyProvider_WORD_COUNTER_COMMON_ERROR_CODE: "An error occured during the execution of {0}: {1}",
-  wonkyProvider_TARGET_NOT_SET: "'target' property not set for adapter {0}",
-  wonkyAdapter_iconCls: CoreIcons_properties.pencil,
-  wonkyAdapter_title: "Wonky GhostwritR",
-  wonkyAdapter_tooltip: "generate text AI driven",
-  wonkyAdapter_ariaLabel: "Wonky GhostwritR",
-  wonkyAdapter_WORD_COUNTER_COMMON_ERROR_CODE: "An error occured during the execution of {0}: {1}",
-  wonkyAdapter_TARGET_NOT_SET: "'target' property not set for adapter {0}",
+  ghostwritr_iconCls: CoreIcons_properties.pencil,
+  ghostwritr_title: "GhostwritR",
+  ghostwritr_tooltip: "AI driven text generation",
+  ghostwritr_ariaLabel: "GhostwritR",
+  ghoestwritr_question_label: "Your Question",
+  ghostwirtr_question_emptyText: "Enter a question to a generate text based on AI",
+  ghostwritr_question_blank_validation_text: "This field is required",
+  ghostwritr_question_submit_button_label: "Generate Text",
+  ghostwritr_generated_text_header: "Generated Text",
+  ghostwritr_apply_text_button_label: "Apply Text to Content",
 };
 
 export default FeedbackHubWonkyGhostwritrStudioPlugin_properties;

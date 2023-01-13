@@ -53,14 +53,14 @@ public class WonkyGhostwritrConnector {
   }
 
   @NonNull
-  private <T> HttpEntity<String> buildRequestEntity(@NonNull WonkyGhostwritrSettings settings, @Nullable T requestBodyEntity) {
+  private static <T> HttpEntity<String> buildRequestEntity(@NonNull WonkyGhostwritrSettings settings, @Nullable T requestBodyEntity) {
     Gson gson = new Gson();
     String payload = gson.toJson(requestBodyEntity);
     return new HttpEntity<>(payload.replaceAll("\n", " "), buildHttpHeaders(settings));
   }
 
   @NonNull
-  private HttpHeaders buildHttpHeaders(@NonNull WonkyGhostwritrSettings settings) {
+  private static HttpHeaders buildHttpHeaders(@NonNull WonkyGhostwritrSettings settings) {
     HttpHeaders headers = new HttpHeaders();
     headers.set(CONTENT_TYPE, "application/json");
     headers.set(ACCEPT, "application/json");

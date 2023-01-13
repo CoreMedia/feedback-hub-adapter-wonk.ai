@@ -1,11 +1,11 @@
-package com.coremedia.labs.plugins.feedbackhub.wonky.custom.jobs;
+package com.coremedia.labs.plugins.feedbackhub.wonky.jobs;
 
+import com.coremedia.cap.common.IdHelper;
 import com.coremedia.cap.multisite.Site;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.labs.plugins.feedbackhub.wonky.WonkyGhostwritrSettings;
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.WonkyGhostWritrService;
-import com.coremedia.labs.plugins.feedbackhub.wonky.api.dto.TextsResponse;
-import com.coremedia.labs.plugins.feedbackhub.wonky.custom.FeedbackSettingsProvider;
+import com.coremedia.labs.plugins.feedbackhub.wonky.FeedbackSettingsProvider;
 import com.coremedia.rest.cap.jobs.GenericJobErrorCode;
 import com.coremedia.rest.cap.jobs.Job;
 import com.coremedia.rest.cap.jobs.JobContext;
@@ -16,8 +16,11 @@ import edu.umd.cs.findbugs.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Locale;
+
 public class GenerateTextJob implements Job {
   private static final Logger LOG = LoggerFactory.getLogger(GenerateTextJob.class);
+  public static final String FALLBACK_LANGUAGE = "en";
 
   private final WonkyGhostWritrService service;
   private final FeedbackSettingsProvider feedbackSettingsProvider;
@@ -60,14 +63,19 @@ public class GenerateTextJob implements Job {
   @Override
   public Object call(@NonNull JobContext jobContext) throws JobExecutionException {
     try {
+      String id = contentId.substring(contentId.lastIndexOf('/') + 1);
+      String capId = IdHelper.formatContentId(id);
 
       WonkyGhostwritrSettings settings = getSettings();
-      Site site = sitesService.getSite(siteId);
-      TextsResponse textsResponse = service.generateTextFrom(question, site.getLocale().getLanguage(), settings);
-      return textsResponse;
+      String language = sitesService.findSite(siteId)
+              .map(Site::getLocale)
+              .map(Locale::getLanguage)
+              .orElse(FALLBACK_LANGUAGE);
+
+      return service.generateTextFrom(capId, question, language, settings);
     } catch (Exception e) {
       LOG.error("Failed to generate text for given question: {} on content {}: {}", question, contentId, e.getMessage());
-      throw new JobExecutionException(GenericJobErrorCode.FAILED);
+      throw new JobExecutionException(GenericJobErrorCode.FAILED, e.getMessage());
     }
   }
 

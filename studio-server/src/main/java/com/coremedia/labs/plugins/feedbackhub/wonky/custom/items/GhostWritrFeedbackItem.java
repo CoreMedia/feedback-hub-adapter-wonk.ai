@@ -5,12 +5,12 @@ import com.coremedia.feedbackhub.items.FeedbackItem;
 /**
  *
  */
-public class GenerateTextFeedbackItem implements FeedbackItem {
+public class GhostWritrFeedbackItem implements FeedbackItem {
 
   private final String collection;
 
 
-  public GenerateTextFeedbackItem(String collection) {
+  public GhostWritrFeedbackItem(String collection) {
     this.collection = collection;
   }
 
@@ -22,6 +22,10 @@ public class GenerateTextFeedbackItem implements FeedbackItem {
   @Override
   public String getCollection() {
     return collection;
+  }
+
+  public static GhostWritrFeedbackItemBuilder builder() {
+    return new GhostWritrFeedbackItemBuilder();
   }
 
 

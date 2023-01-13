@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class WonkyGhostwritrFeedbackAdapterFactory implements FeedbackHubAdapterFactory<WonkyGhostwritrSettings> {
 
-  public static final String TYPE = "wonkyAdapter";
+  public static final String TYPE = "ghostwritr";
 
   private final WonkyGhostWritrService wonkyGhostWritrService;
 
@@ -20,7 +20,7 @@ public class WonkyGhostwritrFeedbackAdapterFactory implements FeedbackHubAdapter
 
   @Override
   public String getId() {
-    return "wonkyAdapter";
+    return TYPE;
   }
 
   @Override

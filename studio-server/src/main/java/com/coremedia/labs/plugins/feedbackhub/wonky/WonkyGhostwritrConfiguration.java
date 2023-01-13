@@ -8,8 +8,9 @@ import com.coremedia.labs.plugins.feedbackhub.wonky.adapter.WonkyGhostwritrFeedb
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.LoggingRequestInterceptor;
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.WonkyGhostWritrService;
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.WonkyGhostwritrConnector;
-import com.coremedia.labs.plugins.feedbackhub.wonky.custom.FeedbackSettingsProvider;
-import com.coremedia.labs.plugins.feedbackhub.wonky.custom.jobs.GenerateTextJobFactory;
+import com.coremedia.labs.plugins.feedbackhub.wonky.data.TextResponsesHolder;
+import com.coremedia.labs.plugins.feedbackhub.wonky.jobs.ApplyTextToContentJobFactory;
+import com.coremedia.labs.plugins.feedbackhub.wonky.jobs.GenerateTextJobFactory;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,8 +31,8 @@ public class WonkyGhostwritrConfiguration {
   }
 
   @Bean
-  public WonkyGhostWritrService wonkyGhostWritrService(WonkyGhostwritrConnector connector) {
-    return new WonkyGhostWritrService(connector);
+  public WonkyGhostWritrService wonkyGhostWritrService(WonkyGhostwritrConnector connector, TextResponsesHolder textResponsesHolder) {
+    return new WonkyGhostWritrService(connector, textResponsesHolder);
   }
 
   @Bean
@@ -60,5 +61,15 @@ public class WonkyGhostwritrConfiguration {
                                                        @NonNull FeedbackSettingsProvider wonkyGhostwritrFeedbackSettingsProvider,
                                                        @NonNull SitesService sitesService) {
     return new GenerateTextJobFactory(wonkyGhostWritrService, wonkyGhostwritrFeedbackSettingsProvider, sitesService);
+  }
+
+  @Bean
+  public ApplyTextToContentJobFactory applyTextToContentJobFactory(@NonNull CapConnection capConnection) {
+    return new ApplyTextToContentJobFactory(capConnection);
+  }
+
+  @Bean
+  public TextResponsesHolder textResponsesHolder() {
+    return new TextResponsesHolder();
   }
 }

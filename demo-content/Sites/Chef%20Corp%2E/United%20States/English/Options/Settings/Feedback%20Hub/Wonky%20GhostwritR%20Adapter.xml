@@ -5,15 +5,14 @@
 <master/>
 <settings><Struct xmlns="http://www.coremedia.com/2008/struct" xmlns:xlink="http://www.w3.org/1999/xlink">
 <StringProperty Name="observedProperties">detailText</StringProperty>
-<StringProperty Name="factoryId">wonkyAdapter</StringProperty>
-<StringProperty Name="groupId">wonkyAdapter</StringProperty>
+<StringProperty Name="factoryId">ghostwritr</StringProperty>
+<StringProperty Name="groupId">ghostwritr</StringProperty>
 <StringProperty Name="contentType">CMArticle</StringProperty>
 <BooleanProperty Name="enabled">true</BooleanProperty>
 <StructProperty Name="settings">
 <Struct>
-<StringProperty Name="sourceProperties">detailText</StringProperty>
-<StringProperty Name="ignoreList">and,with</StringProperty>
-<IntProperty Name="target">1000</IntProperty>
+<StringProperty Name="apiKey">YOUR API KEY</StringProperty>
+
 </Struct>
 </StructProperty>
 </Struct></settings>

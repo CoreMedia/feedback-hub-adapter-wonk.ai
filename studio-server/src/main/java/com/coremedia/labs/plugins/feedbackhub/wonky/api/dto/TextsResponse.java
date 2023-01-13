@@ -2,6 +2,8 @@ package com.coremedia.labs.plugins.feedbackhub.wonky.api.dto;
 
 import java.util.List;
 
+import static java.util.Collections.unmodifiableList;
+
 public class TextsResponse {
 
   private String text;
@@ -26,14 +28,14 @@ public class TextsResponse {
   }
 
   public List<Source> getSources() {
-    return sources;
+    return unmodifiableList(sources);
   }
 
   public void setSources(List<Source> sources) {
-    this.sources = sources;
+    this.sources = unmodifiableList(sources);
   }
 
-  class Source {
+  public static class Source {
 
     private String text;
 

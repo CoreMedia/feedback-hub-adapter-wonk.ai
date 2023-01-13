@@ -1,5 +1,6 @@
 package com.coremedia.labs.plugins.feedbackhub.wonky.adapter;
 
+import com.coremedia.cap.content.Content;
 import com.coremedia.feedbackhub.adapter.FeedbackContext;
 import com.coremedia.feedbackhub.adapter.text.TextFeedbackHubAdapter;
 import com.coremedia.feedbackhub.items.FeedbackItem;
@@ -9,7 +10,8 @@ import com.coremedia.feedbackhub.items.LabelFeedbackItem;
 import com.coremedia.feedbackhub.items.PercentageBarFeedbackItem;
 import com.coremedia.labs.plugins.feedbackhub.wonky.WonkyGhostwritrSettings;
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.WonkyGhostWritrService;
-import com.coremedia.labs.plugins.feedbackhub.wonky.custom.items.GenerateTextFeedbackItem;
+import com.coremedia.labs.plugins.feedbackhub.wonky.api.dto.TextsResponse;
+import com.coremedia.labs.plugins.feedbackhub.wonky.custom.items.GhostWritrFeedbackItem;
 import edu.umd.cs.findbugs.annotations.DefaultAnnotation;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
@@ -22,15 +24,11 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-import static com.coremedia.labs.plugins.feedbackhub.wonky.WonkyGhostWritrFeedbackCollections.INTERACTIVE;
-import static com.coremedia.labs.plugins.feedbackhub.wonky.WonkyGhostWritrFeedbackCollections.SIMPLE;
-
 /**
  *
  */
 @DefaultAnnotation(NonNull.class)
 public class WonkyGhostwriterFeedbackAdapter implements TextFeedbackHubAdapter {
-  public static final String FALLBACK_LANGUAGE = "en";
   private final WonkyGhostwritrSettings settings;
 
   private final WonkyGhostWritrService wonkyGhostWritrService;
@@ -44,42 +42,39 @@ public class WonkyGhostwriterFeedbackAdapter implements TextFeedbackHubAdapter {
   public CompletionStage<Collection<FeedbackItem>> analyzeText(FeedbackContext context, Map<String, String> textProperties, @Nullable Locale locale) {
     List<FeedbackItem> items = new ArrayList<>();
 
-    String plainText = String.join(" ", textProperties.values());
 
     FeedbackLinkFeedbackItem wonkyLink = FeedbackItemFactory.createFeedbackLink("https://wonki-api-gateway.developer.azure-api.net/");
     items.add(wonkyLink);
 
-    LabelFeedbackItem questionLabel = LabelFeedbackItem.builder()
-            .withLabel("Question")
-            .withBold()
-            .withCollection(SIMPLE)
+    GhostWritrFeedbackItem ghostWritrFeedbackItem = GhostWritrFeedbackItem.builder()
+            .withCollection("general")
             .build();
-    items.add(questionLabel);
+    items.add(ghostWritrFeedbackItem);
 
-    LabelFeedbackItem question = LabelFeedbackItem.builder()
-            .withLabel(plainText)
-            .withCollection(SIMPLE)
-            .build();
-    items.add(question);
-    items.add(FeedbackItemFactory.createEmptyItem(null));
+    Content content = (Content) context.getEntity();
+    String contentId = content.getId();
+    TextsResponse textsResponse = wonkyGhostWritrService.getTextsResponse(contentId);
 
-    String language = locale != null ? locale.getLanguage() : FALLBACK_LANGUAGE;
-    //TextsResponse textsResponse = wonkyGhostWritrService.generateTextFrom(plainText, language, settings);
-    LabelFeedbackItem generatedText = LabelFeedbackItem.builder()
-            .withLabel("textsResponse.getText()")
-            .withCollection(SIMPLE)
-            .build();
-    items.add(generatedText);
+    if (textsResponse != null) {
+      PercentageBarFeedbackItem confidence = PercentageBarFeedbackItem.builder()
+              .withCollection("sources")
+              .withValue(textsResponse.getConfidence() * 100)
+              .withLabel("Confidence")
+              .build();
+      items.add(confidence);
 
-    PercentageBarFeedbackItem confidence = PercentageBarFeedbackItem.builder()
-            // .withValue(textsResponse.getConfidence() * 100)
-            .withValue(95)
-            .withLabel("Confidence")
-            .withCollection(SIMPLE)
-            .build();
-    items.add(confidence);
+      List<TextsResponse.Source> sources = textsResponse.getSources();
+      for (TextsResponse.Source source: sources) {
+        LabelFeedbackItem sourcesLabel = LabelFeedbackItem.builder()
+                .withCollection("sources")
+                .withLabel(source.getSource())
+                .build();
+        items.add(sourcesLabel);
+      }
+    } else {
+      items.add(FeedbackItemFactory.createEmptyItem("sources"));
+    }
 
-    items.add(new GenerateTextFeedbackItem(INTERACTIVE));
 
     return CompletableFuture.completedFuture(items);
   }
