@@ -1,13 +1,15 @@
-import CopyResourceBundleProperties from "@coremedia/studio-client.main.editor-components/configuration/CopyResourceBundleProperties";
+import CopyResourceBundleProperties
+  from "@coremedia/studio-client.main.editor-components/configuration/CopyResourceBundleProperties";
 import StudioPlugin from "@coremedia/studio-client.main.editor-components/configuration/StudioPlugin";
-import FeedbackHub_properties from "@coremedia/studio-client.main.feedback-hub-editor-components/FeedbackHub_properties";
+import FeedbackHub_properties
+  from "@coremedia/studio-client.main.feedback-hub-editor-components/FeedbackHub_properties";
 import feedbackService from "@coremedia/studio-client.main.feedback-hub-editor-components/feedbackService";
 import Config from "@jangaroo/runtime/Config";
 import ConfigUtils from "@jangaroo/runtime/ConfigUtils";
 import resourceManager from "@jangaroo/runtime/l10n/resourceManager";
-import CursiveTextFeedbackItem from "./CursiveTextFeedbackItem";
 import FeedbackHubWonkyGhostwritrStudioPlugin_properties from "./FeedbackHubWonkyGhostwritrStudioPlugin_properties";
-import WonkyGhostwritrItemPanel from "./custom/itemtypes/WonkyGhostwritrItemPanel";
+import GhostwritrGeneralPanel from "./custom/itemtypes/GhostwritrGeneralPanel";
+import GhostwritrDetailsPanel from "./custom/itemtypes/GhostwritrDetailsPanel";
 
 interface FeedbackHubWonkyGhostwritrStudioPluginConfig extends Config<StudioPlugin> {
 }
@@ -35,8 +37,8 @@ class FeedbackHubWonkyGhostwritrStudioPlugin extends StudioPlugin {
   }
 
   #__initialize__(config: Config<FeedbackHubWonkyGhostwritrStudioPlugin>): void {
-    feedbackService._.registerFeedbackItemPanel("cursiveText", Config(CursiveTextFeedbackItem));
-    feedbackService._.registerFeedbackItemPanel("GenerateTextFeedbackItem", Config(WonkyGhostwritrItemPanel));
+    feedbackService._.registerFeedbackItemPanel("GhostWritrGeneralFeedbackItem", Config(GhostwritrGeneralPanel));
+    feedbackService._.registerFeedbackItemPanel("GhostwritrDetailsFeedbackItem", Config(GhostwritrDetailsPanel));
   }
 }
 

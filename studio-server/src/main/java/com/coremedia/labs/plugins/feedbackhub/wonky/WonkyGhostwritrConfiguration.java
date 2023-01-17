@@ -8,7 +8,6 @@ import com.coremedia.labs.plugins.feedbackhub.wonky.adapter.WonkyGhostwritrFeedb
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.LoggingRequestInterceptor;
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.WonkyGhostWritrService;
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.WonkyGhostwritrConnector;
-import com.coremedia.labs.plugins.feedbackhub.wonky.data.TextResponsesHolder;
 import com.coremedia.labs.plugins.feedbackhub.wonky.jobs.ApplyTextToContentJobFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonky.jobs.GenerateTextJobFactory;
 import edu.umd.cs.findbugs.annotations.NonNull;
@@ -26,13 +25,13 @@ import java.util.Collections;
 public class WonkyGhostwritrConfiguration {
 
   @Bean
-  public WonkyGhostwritrFeedbackAdapterFactory wonkyGhostwritrFeedbackAdapterFactory(WonkyGhostWritrService wonkyGhostWritrService) {
-    return new WonkyGhostwritrFeedbackAdapterFactory(wonkyGhostWritrService);
+  public WonkyGhostwritrFeedbackAdapterFactory wonkyGhostwritrFeedbackAdapterFactory() {
+    return new WonkyGhostwritrFeedbackAdapterFactory();
   }
 
   @Bean
-  public WonkyGhostWritrService wonkyGhostWritrService(WonkyGhostwritrConnector connector, TextResponsesHolder textResponsesHolder) {
-    return new WonkyGhostWritrService(connector, textResponsesHolder);
+  public WonkyGhostWritrService wonkyGhostWritrService(WonkyGhostwritrConnector connector) {
+    return new WonkyGhostWritrService(connector);
   }
 
   @Bean
@@ -66,10 +65,5 @@ public class WonkyGhostwritrConfiguration {
   @Bean
   public ApplyTextToContentJobFactory applyTextToContentJobFactory(@NonNull CapConnection capConnection) {
     return new ApplyTextToContentJobFactory(capConnection);
-  }
-
-  @Bean
-  public TextResponsesHolder textResponsesHolder() {
-    return new TextResponsesHolder();
   }
 }

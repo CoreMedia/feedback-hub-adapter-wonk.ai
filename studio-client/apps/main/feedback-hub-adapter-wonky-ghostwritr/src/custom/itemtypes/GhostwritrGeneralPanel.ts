@@ -23,30 +23,37 @@ import TextField from "@jangaroo/ext-ts/form/field/Text";
 import AnchorLayout from "@jangaroo/ext-ts/layout/container/Anchor";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import VBoxLayout from "@jangaroo/ext-ts/layout/container/VBox";
-import { bind } from "@jangaroo/runtime";
+import {bind} from "@jangaroo/runtime";
 import Config from "@jangaroo/runtime/Config";
 import ConfigUtils from "@jangaroo/runtime/ConfigUtils";
 import trace from "@jangaroo/runtime/trace";
 import FeedbackHubWonkyGhostwritrStudioPlugin_properties from "../../FeedbackHubWonkyGhostwritrStudioPlugin_properties";
+import GhostWritrtSource from "./GhostWritrtSource";
+import FeedbackItem from "@coremedia/studio-client.feedback-hub-models/FeedbackItem";
+import GhostWritrValueHolder from "./GhostWritrValueHolder";
+import PercentageBarFeedbackItemPanel
+  from "@coremedia/studio-client.main.feedback-hub-editor-components/components/itempanels/PercentageBarFeedbackItemPanel";
 
-interface WonkyGhostwritrItemPanelConfig extends Config<FeedbackItemPanel> {
+interface GhostwritrGeneralPanelConfig extends Config<FeedbackItemPanel> {
 }
 
-class WonkyGhostwritrItemPanel extends FeedbackItemPanel {
-  declare Config: WonkyGhostwritrItemPanelConfig;
+class GhostwritrGeneralPanel extends FeedbackItemPanel {
+  declare Config: GhostwritrGeneralPanelConfig;
 
   #generatedTextExpression: ValueExpression = null;
 
   #questionInputExpression: ValueExpression = null;
 
+  #sourcesExpression: ValueExpression = null;
+
   #loadMask: LoadMask = null;
 
   //dirty
-
   static override readonly xtype: string = "com.coremedia.labs.plugins.feedbackhub.wonky.config.wonkyghostwritritempanel";
 
-  constructor(config: Config<WonkyGhostwritrItemPanel> = null) {
-    super((() => ConfigUtils.apply(Config(WonkyGhostwritrItemPanel, {
+
+  constructor(config: Config<GhostwritrGeneralPanel> = null) {
+    super((() => ConfigUtils.apply(Config(GhostwritrGeneralPanel, {
       items: [
         Config(FormPanel, {
           items: [
@@ -63,7 +70,7 @@ class WonkyGhostwritrItemPanel extends FeedbackItemPanel {
                 }),
               ],
             }),
-            Config(Container, { width: 6 }),
+            Config(Container, {width: 6}),
             Config(Button, {
               formBind: true,
               ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
@@ -80,6 +87,9 @@ class WonkyGhostwritrItemPanel extends FeedbackItemPanel {
           id: "response_container",
           hidden: true,
           items: [
+            Config(PercentageBarFeedbackItemPanel, {
+              feedbackItem: this.createFeedbackItem(),
+            }),
             Config(DisplayField, {
               ui: DisplayFieldSkin.BOLD.getSkin(),
               value: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_generated_text_header,
@@ -105,7 +115,7 @@ class WonkyGhostwritrItemPanel extends FeedbackItemPanel {
                 }),
               ],
             }),
-            Config(Container, { width: 6 }),
+            Config(Container, {width: 6}),
             Config(Button, {
               formBind: true,
               ui: ButtonSkin.VIVID.getSkin(),
@@ -113,16 +123,16 @@ class WonkyGhostwritrItemPanel extends FeedbackItemPanel {
               text: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_apply_text_button_label,
             }),
           ],
-          layout: Config(VBoxLayout, { align: "stretch" }),
+          layout: Config(VBoxLayout, {align: "stretch"}),
           /*  plugins: [
               Config(BindVisibilityPlugin, { bindTo: this.getBriefingInfoExpression() }),
             ],
            */
         }),
-        Config(Component, { height: 6 }),
+        Config(Component, {height: 6}),
       ],
       defaultType: Component.xtype,
-      defaults: Config<Component>({ anchor: "100%" }),
+      defaults: Config<Component>({anchor: "100%"}),
       layout: Config(AnchorLayout),
       plugins: [
         Config(VerticalSpacingPlugin),
@@ -144,6 +154,33 @@ class WonkyGhostwritrItemPanel extends FeedbackItemPanel {
     return this.#generatedTextExpression;
   }
 
+  getSourcesExpression(): ValueExpression {
+    if (!this.#sourcesExpression) {
+      this.#sourcesExpression = ValueExpressionFactory.createFromValue([]);
+    }
+    return this.#sourcesExpression;
+  }
+
+  createSource(text: string, url: string): GhostWritrtSource {
+    return new GhostWritrtSource(Ext.id(null, "GhostWritrSource"), text, url);
+  }
+
+  getSourceId(source: GhostWritrtSource): string {
+    return source.id;
+  }
+
+  createFeedbackItem(): FeedbackItem {
+    let feedbackItem: FeedbackItem = new FeedbackItem("foo", "bar", "Test", "test");
+    feedbackItem["label"] = "Test";
+    feedbackItem["value"] = 42;
+    feedbackItem["maxValue"] = 100;
+    feedbackItem["targetValue"] = 75;
+    feedbackItem["reverseColors"] = false;
+    feedbackItem["decimalPlaces"] = 2;
+    feedbackItem["color"] = "green";
+    return feedbackItem;
+  };
+
   applyTextToContent(b: Button): void {
     const content: Content = this.contentExpression.getValue();
     let siteId = editorContext._.getSitesService().getSiteIdFor(content);
@@ -159,15 +196,15 @@ class WonkyGhostwritrItemPanel extends FeedbackItemPanel {
     const JOB_TYPE = "ApplyTextToContent";
     console.log(`request params: ${params}`);
     jobService._.executeJob(
-      new GenericRemoteJob(JOB_TYPE, params),
-      //on success
-      (details: any): void => {
-        //  this.getGeneratedTextExpression().setValue(details.text);
-      },
-      //on error
-      (error: JobExecutionError): void => {
-        trace("[ERROR]", "Error applying text to content: " + error);
-      },
+            new GenericRemoteJob(JOB_TYPE, params),
+            //on success
+            (details: any): void => {
+              //  this.getGeneratedTextExpression().setValue(details.text);
+            },
+            //on error
+            (error: JobExecutionError): void => {
+              trace("[ERROR]", "Error applying text to content: " + error);
+            },
     );
   }
 
@@ -190,23 +227,28 @@ class WonkyGhostwritrItemPanel extends FeedbackItemPanel {
     const JOB_TYPE = "generateText";
     console.log(`request params: ${params}`);
     jobService._.executeJob(
-      new GenericRemoteJob(JOB_TYPE, params),
-      //on success
-      (details: any): void => {
-        if (this.#loadMask && !this.#loadMask.destroyed) {
-          this.#loadMask.destroy();
-        }
-        responseContainer.show();
-        this.getGeneratedTextExpression().setValue(details.text);
-        console.log(`details: ${details}`);
-      },
-      //on error
-      (error: JobExecutionError): void => {
-        if (this.#loadMask && !this.#loadMask.destroyed) {
-          this.#loadMask.destroy();
-        }
-        trace("[ERROR]", "Error assigning briefing: " + error);
-      },
+            new GenericRemoteJob(JOB_TYPE, params),
+            //on success
+            (details: any): void => {
+              if (this.#loadMask && !this.#loadMask.destroyed) {
+                this.#loadMask.destroy();
+              }
+              responseContainer.show();
+              this.getGeneratedTextExpression().setValue(details.text);
+
+              let sources = details.sources.map(source => {
+                return this.createSource(source.text, source.source)
+              });
+              GhostWritrValueHolder.getInstance().getSourcesExpression().setValue(sources);
+              console.log(`details: ${details}`);
+            },
+            //on error
+            (error: JobExecutionError): void => {
+              if (this.#loadMask && !this.#loadMask.destroyed) {
+                this.#loadMask.destroy();
+              }
+              trace("[ERROR]", "Error assigning briefing: " + error);
+            },
     );
 
     if (!this.#loadMask || this.#loadMask.destroyed) {
@@ -221,4 +263,4 @@ class WonkyGhostwritrItemPanel extends FeedbackItemPanel {
   }
 }
 
-export default WonkyGhostwritrItemPanel;
+export default GhostwritrGeneralPanel;

@@ -63,16 +63,13 @@ public class GenerateTextJob implements Job {
   @Override
   public Object call(@NonNull JobContext jobContext) throws JobExecutionException {
     try {
-      String id = contentId.substring(contentId.lastIndexOf('/') + 1);
-      String capId = IdHelper.formatContentId(id);
-
       WonkyGhostwritrSettings settings = getSettings();
       String language = sitesService.findSite(siteId)
               .map(Site::getLocale)
               .map(Locale::getLanguage)
               .orElse(FALLBACK_LANGUAGE);
 
-      return service.generateTextFrom(capId, question, language, settings);
+      return service.generateTextFrom(question, language, settings);
     } catch (Exception e) {
       LOG.error("Failed to generate text for given question: {} on content {}: {}", question, contentId, e.getMessage());
       throw new JobExecutionException(GenericJobErrorCode.FAILED, e.getMessage());

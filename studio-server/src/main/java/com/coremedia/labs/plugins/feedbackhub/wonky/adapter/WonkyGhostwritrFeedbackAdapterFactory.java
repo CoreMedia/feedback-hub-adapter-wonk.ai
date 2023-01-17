@@ -5,17 +5,14 @@ import com.coremedia.feedbackhub.adapter.FeedbackHubAdapterFactory;
 import com.coremedia.feedbackhub.adapter.FeedbackHubException;
 import com.coremedia.labs.plugins.feedbackhub.wonky.WonkyGhostwritrSettings;
 import com.coremedia.labs.plugins.feedbackhub.wonky.WonkyGhostwrtrFeedbackHubErrorCode;
-import com.coremedia.labs.plugins.feedbackhub.wonky.api.WonkyGhostWritrService;
 import org.apache.commons.lang3.StringUtils;
 
 public class WonkyGhostwritrFeedbackAdapterFactory implements FeedbackHubAdapterFactory<WonkyGhostwritrSettings> {
 
   public static final String TYPE = "ghostwritr";
 
-  private final WonkyGhostWritrService wonkyGhostWritrService;
 
-  public WonkyGhostwritrFeedbackAdapterFactory(WonkyGhostWritrService wonkyGhostWritrService) {
-    this.wonkyGhostWritrService = wonkyGhostWritrService;
+  public WonkyGhostwritrFeedbackAdapterFactory() {
   }
 
   @Override
@@ -30,6 +27,6 @@ public class WonkyGhostwritrFeedbackAdapterFactory implements FeedbackHubAdapter
       throw new FeedbackHubException("settings must provide an apiKey", WonkyGhostwrtrFeedbackHubErrorCode.API_KEY_NOT_SET);
     }
 
-    return new WonkyGhostwriterFeedbackAdapter(settings, wonkyGhostWritrService);
+    return new WonkyGhostwriterFeedbackAdapter();
   }
 }

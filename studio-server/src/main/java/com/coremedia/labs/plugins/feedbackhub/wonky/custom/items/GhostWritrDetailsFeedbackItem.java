@@ -5,18 +5,18 @@ import com.coremedia.feedbackhub.items.FeedbackItem;
 /**
  *
  */
-public class GhostWritrFeedbackItem implements FeedbackItem {
+public class GhostWritrDetailsFeedbackItem implements FeedbackItem {
 
   private final String collection;
 
 
-  public GhostWritrFeedbackItem(String collection) {
+  public GhostWritrDetailsFeedbackItem(String collection) {
     this.collection = collection;
   }
 
   @Override
   public String getType() {
-    return "GenerateTextFeedbackItem";
+    return "GhostwritrDetailsFeedbackItem";
   }
 
   @Override
@@ -24,8 +24,8 @@ public class GhostWritrFeedbackItem implements FeedbackItem {
     return collection;
   }
 
-  public static GhostWritrFeedbackItemBuilder builder() {
-    return new GhostWritrFeedbackItemBuilder();
+  public static GhostWritrDetailsFeedbackItemBuilder builder() {
+    return new GhostWritrDetailsFeedbackItemBuilder();
   }
 
 
