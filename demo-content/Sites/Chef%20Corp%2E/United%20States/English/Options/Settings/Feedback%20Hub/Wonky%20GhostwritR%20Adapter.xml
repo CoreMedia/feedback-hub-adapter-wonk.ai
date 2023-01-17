@@ -9,6 +9,7 @@
 <StringProperty Name="groupId">ghostwritr</StringProperty>
 <StringProperty Name="contentType">CMArticle</StringProperty>
 <BooleanProperty Name="enabled">true</BooleanProperty>
+<StringProperty Name="reloadMode">none</StringProperty>
 <StructProperty Name="settings">
 <Struct>
 <StringProperty Name="apiKey">YOUR API KEY</StringProperty>

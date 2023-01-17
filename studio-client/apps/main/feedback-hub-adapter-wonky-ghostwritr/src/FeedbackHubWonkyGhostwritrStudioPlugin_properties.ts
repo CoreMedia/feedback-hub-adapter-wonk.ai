@@ -13,6 +13,8 @@ interface FeedbackHubWonkyGhostwritrStudioPlugin_properties {
   ghostwritr_title: string;
   ghostwritr_tooltip: string;
   ghostwritr_ariaLabel: string;
+  ghostwritr_general_tab_title: string;
+  ghostwritr_details_tab_title: string;
 
   /**
    * Custom UI
@@ -31,6 +33,11 @@ interface FeedbackHubWonkyGhostwritrStudioPlugin_properties {
 
   ghostwritr_apply_text_button_label: string;
 
+  ghostwritr_apply_text_popup_message: string;
+
+  ghostwritr_apply_text_popup_submit_button_label: string;
+
+
 }
 
 /**
@@ -42,12 +49,16 @@ const FeedbackHubWonkyGhostwritrStudioPlugin_properties: FeedbackHubWonkyGhostwr
   ghostwritr_title: "GhostwritR",
   ghostwritr_tooltip: "AI driven text generation",
   ghostwritr_ariaLabel: "GhostwritR",
+  ghostwritr_general_tab_title: "General",
+  ghostwritr_details_tab_title: "Details",
   ghoestwritr_question_label: "Your Question",
   ghostwirtr_question_emptyText: "Enter a question to a generate text based on AI",
   ghostwritr_question_blank_validation_text: "This field is required",
   ghostwritr_question_submit_button_label: "Generate Text",
   ghostwritr_generated_text_header: "Generated Text",
   ghostwritr_apply_text_button_label: "Apply Text to Content",
+  ghostwritr_apply_text_popup_message: "This will override the existing Article Text.",
+  ghostwritr_apply_text_popup_submit_button_label: "Confirm",
 };
 
 export default FeedbackHubWonkyGhostwritrStudioPlugin_properties;

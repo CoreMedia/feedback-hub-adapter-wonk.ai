@@ -33,6 +33,7 @@ import FeedbackItem from "@coremedia/studio-client.feedback-hub-models/FeedbackI
 import GhostWritrValueHolder from "./GhostWritrValueHolder";
 import PercentageBarFeedbackItemPanel
   from "@coremedia/studio-client.main.feedback-hub-editor-components/components/itempanels/PercentageBarFeedbackItemPanel";
+import MessageBoxUtil from "@coremedia/studio-client.ext.ui-components/messagebox/MessageBoxUtil";
 
 interface GhostwritrGeneralPanelConfig extends Config<FeedbackItemPanel> {
 }
@@ -44,7 +45,7 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
 
   #questionInputExpression: ValueExpression = null;
 
-  #sourcesExpression: ValueExpression = null;
+  #confidenceExpression: ValueExpression = null;
 
   #loadMask: LoadMask = null;
 
@@ -87,8 +88,17 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
           id: "response_container",
           hidden: true,
           items: [
+            //TODO without explicitly setting the feedbackItem this doesnt work. But like this the changed value wont be rendered
             Config(PercentageBarFeedbackItemPanel, {
-              feedbackItem: this.createFeedbackItem(),
+              feedbackItem: this.getConfidenceExpression().getValue(),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  componentProperty: "feedbackItem",
+                  bindTo: this.getConfidenceExpression(),
+                  bidirectional: true,
+
+                }),
+              ],
             }),
             Config(DisplayField, {
               ui: DisplayFieldSkin.BOLD.getSkin(),
@@ -154,11 +164,12 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
     return this.#generatedTextExpression;
   }
 
-  getSourcesExpression(): ValueExpression {
-    if (!this.#sourcesExpression) {
-      this.#sourcesExpression = ValueExpressionFactory.createFromValue([]);
+  getConfidenceExpression(): ValueExpression {
+    if (!this.#confidenceExpression) {
+      //TODO creat with initial value of -1
+      this.#confidenceExpression = ValueExpressionFactory.createFromValue(this.createPercentageBarFeedbackItem(95));
     }
-    return this.#sourcesExpression;
+    return this.#confidenceExpression;
   }
 
   createSource(text: string, url: string): GhostWritrtSource {
@@ -169,10 +180,10 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
     return source.id;
   }
 
-  createFeedbackItem(): FeedbackItem {
-    let feedbackItem: FeedbackItem = new FeedbackItem("foo", "bar", "Test", "test");
+  createPercentageBarFeedbackItem(value: number): FeedbackItem {
+    let feedbackItem: FeedbackItem = new FeedbackItem("foo", "bar", "Test", "");
     feedbackItem["label"] = "Test";
-    feedbackItem["value"] = 42;
+    feedbackItem["value"] = value;
     feedbackItem["maxValue"] = 100;
     feedbackItem["targetValue"] = 75;
     feedbackItem["reverseColors"] = false;
@@ -182,35 +193,36 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
   };
 
   applyTextToContent(b: Button): void {
-    const content: Content = this.contentExpression.getValue();
-    let siteId = editorContext._.getSitesService().getSiteIdFor(content);
-    if (!siteId) {
-      siteId = "all";
-    }
-    const text = this.getGeneratedTextExpression().getValue();
-    const params: Record<string, any> = {
-      text: text,
-      contentId: content.getId(),
-    };
+    let title = FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_apply_text_button_label;
+    let msg = FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_apply_text_popup_message;
+    let buttonLabel = FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_apply_text_popup_submit_button_label;
+    MessageBoxUtil.showConfirmation(title, msg, buttonLabel,
+            (btn: any): void => {
+              if (btn === "ok") {
+                const content: Content = this.contentExpression.getValue();
+                const text = this.getGeneratedTextExpression().getValue();
+                const params: Record<string, any> = {
+                  text: text,
+                  contentId: content.getId(),
+                };
 
-    const JOB_TYPE = "ApplyTextToContent";
-    console.log(`request params: ${params}`);
-    jobService._.executeJob(
-            new GenericRemoteJob(JOB_TYPE, params),
-            //on success
-            (details: any): void => {
-              //  this.getGeneratedTextExpression().setValue(details.text);
-            },
-            //on error
-            (error: JobExecutionError): void => {
-              trace("[ERROR]", "Error applying text to content: " + error);
-            },
-    );
+                const JOB_TYPE = "ApplyTextToContent";
+                console.log(`request params: ${params}`);
+                jobService._.executeJob(
+                        new GenericRemoteJob(JOB_TYPE, params),
+                        //on success
+                        (details: any): void => {
+                        },
+                        //on error
+                        (error: JobExecutionError): void => {
+                          trace("[ERROR]", "Error applying text to content: " + error);
+                        },
+                );
+              }})
   }
 
   applyQuestion(b: Button): void {
     const responseContainer = Ext.getCmp("response_container");
-    responseContainer.hide();
     const content: Content = this.contentExpression.getValue();
     let siteId = editorContext._.getSitesService().getSiteIdFor(content);
     if (!siteId) {
@@ -233,14 +245,14 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
               if (this.#loadMask && !this.#loadMask.destroyed) {
                 this.#loadMask.destroy();
               }
-              responseContainer.show();
               this.getGeneratedTextExpression().setValue(details.text);
+              this.getConfidenceExpression().setValue(this.createPercentageBarFeedbackItem(details.confidence))
+              responseContainer.show();
 
               let sources = details.sources.map(source => {
                 return this.createSource(source.text, source.source)
               });
               GhostWritrValueHolder.getInstance().getSourcesExpression().setValue(sources);
-              console.log(`details: ${details}`);
             },
             //on error
             (error: JobExecutionError): void => {
