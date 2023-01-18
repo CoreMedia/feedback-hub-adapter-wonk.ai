@@ -3,6 +3,7 @@
     <package-json value="$PROJECT_DIR$/studio-client/apps/main/feedback-hub-adapter-wonky-ghostwritr/package.json" />
     <command value="start" />
     <node-interpreter value="project" />
+    <package-manager value="pnpm" />
     <envs />
     <method v="2" />
   </configuration>
