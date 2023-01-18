@@ -1,5 +1,6 @@
 .ghostwritr-general-panel__default-state-icon:before,
-.ghostwritr-general-panel__empty-state-icon:before {
+.ghostwritr-general-panel__empty-state-icon:before,
+.ghostwritr-general-panel__loading-state-icon:before {
   content: "";
   display: block;
   margin: auto;
@@ -16,6 +17,10 @@
 
 .ghostwritr-general-panel__empty-state-icon:before {
   background-image: url('../img/empty-state.png');
+}
+
+.ghostwritr-general-panel__loading-state-icon:before {
+  background-image: url('../img/loading.gif');
 }
 
 .ghostwritr-source-container {

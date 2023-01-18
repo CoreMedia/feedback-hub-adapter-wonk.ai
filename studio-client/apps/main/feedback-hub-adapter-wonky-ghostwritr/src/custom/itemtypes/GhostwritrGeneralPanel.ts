@@ -8,13 +8,11 @@ import BindPropertyPlugin from "@coremedia/studio-client.ext.ui-components/plugi
 import VerticalSpacingPlugin from "@coremedia/studio-client.ext.ui-components/plugins/VerticalSpacingPlugin";
 import ButtonSkin from "@coremedia/studio-client.ext.ui-components/skins/ButtonSkin";
 import DisplayFieldSkin from "@coremedia/studio-client.ext.ui-components/skins/DisplayFieldSkin";
-import LoadMaskSkin from "@coremedia/studio-client.ext.ui-components/skins/LoadMaskSkin";
 import editorContext from "@coremedia/studio-client.main.editor-components/sdk/editorContext";
 import FeedbackItemPanel
   from "@coremedia/studio-client.main.feedback-hub-editor-components/components/itempanels/FeedbackItemPanel";
 import Ext from "@jangaroo/ext-ts";
 import Component from "@jangaroo/ext-ts/Component";
-import LoadMask from "@jangaroo/ext-ts/LoadMask";
 import Button from "@jangaroo/ext-ts/button/Button";
 import Container from "@jangaroo/ext-ts/container/Container";
 import FormPanel from "@jangaroo/ext-ts/form/Panel";
@@ -59,10 +57,10 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
 
   static readonly DEFAULT_STATE: string = "default";
   static readonly EMPTY_STATE: string = "empty";
+  static readonly LOADING_STATE: string = "loading";
   static readonly SUCCESS_STATE: string = "success";
 
   static readonly BLOCK_CLASS_NAME: string = "ghostwritr-general-panel";
-  #loadMask: LoadMask = null;
 
   //dirty
   static override readonly xtype: string = "com.coremedia.labs.plugins.feedbackhub.wonky.config.wonkyghostwritritempanel";
@@ -133,6 +131,14 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
               ui: ContainerSkin.GRID_100.getSkin(),
               title: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_empty_state_title,
               text: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_empty_state_text,
+            }),
+            Config(EmptyContainer, {
+              itemId: GhostwritrGeneralPanel.LOADING_STATE,
+              iconElementName: "loading-state-icon",
+              bemBlockName: GhostwritrGeneralPanel.BLOCK_CLASS_NAME,
+              ui: ContainerSkin.GRID_100.getSkin(),
+              title: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_loading_state_title,
+              text: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_loading_state_text,
             }),
             Config(Container, {
               itemId: GhostwritrGeneralPanel.SUCCESS_STATE,
@@ -253,15 +259,12 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
     console.log(`request params: ${params}`);
 
     this.hideDetailsTab();
+    this.removeConfidenceBar();
 
     jobService._.executeJob(
             new GenericRemoteJob(JOB_TYPE, params),
             //on success
             (details: any): void => {
-              if (this.#loadMask && !this.#loadMask.destroyed) {
-                this.#loadMask.destroy();
-              }
-
               if (details.text === "Unfortunately I have no answer.") {
                 this.getActiveStateExpression().setValue(GhostwritrGeneralPanel.EMPTY_STATE);
                 GhostWritrValueHolder.getInstance().getSourcesExpression().setValue([]);
@@ -288,22 +291,11 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
             //on error
             (error: JobExecutionError): void => {
               this.getActiveStateExpression().setValue(GhostwritrGeneralPanel.EMPTY_STATE);
-              if (this.#loadMask && !this.#loadMask.destroyed) {
-                this.#loadMask.destroy();
-              }
               trace("[ERROR]", "Error assigning briefing: " + error);
             },
     );
 
-    if (!this.#loadMask || this.#loadMask.destroyed) {
-      const loadMaskConfig = Config(LoadMask);
-      loadMaskConfig.ui = LoadMaskSkin.DARK.getSkin();
-      loadMaskConfig.msg = "Please wait...";
-      loadMaskConfig.target = this;
-      this.#loadMask = new LoadMask(loadMaskConfig);
-    }
-
-    this.#loadMask.show();
+    this.getActiveStateExpression().setValue(GhostwritrGeneralPanel.LOADING_STATE);
   }
 
   removeConfidenceBar() {
@@ -313,7 +305,8 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
   addConfidenceBar(confidence: number) {
     this.removeConfidenceBar();
 
-    const confidencePercent = confidence * 100;
+    const confidencePercent = Math.round(confidence * 100);
+    console.log(`Confidence: ${confidence} -> ${confidencePercent}%`);
     const targetConfidence = 75;
 
     const confidenceFeedback: FeedbackItem = new FeedbackItem("confidenceFeedback", "bar", FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_confidence_bar_label, null);
