@@ -23,7 +23,7 @@ import TextField from "@jangaroo/ext-ts/form/field/Text";
 import AnchorLayout from "@jangaroo/ext-ts/layout/container/Anchor";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import VBoxLayout from "@jangaroo/ext-ts/layout/container/VBox";
-import {bind} from "@jangaroo/runtime";
+import { bind } from "@jangaroo/runtime";
 import Config from "@jangaroo/runtime/Config";
 import ConfigUtils from "@jangaroo/runtime/ConfigUtils";
 import trace from "@jangaroo/runtime/trace";
@@ -34,6 +34,14 @@ import GhostWritrValueHolder from "./GhostWritrValueHolder";
 import PercentageBarFeedbackItemPanel
   from "@coremedia/studio-client.main.feedback-hub-editor-components/components/itempanels/PercentageBarFeedbackItemPanel";
 import MessageBoxUtil from "@coremedia/studio-client.ext.ui-components/messagebox/MessageBoxUtil";
+import BaseField from "@jangaroo/ext-ts/form/field/Base";
+import ExtEvent from "@jangaroo/ext-ts/event/Event";
+import CollectionViewConstants
+  from "@coremedia/studio-client.main.editor-components/sdk/collectionview/CollectionViewConstants";
+import createComponentSelector from "@coremedia/studio-client.ext.ui-components/util/createComponentSelector";
+
+const CONFIDENCE_BAR_ITEM_ID: string = "confidenceBar";
+const RESPONSE_CONTAINER_ITEM_ID: string = "responseContainer";
 
 interface GhostwritrGeneralPanelConfig extends Config<FeedbackItemPanel> {
 }
@@ -52,7 +60,6 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
   //dirty
   static override readonly xtype: string = "com.coremedia.labs.plugins.feedbackhub.wonky.config.wonkyghostwritritempanel";
 
-
   constructor(config: Config<GhostwritrGeneralPanel> = null) {
     super((() => ConfigUtils.apply(Config(GhostwritrGeneralPanel, {
       items: [
@@ -70,8 +77,15 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
                   bidirectional: true,
                 }),
               ],
+              listeners: {
+                "specialkey": (field: BaseField, e: ExtEvent) => {
+                  if (e.getKey() === ExtEvent.ENTER) {
+                    this.applyQuestion();
+                  }
+                }
+              },
             }),
-            Config(Container, {width: 6}),
+            Config(Container, { width: 6 }),
             Config(Button, {
               formBind: true,
               ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
@@ -84,21 +98,13 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
             pack: "start",
           }),
         }),
+
+        // Confidence bar will be added dynamically here
+
         Config(Container, {
-          id: "response_container",
+          itemId: RESPONSE_CONTAINER_ITEM_ID,
           hidden: true,
           items: [
-            //TODO without explicitly setting the feedbackItem this doesnt work. But like this the changed value wont be rendered
-            Config(PercentageBarFeedbackItemPanel, {
-              feedbackItem: this.getConfidenceExpression().getValue(),
-              plugins: [
-                Config(BindPropertyPlugin, {
-                  componentProperty: "feedbackItem",
-                  bindTo: this.getConfidenceExpression(),
-                  bidirectional: true,
-                }),
-              ],
-            }),
             Config(DisplayField, {
               ui: DisplayFieldSkin.BOLD.getSkin(),
               value: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_generated_text_header,
@@ -124,7 +130,7 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
                 }),
               ],
             }),
-            Config(Container, {width: 6}),
+            Config(Container, { width: 6 }),
             Config(Button, {
               formBind: true,
               ui: ButtonSkin.VIVID.getSkin(),
@@ -132,12 +138,12 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
               text: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_apply_text_button_label,
             }),
           ],
-          layout: Config(VBoxLayout, {align: "stretch"}),
+          layout: Config(VBoxLayout, { align: "stretch" }),
         }),
-        Config(Component, {height: 6}),
+        Config(Component, { height: 6 }),
       ],
       defaultType: Component.xtype,
-      defaults: Config<Component>({anchor: "100%"}),
+      defaults: Config<Component>({ anchor: "100%" }),
       layout: Config(AnchorLayout),
       plugins: [
         Config(VerticalSpacingPlugin),
@@ -159,29 +165,10 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
     return this.#generatedTextExpression;
   }
 
-  getConfidenceExpression(): ValueExpression {
-    if (!this.#confidenceExpression) {
-      //TODO create with initial value of -1
-      this.#confidenceExpression = ValueExpressionFactory.createFromValue(this.createPercentageBarFeedbackItem(95));
-    }
-    return this.#confidenceExpression;
-  }
-
   createSource(text: string, url: string): GhostWritrtSource {
     let id = Ext.id(null, "GhostWritrSource");
     return new GhostWritrtSource(id, text, url);
   }
-  createPercentageBarFeedbackItem(value: number): FeedbackItem {
-    let id = Ext.id(null, "FeedbackItem");
-    let feedbackItem: FeedbackItem = new FeedbackItem(id, "percentageScoreBar", "Confidence Feedback Item", "general");
-    feedbackItem["label"] = "Confidence";
-    feedbackItem["value"] = value;
-    feedbackItem["maxValue"] = 100;
-    feedbackItem["reverseColors"] = false;
-    feedbackItem["decimalPlaces"] = 2;
-    feedbackItem["color"] = "green";
-    return feedbackItem;
-  };
 
   applyTextToContent(b: Button): void {
     let title = FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_apply_text_button_label;
@@ -209,11 +196,12 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
                           trace("[ERROR]", "Error applying text to content: " + error);
                         },
                 );
-              }})
+              }
+            });
   }
 
-  applyQuestion(b: Button): void {
-    const responseContainer = Ext.getCmp("response_container");
+  applyQuestion(): void {
+    const [responseContainer] = this.query(createComponentSelector().itemId(RESPONSE_CONTAINER_ITEM_ID).build());
     const content: Content = this.contentExpression.getValue();
     let siteId = editorContext._.getSitesService().getSiteIdFor(content);
     if (!siteId) {
@@ -229,6 +217,7 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
 
     const JOB_TYPE = "generateText";
     console.log(`request params: ${params}`);
+
     jobService._.executeJob(
             new GenericRemoteJob(JOB_TYPE, params),
             //on success
@@ -237,11 +226,15 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
                 this.#loadMask.destroy();
               }
               this.getGeneratedTextExpression().setValue(details.text);
-              this.getConfidenceExpression().setValue(this.createPercentageBarFeedbackItem(details.confidence))
+
+              // add confidence bar
+              this.addConfidenceBar(details.confidence);
+
+              // show response container
               responseContainer.show();
 
               let sources = details.sources.map(source => {
-                return this.createSource(source.text, source.source)
+                return this.createSource(source.text, source.source);
               });
               GhostWritrValueHolder.getInstance().getSourcesExpression().setValue(sources);
             },
@@ -264,6 +257,28 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
 
     this.#loadMask.show();
   }
+
+  addConfidenceBar(confidence: number) {
+    this.remove(CONFIDENCE_BAR_ITEM_ID);
+
+    const confidencePercent = confidence * 100;
+    const targetConfidence = 75;
+
+    const confidenceFeedback: FeedbackItem = new FeedbackItem("foo", "bar", "Test", "");
+    confidenceFeedback["label"] = FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_confidence_bar_label;
+    confidenceFeedback["value"] = confidencePercent;
+    confidenceFeedback["maxValue"] = 100;
+    confidenceFeedback["targetValue"] = targetConfidence;
+    confidenceFeedback["reverseColors"] = false;
+    confidenceFeedback["decimalPlaces"] = 1;
+    confidenceFeedback["color"] = confidencePercent >= targetConfidence ? "green" : "orange";
+
+    this.insert(1, Config(PercentageBarFeedbackItemPanel, {
+      itemId: CONFIDENCE_BAR_ITEM_ID,
+      feedbackItem: confidenceFeedback,
+    }));
+  }
+
 }
 
 export default GhostwritrGeneralPanel;

@@ -37,6 +37,7 @@ interface FeedbackHubWonkyGhostwritrStudioPlugin_properties {
 
   ghostwritr_apply_text_popup_submit_button_label: string;
 
+  ghostwritr_confidence_bar_label: string;
 
 }
 
@@ -59,6 +60,7 @@ const FeedbackHubWonkyGhostwritrStudioPlugin_properties: FeedbackHubWonkyGhostwr
   ghostwritr_apply_text_button_label: "Apply Text to Content",
   ghostwritr_apply_text_popup_message: "This will override the existing Article Text.",
   ghostwritr_apply_text_popup_submit_button_label: "Confirm",
+  ghostwritr_confidence_bar_label: "Confidence"
 };
 
 export default FeedbackHubWonkyGhostwritrStudioPlugin_properties;
