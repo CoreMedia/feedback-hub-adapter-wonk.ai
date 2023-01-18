@@ -8,6 +8,10 @@ import VBoxLayout from "@jangaroo/ext-ts/layout/container/VBox";
 import Config from "@jangaroo/runtime/Config";
 import ConfigUtils from "@jangaroo/runtime/ConfigUtils";
 import GhostWritrSource from "./GhostWritrtSource";
+import Button from "@jangaroo/ext-ts/button/Button";
+import ButtonSkin from "@coremedia/studio-client.ext.ui-components/skins/ButtonSkin";
+import ExtEvent from "@jangaroo/ext-ts/event/Event";
+import MenuSeparator from "@jangaroo/ext-ts/menu/Separator";
 
 interface SourcesPanelConfig extends Config<Container>, Partial<Pick<SourcesPanel,
         "source"
@@ -29,16 +33,28 @@ class SourcesPanel extends Container {
           itemId: "SourceContainer",
           items: [
             Config(DisplayField, {
+              margin: '10 0 0 9',
+              ui: DisplayFieldSkin.BOLD.getSkin(),
+              value: this.extractDomain(config.source.url),
+            }),
+            Config(DisplayField, {
+              margin: '0 0 0 9',
               scrollable: "y",
               autoScroll: true,
               flex: 1,
               itemId: "sourceText",
               value: config.source.text,
             }),
-            Config(DisplayField, {
-              ui: DisplayFieldSkin.BOLD.getSkin(),
-              value: config.source.url,
+            Config(Button, {
+              text: config.source.url,
+              textAlign: 'left',
+              margin: '0 0 10 0',
+              ui: ButtonSkin.SIMPLE_PRIMARY.getSkin(),
+              handler: (btn: Button, e: ExtEvent) => {
+                window.open(config.source.url, "_blank")
+              },
             }),
+            Config(MenuSeparator, {})
           ],
           layout: Config(VBoxLayout, {align: "stretch"}),
         }),
@@ -52,6 +68,10 @@ class SourcesPanel extends Container {
     }), config))());
   }
 
+  extractDomain(url: string) {
+    let splittedUrl = url.split('/');
+    return splittedUrl[2].replace("www.", "");
+  }
 }
 
 export default SourcesPanel;
