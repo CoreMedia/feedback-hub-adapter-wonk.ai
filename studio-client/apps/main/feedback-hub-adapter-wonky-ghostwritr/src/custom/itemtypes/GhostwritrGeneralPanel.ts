@@ -23,7 +23,7 @@ import TextField from "@jangaroo/ext-ts/form/field/Text";
 import AnchorLayout from "@jangaroo/ext-ts/layout/container/Anchor";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import VBoxLayout from "@jangaroo/ext-ts/layout/container/VBox";
-import { bind } from "@jangaroo/runtime";
+import { as, bind } from "@jangaroo/runtime";
 import Config from "@jangaroo/runtime/Config";
 import ConfigUtils from "@jangaroo/runtime/ConfigUtils";
 import trace from "@jangaroo/runtime/trace";
@@ -36,12 +36,11 @@ import PercentageBarFeedbackItemPanel
 import MessageBoxUtil from "@coremedia/studio-client.ext.ui-components/messagebox/MessageBoxUtil";
 import BaseField from "@jangaroo/ext-ts/form/field/Base";
 import ExtEvent from "@jangaroo/ext-ts/event/Event";
-import CollectionViewConstants
-  from "@coremedia/studio-client.main.editor-components/sdk/collectionview/CollectionViewConstants";
-import createComponentSelector from "@coremedia/studio-client.ext.ui-components/util/createComponentSelector";
-
-const CONFIDENCE_BAR_ITEM_ID: string = "confidenceBar";
-const RESPONSE_CONTAINER_ITEM_ID: string = "responseContainer";
+import EmptyContainer from "@coremedia/studio-client.ext.ui-components/components/EmptyContainer";
+import ContainerSkin from "@coremedia/studio-client.ext.ui-components/skins/ContainerSkin";
+import SwitchingContainer from "@coremedia/studio-client.ext.ui-components/components/SwitchingContainer";
+import TextArea from "@jangaroo/ext-ts/form/field/TextArea";
+import TabPanel from "@jangaroo/ext-ts/tab/Panel";
 
 interface GhostwritrGeneralPanelConfig extends Config<FeedbackItemPanel> {
 }
@@ -49,20 +48,32 @@ interface GhostwritrGeneralPanelConfig extends Config<FeedbackItemPanel> {
 class GhostwritrGeneralPanel extends FeedbackItemPanel {
   declare Config: GhostwritrGeneralPanelConfig;
 
+  static readonly CONFIDENCE_BAR_ITEM_ID: string = "confidenceBar";
+  static readonly RESPONSE_CONTAINER_ITEM_ID: string = "responseContainer";
+
   #generatedTextExpression: ValueExpression = null;
 
   #questionInputExpression: ValueExpression = null;
 
-  #confidenceExpression: ValueExpression = null;
+  #activeStateExpression: ValueExpression = null;
 
+  static readonly DEFAULT_STATE: string = "default";
+  static readonly EMPTY_STATE: string = "empty";
+  static readonly SUCCESS_STATE: string = "success";
+
+  static readonly BLOCK_CLASS_NAME: string = "ghostwritr-general-panel";
   #loadMask: LoadMask = null;
 
   //dirty
   static override readonly xtype: string = "com.coremedia.labs.plugins.feedbackhub.wonky.config.wonkyghostwritritempanel";
 
   constructor(config: Config<GhostwritrGeneralPanel> = null) {
-    super((() => ConfigUtils.apply(Config(GhostwritrGeneralPanel, {
+    // @ts-expect-error Ext JS semantics
+    const this$ = this;
+    super(ConfigUtils.apply(Config(GhostwritrGeneralPanel, {
+      cls: GhostwritrGeneralPanel.BLOCK_CLASS_NAME,
       items: [
+        // Input fields
         Config(FormPanel, {
           items: [
             Config(TextField, {
@@ -73,7 +84,7 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
               emptyText: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwirtr_question_emptyText,
               plugins: [
                 Config(BindPropertyPlugin, {
-                  bindTo: this.getQuestionInputExpression(),
+                  bindTo: this$.getQuestionInputExpression(),
                   bidirectional: true,
                 }),
               ],
@@ -89,7 +100,7 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
             Config(Button, {
               formBind: true,
               ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
-              handler: bind(this, this.applyQuestion),
+              handler: bind(this$, this$.applyQuestion),
               text: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_question_submit_button_label,
             }),
           ],
@@ -101,46 +112,58 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
 
         // Confidence bar will be added dynamically here
 
-        Config(Container, {
-          itemId: RESPONSE_CONTAINER_ITEM_ID,
-          hidden: true,
+        // Results
+        Config(SwitchingContainer, {
+          itemId: GhostwritrGeneralPanel.RESPONSE_CONTAINER_ITEM_ID,
+          activeItemValueExpression: this$.getActiveStateExpression(),
+          minHeight: 100,
           items: [
-            Config(DisplayField, {
-              ui: DisplayFieldSkin.BOLD.getSkin(),
-              value: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_generated_text_header,
+            Config(EmptyContainer, {
+              itemId: GhostwritrGeneralPanel.DEFAULT_STATE,
+              iconElementName: "default-state-icon",
+              bemBlockName: GhostwritrGeneralPanel.BLOCK_CLASS_NAME,
+              ui: ContainerSkin.GRID_100.getSkin(),
+              title: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_default_state_title,
+              text: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_default_state_text,
+            }),
+            Config(EmptyContainer, {
+              itemId: GhostwritrGeneralPanel.EMPTY_STATE,
+              iconElementName: "empty-state-icon",
+              bemBlockName: GhostwritrGeneralPanel.BLOCK_CLASS_NAME,
+              ui: ContainerSkin.GRID_100.getSkin(),
+              title: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_empty_state_title,
+              text: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_empty_state_text,
             }),
             Config(Container, {
-              scrollable: "y",
-              autoScroll: true,
-              flex: 1,
-              style: "border: 1px solid #c7c7c7; border-radius: 3px; padding: 6px;",
+              itemId: GhostwritrGeneralPanel.SUCCESS_STATE,
               items: [
                 Config(DisplayField, {
-                  scrollable: "y",
+                  ui: DisplayFieldSkin.BOLD.getSkin(),
+                  value: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_generated_text_header,
+                }),
+                Config(TextArea, {
                   autoScroll: true,
+                  readOnly: true,
                   flex: 1,
-                  html: true,
-                  itemId: "briefingContent",
+                  minHeight: 300,
                   plugins: [
                     Config(BindPropertyPlugin, {
-                      componentProperty: "value",
-                      bindTo: this.getGeneratedTextExpression(),
+                      bindTo: this$.getGeneratedTextExpression(),
                     }),
                   ],
                 }),
+                Config(Container, { height: 6 }),
+                Config(Button, {
+                  formBind: true,
+                  ui: ButtonSkin.VIVID.getSkin(),
+                  handler: bind(this$, this$.applyTextToContent),
+                  text: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_apply_text_button_label,
+                }),
               ],
+              layout: Config(VBoxLayout, { align: "stretch" }),
             }),
-            Config(Container, { width: 6 }),
-            Config(Button, {
-              formBind: true,
-              ui: ButtonSkin.VIVID.getSkin(),
-              handler: bind(this, this.applyTextToContent),
-              text: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_apply_text_button_label,
-            }),
-          ],
-          layout: Config(VBoxLayout, { align: "stretch" }),
+          ]
         }),
-        Config(Component, { height: 6 }),
       ],
       defaultType: Component.xtype,
       defaults: Config<Component>({ anchor: "100%" }),
@@ -148,7 +171,12 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
       plugins: [
         Config(VerticalSpacingPlugin),
       ],
-    }), config))());
+    }), config));
+  }
+
+  protected override afterRender(): any {
+    this.hideDetailsTab();
+    return super.afterRender();
   }
 
   getQuestionInputExpression(): ValueExpression {
@@ -163,6 +191,13 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
       this.#generatedTextExpression = ValueExpressionFactory.createFromValue("");
     }
     return this.#generatedTextExpression;
+  }
+
+  getActiveStateExpression(): ValueExpression {
+    if (!this.#activeStateExpression) {
+      this.#activeStateExpression = ValueExpressionFactory.createFromValue(GhostwritrGeneralPanel.DEFAULT_STATE);
+    }
+    return this.#activeStateExpression;
   }
 
   createSource(text: string, url: string): GhostWritrtSource {
@@ -201,7 +236,6 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
   }
 
   applyQuestion(): void {
-    const [responseContainer] = this.query(createComponentSelector().itemId(RESPONSE_CONTAINER_ITEM_ID).build());
     const content: Content = this.contentExpression.getValue();
     let siteId = editorContext._.getSitesService().getSiteIdFor(content);
     if (!siteId) {
@@ -218,6 +252,8 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
     const JOB_TYPE = "generateText";
     console.log(`request params: ${params}`);
 
+    this.hideDetailsTab();
+
     jobService._.executeJob(
             new GenericRemoteJob(JOB_TYPE, params),
             //on success
@@ -225,21 +261,33 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
               if (this.#loadMask && !this.#loadMask.destroyed) {
                 this.#loadMask.destroy();
               }
-              this.getGeneratedTextExpression().setValue(details.text);
 
-              // add confidence bar
-              this.addConfidenceBar(details.confidence);
+              if (details.text === "Unfortunately I have no answer.") {
+                this.getActiveStateExpression().setValue(GhostwritrGeneralPanel.EMPTY_STATE);
+                GhostWritrValueHolder.getInstance().getSourcesExpression().setValue([]);
+                this.removeConfidenceBar();
 
-              // show response container
-              responseContainer.show();
+              } else {
+                this.getActiveStateExpression().setValue(GhostwritrGeneralPanel.SUCCESS_STATE);
+                this.getGeneratedTextExpression().setValue(details.text);
 
-              let sources = details.sources.map(source => {
-                return this.createSource(source.text, source.source);
-              });
-              GhostWritrValueHolder.getInstance().getSourcesExpression().setValue(sources);
+                // add confidence bar
+                this.addConfidenceBar(details.confidence);
+
+                let sources = details.sources.map(source => {
+                  return this.createSource(source.text, source.source);
+                });
+                GhostWritrValueHolder.getInstance().getSourcesExpression().setValue(sources);
+
+                if (sources && sources.length > 0) {
+                  this.showDetailsTab();
+                }
+              }
+
             },
             //on error
             (error: JobExecutionError): void => {
+              this.getActiveStateExpression().setValue(GhostwritrGeneralPanel.EMPTY_STATE);
               if (this.#loadMask && !this.#loadMask.destroyed) {
                 this.#loadMask.destroy();
               }
@@ -258,13 +306,17 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
     this.#loadMask.show();
   }
 
+  removeConfidenceBar() {
+    this.remove(GhostwritrGeneralPanel.CONFIDENCE_BAR_ITEM_ID);
+  }
+
   addConfidenceBar(confidence: number) {
-    this.remove(CONFIDENCE_BAR_ITEM_ID);
+    this.removeConfidenceBar();
 
     const confidencePercent = confidence * 100;
     const targetConfidence = 75;
 
-    const confidenceFeedback: FeedbackItem = new FeedbackItem("foo", "bar", "Test", "");
+    const confidenceFeedback: FeedbackItem = new FeedbackItem("confidenceFeedback", "bar", FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_confidence_bar_label, null);
     confidenceFeedback["label"] = FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_confidence_bar_label;
     confidenceFeedback["value"] = confidencePercent;
     confidenceFeedback["maxValue"] = 100;
@@ -274,9 +326,33 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
     confidenceFeedback["color"] = confidencePercent >= targetConfidence ? "green" : "orange";
 
     this.insert(1, Config(PercentageBarFeedbackItemPanel, {
-      itemId: CONFIDENCE_BAR_ITEM_ID,
+      itemId: GhostwritrGeneralPanel.CONFIDENCE_BAR_ITEM_ID,
       feedbackItem: confidenceFeedback,
     }));
+  }
+
+  hideDetailsTab() {
+    try {
+      let tabPanel:TabPanel = as(this.findParentByType(TabPanel.xtype), TabPanel);
+      if (tabPanel) {
+        // Hide "Details" tab
+        tabPanel.getTabBar().items.getAt(1).hide();
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  showDetailsTab() {
+    try {
+      let tabPanel:TabPanel = as(this.findParentByType(TabPanel.xtype), TabPanel);
+      if (tabPanel) {
+        // Show "Details" tab
+        tabPanel.getTabBar().items.getAt(1).show();
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
 }

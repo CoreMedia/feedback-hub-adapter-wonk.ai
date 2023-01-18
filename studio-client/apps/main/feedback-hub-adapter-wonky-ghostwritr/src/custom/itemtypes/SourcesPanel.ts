@@ -22,12 +22,15 @@ interface SourcesPanelConfig extends Config<Container>, Partial<Pick<SourcesPane
 class SourcesPanel extends Container {
   declare Config: SourcesPanelConfig;
 
+  static readonly BLOCK_CLASS_NAME: string = "ghostwritr-source-container";
+
   source: GhostWritrSource;
 
   static override readonly xtype: string = "com.coremedia.labs.plugins.feedbackhub.wonky.config.sourcspanel";
 
   constructor(config: Config<SourcesPanel> = null) {
     super((() => ConfigUtils.apply(Config(SourcesPanel, {
+      cls: SourcesPanel.BLOCK_CLASS_NAME,
       items: [
         Config(Container, {
           itemId: "SourceContainer",
@@ -44,6 +47,7 @@ class SourcesPanel extends Container {
               flex: 1,
               itemId: "sourceText",
               value: config.source.text,
+              cls: `${SourcesPanel.BLOCK_CLASS_NAME}__quote`
             }),
             Config(Button, {
               text: config.source.url,
@@ -54,7 +58,6 @@ class SourcesPanel extends Container {
                 window.open(config.source.url, "_blank")
               },
             }),
-            Config(MenuSeparator, {})
           ],
           layout: Config(VBoxLayout, {align: "stretch"}),
         }),

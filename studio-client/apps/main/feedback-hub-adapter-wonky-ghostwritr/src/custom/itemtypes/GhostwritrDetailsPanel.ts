@@ -10,6 +10,8 @@ import Panel from "@jangaroo/ext-ts/panel/Panel";
 import SourcesPanel from "./SourcesPanel";
 import GhostWritrtSource from "./GhostWritrtSource";
 import GhostWritrValueHolder from "./GhostWritrValueHolder";
+import DisplayField from "@jangaroo/ext-ts/form/field/Display";
+import FeedbackHubWonkyGhostwritrStudioPlugin_properties from "../../FeedbackHubWonkyGhostwritrStudioPlugin_properties";
 
 interface GhostwritrDetailsPanelConfig extends Config<FeedbackItemPanel> {
 }
@@ -25,6 +27,7 @@ class GhostwritrDetailsPanel extends FeedbackItemPanel {
       items: [
         Config(Panel, {
           itemId: "detailsContainer",
+          title: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_sources_title,
           plugins: [Config(BindComponentsPlugin, {
             configBeanParameterName: "source",
             valueExpression: GhostWritrValueHolder.getInstance().getSourcesExpression(),
