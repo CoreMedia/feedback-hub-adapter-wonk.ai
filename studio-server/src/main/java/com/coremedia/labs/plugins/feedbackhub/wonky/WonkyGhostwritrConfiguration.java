@@ -4,7 +4,7 @@ import com.coremedia.cap.common.CapConnection;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.cms.common.plugins.beans_for_plugins.CommonBeansForPluginsConfiguration;
 import com.coremedia.feedbackhub.FeedbackHubConfigurationProperties;
-import com.coremedia.labs.plugins.feedbackhub.wonky.adapter.WonkyGhostwritrFeedbackAdapterFactory;
+import com.coremedia.labs.plugins.feedbackhub.wonky.adapter.WonkyGhostwritrFeedbackProviderFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.LoggingRequestInterceptor;
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.WonkyGhostWritrService;
 import com.coremedia.labs.plugins.feedbackhub.wonky.api.WonkyGhostwritrConnector;
@@ -25,8 +25,17 @@ import java.util.Collections;
 public class WonkyGhostwritrConfiguration {
 
   @Bean
-  public WonkyGhostwritrFeedbackAdapterFactory wonkyGhostwritrFeedbackAdapterFactory() {
-    return new WonkyGhostwritrFeedbackAdapterFactory();
+  public WonkyGhostwritrFeedbackProviderFactory wonkyGhostwritrFeedbackProviderFactory() {
+    return new WonkyGhostwritrFeedbackProviderFactory();
+  }
+
+  @Bean
+  public FeedbackSettingsProvider wonkyGhostwritrFeedbackSettingsProvider(@NonNull SitesService sitesService, @NonNull CapConnection capConnection) {
+    return new FeedbackSettingsProvider(capConnection,
+            sitesService,
+            new FeedbackHubConfigurationProperties.Bindings(),
+            WonkyGhostwritrSettings.class,
+            WonkyGhostwritrFeedbackProviderFactory.TYPE);
   }
 
   @Bean
@@ -44,15 +53,6 @@ public class WonkyGhostwritrConfiguration {
     RestTemplate restTemplate = new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
     restTemplate.setInterceptors(Collections.singletonList(new LoggingRequestInterceptor()));
     return restTemplate;
-  }
-
-  @Bean
-  public FeedbackSettingsProvider wonkyGhostwritrFeedbackSettingsProvider(@NonNull SitesService sitesService, @NonNull CapConnection capConnection) {
-    return new FeedbackSettingsProvider(capConnection,
-            sitesService,
-            new FeedbackHubConfigurationProperties.Bindings(),
-            WonkyGhostwritrSettings.class,
-            WonkyGhostwritrFeedbackAdapterFactory.TYPE);
   }
 
   @Bean
