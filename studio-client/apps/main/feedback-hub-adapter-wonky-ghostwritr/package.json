@@ -2,7 +2,7 @@
   "name": "@coremedia-labs/studio-client.main.feedback-hub-adapter-wonky-ghostwritr",
   "author": "CoreMedia GmbH",
   "license": "CoreMedia Open Source License",
-  "version": "0.0.1-SNAPSHOT",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@coremedia/studio-client.cap-rest-client": "2207.1.0",
@@ -14,7 +14,6 @@
     "@coremedia/studio-client.main.editor-components": "2207.1.0",
     "@coremedia/studio-client.main.feedback-hub-editor-components": "2207.1.0",
     "@coremedia/studio-client.feedback-hub-models": "2207.1.0",
-
     "@jangaroo/ext-ts": "^1.0.3",
     "@jangaroo/runtime": "^1.0.3"
   },
