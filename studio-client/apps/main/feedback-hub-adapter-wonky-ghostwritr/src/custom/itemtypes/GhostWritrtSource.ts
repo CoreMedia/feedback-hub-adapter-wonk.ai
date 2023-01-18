@@ -2,9 +2,7 @@ class GhostWritrSource {
 
   id: string;
   text: string;
-
   url: string;
-
 
   constructor(id: string, text: string, url: string) {
     this.id = id;
@@ -12,6 +10,5 @@ class GhostWritrSource {
     this.url = url;
   }
 }
-
 
 export default  GhostWritrSource

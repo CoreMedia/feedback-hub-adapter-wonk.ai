@@ -19,9 +19,8 @@ class SourcesPanel extends Container {
   declare Config: SourcesPanelConfig;
 
   source: GhostWritrSource;
-  //dirty
-  static override readonly xtype: string = "com.coremedia.labs.plugins.feedbackhub.wonky.config.sourcspanel";
 
+  static override readonly xtype: string = "com.coremedia.labs.plugins.feedbackhub.wonky.config.sourcspanel";
 
   constructor(config: Config<SourcesPanel> = null) {
     super((() => ConfigUtils.apply(Config(SourcesPanel, {

@@ -27,10 +27,8 @@ class GhostwritrDetailsPanel extends FeedbackItemPanel {
           itemId: "detailsContainer",
           plugins: [Config(BindComponentsPlugin, {
             configBeanParameterName: "source",
-            /* config parameter name of template component */
             valueExpression: GhostWritrValueHolder.getInstance().getSourcesExpression(),
             template: Config(SourcesPanel),
-            /* template component */
             getKey: this.getSourceId
           })
           ]

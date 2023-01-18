@@ -96,7 +96,6 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
                   componentProperty: "feedbackItem",
                   bindTo: this.getConfidenceExpression(),
                   bidirectional: true,
-
                 }),
               ],
             }),
@@ -134,10 +133,6 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
             }),
           ],
           layout: Config(VBoxLayout, {align: "stretch"}),
-          /*  plugins: [
-              Config(BindVisibilityPlugin, { bindTo: this.getBriefingInfoExpression() }),
-            ],
-           */
         }),
         Config(Component, {height: 6}),
       ],
@@ -166,26 +161,22 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
 
   getConfidenceExpression(): ValueExpression {
     if (!this.#confidenceExpression) {
-      //TODO creat with initial value of -1
+      //TODO create with initial value of -1
       this.#confidenceExpression = ValueExpressionFactory.createFromValue(this.createPercentageBarFeedbackItem(95));
     }
     return this.#confidenceExpression;
   }
 
   createSource(text: string, url: string): GhostWritrtSource {
-    return new GhostWritrtSource(Ext.id(null, "GhostWritrSource"), text, url);
+    let id = Ext.id(null, "GhostWritrSource");
+    return new GhostWritrtSource(id, text, url);
   }
-
-  getSourceId(source: GhostWritrtSource): string {
-    return source.id;
-  }
-
   createPercentageBarFeedbackItem(value: number): FeedbackItem {
-    let feedbackItem: FeedbackItem = new FeedbackItem("foo", "bar", "Test", "");
-    feedbackItem["label"] = "Test";
+    let id = Ext.id(null, "FeedbackItem");
+    let feedbackItem: FeedbackItem = new FeedbackItem(id, "percentageScoreBar", "Confidence Feedback Item", "general");
+    feedbackItem["label"] = "Confidence";
     feedbackItem["value"] = value;
     feedbackItem["maxValue"] = 100;
-    feedbackItem["targetValue"] = 75;
     feedbackItem["reverseColors"] = false;
     feedbackItem["decimalPlaces"] = 2;
     feedbackItem["color"] = "green";

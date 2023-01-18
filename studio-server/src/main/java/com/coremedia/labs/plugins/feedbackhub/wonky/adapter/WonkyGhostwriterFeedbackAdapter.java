@@ -32,7 +32,7 @@ public class WonkyGhostwriterFeedbackAdapter implements TextFeedbackHubAdapter {
   public CompletionStage<Collection<FeedbackItem>> analyzeText(FeedbackContext context, Map<String, String> textProperties, @Nullable Locale locale) {
     List<FeedbackItem> items = new ArrayList<>();
 
-    FeedbackLinkFeedbackItem wonkyLink = FeedbackItemFactory.createFeedbackLink("https://wonki-api-gateway.developer.azure-api.net/");
+    FeedbackLinkFeedbackItem wonkyLink = FeedbackItemFactory.createFeedbackLink("https://github.com/CoreMedia/feedback-hub-adapter-wonky-ghostwritr");
     items.add(wonkyLink);
 
     GhostWritrGeneralFeedbackItem ghostWritrGeneralFeedbackItem = GhostWritrGeneralFeedbackItem.builder()

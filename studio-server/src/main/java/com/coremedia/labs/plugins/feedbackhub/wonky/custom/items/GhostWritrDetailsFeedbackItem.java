@@ -2,9 +2,7 @@ package com.coremedia.labs.plugins.feedbackhub.wonky.custom.items;
 
 import com.coremedia.feedbackhub.items.FeedbackItem;
 
-/**
- *
- */
+
 public class GhostWritrDetailsFeedbackItem implements FeedbackItem {
 
   private final String collection;

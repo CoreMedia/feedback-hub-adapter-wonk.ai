@@ -8,7 +8,7 @@ class GhostWritrValueHolder {
 
   constructor() {
     if (GhostWritrValueHolder.instance) {
-      throw new Error("Error - use Singleton.getInstance()");
+      throw new Error("Error - use GhostWritrValueHolder.getInstance()");
     }
   }
 
