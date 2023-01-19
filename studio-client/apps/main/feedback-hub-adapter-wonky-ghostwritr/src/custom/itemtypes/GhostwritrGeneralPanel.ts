@@ -76,10 +76,10 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
           items: [
             Config(TextField, {
               flex: 1,
-              fieldLabel: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghoestwritr_question_label,
+              fieldLabel: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_question_label,
               allowBlank: false,
               blankText: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_question_blank_validation_text,
-              emptyText: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwirtr_question_emptyText,
+              emptyText: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_question_emptyText,
               plugins: [
                 Config(BindPropertyPlugin, {
                   bindTo: this$.getQuestionInputExpression(),
@@ -170,6 +170,11 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
             }),
           ]
         }),
+        Config(DisplayField, {
+          cls: `${GhostwritrGeneralPanel.BLOCK_CLASS_NAME}__credit_link`,
+          value: FeedbackHubWonkyGhostwritrStudioPlugin_properties.ghostwritr_credit_link,
+          htmlEncode: false
+        })
       ],
       defaultType: Component.xtype,
       defaults: Config<Component>({ anchor: "100%" }),
@@ -326,7 +331,7 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
 
   hideDetailsTab() {
     try {
-      let tabPanel:TabPanel = as(this.findParentByType(TabPanel.xtype), TabPanel);
+      let tabPanel: TabPanel = as(this.findParentByType(TabPanel.xtype), TabPanel);
       if (tabPanel) {
         // Hide "Details" tab
         tabPanel.getTabBar().items.getAt(1).hide();
@@ -338,7 +343,7 @@ class GhostwritrGeneralPanel extends FeedbackItemPanel {
 
   showDetailsTab() {
     try {
-      let tabPanel:TabPanel = as(this.findParentByType(TabPanel.xtype), TabPanel);
+      let tabPanel: TabPanel = as(this.findParentByType(TabPanel.xtype), TabPanel);
       if (tabPanel) {
         // Show "Details" tab
         tabPanel.getTabBar().items.getAt(1).show();

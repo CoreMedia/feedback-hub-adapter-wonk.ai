@@ -23,6 +23,11 @@
   background-image: url('../img/loading.gif');
 }
 
+.ghostwritr-general-panel__credit_link {
+  text-align: center;
+  opacity: .5;
+}
+
 .ghostwritr-source-container {
   margin-bottom: 10px;
 }

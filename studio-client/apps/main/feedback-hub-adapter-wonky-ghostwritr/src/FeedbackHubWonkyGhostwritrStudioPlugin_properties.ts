@@ -1,4 +1,5 @@
-import CoreIcons_properties from "@coremedia/studio-client.core-icons/CoreIcons_properties";
+import SvgIconUtil from "@coremedia/studio-client.base-models/util/SvgIconUtil";
+import icon from "./icons/ghost-icon.svg";
 
 /**
  * Interface values for ResourceBundle "FeedbackHubWonkyGhostwritrStudioPlugin".
@@ -21,9 +22,9 @@ interface FeedbackHubWonkyGhostwritrStudioPlugin_properties {
    *#######################################################################################################################
    */
 
-  ghoestwritr_question_label: string;
+  ghostwritr_question_label: string;
 
-  ghostwirtr_question_emptyText: string;
+  ghostwritr_question_emptyText: string;
 
   ghostwritr_question_blank_validation_text: string;
 
@@ -49,6 +50,8 @@ interface FeedbackHubWonkyGhostwritrStudioPlugin_properties {
   ghostwritr_loading_state_text: string;
   ghostwritr_sources_title: string;
 
+  ghostwritr_credit_link: string;
+
 
 }
 
@@ -57,14 +60,14 @@ interface FeedbackHubWonkyGhostwritrStudioPlugin_properties {
  * @see FeedbackHubWonkyGhostwritrStudioPlugin_properties
  */
 const FeedbackHubWonkyGhostwritrStudioPlugin_properties: FeedbackHubWonkyGhostwritrStudioPlugin_properties = {
-  ghostwritr_iconCls: CoreIcons_properties.pencil,
+  ghostwritr_iconCls: SvgIconUtil.getIconStyleClassForSvgIcon(icon),
   ghostwritr_title: "GhostwritR",
   ghostwritr_tooltip: "AI driven text generation",
   ghostwritr_ariaLabel: "GhostwritR",
   ghostwritr_general_tab_title: "General",
   ghostwritr_details_tab_title: "Details",
-  ghoestwritr_question_label: "Your Question",
-  ghostwirtr_question_emptyText: "Enter a question to a generate text based on AI",
+  ghostwritr_question_label: "Question/Idea",
+  ghostwritr_question_emptyText: "Enter a question or idea to generate text based on AI",
   ghostwritr_question_blank_validation_text: "This field is required",
   ghostwritr_question_submit_button_label: "Generate Text",
   ghostwritr_generated_text_header: "Generated Text",
@@ -78,7 +81,8 @@ const FeedbackHubWonkyGhostwritrStudioPlugin_properties: FeedbackHubWonkyGhostwr
   ghostwritr_empty_state_text: "GhostwritR was not able to generate a result. Please rephrase your question and try again.",
   ghostwritr_loading_state_title: "Writing ...",
   ghostwritr_loading_state_text: "Please have some patience while GhostwritR generates the text.",
-  ghostwritr_sources_title: "Sources"
+  ghostwritr_sources_title: "Sources",
+  ghostwritr_credit_link: "service provided by <a href=\"https://wonki.tech/\" target=\"_blank\">wonki</a>."
 };
 
 export default FeedbackHubWonkyGhostwritrStudioPlugin_properties;
