@@ -11,6 +11,24 @@ If a project is inactive it means that the development has been discontinued and
 
 # Feedback Hub Adapter for Wonky GhostwritR
 
+This is an integration for Wonky GhostwritR, a powerful tool for Ai based tasks on natural language processing and content generation.
+
+It Enables CoreMedia Studio Business users to speed up the content creation process, by providing inspirational texts for given questions or phrases.
+
+Simply type in a question or phrase on your topic of interest.
+
+![Feedback Rendering](docs/images/GhostwritR_general_question.png "Provide a question or phrase")
+
+Based on your input GhostwritR will generate a text an entirely new text based on knowledge graphs and web searches. This text can then be applied to the content with a simply click of a button.
+
+![Feedback Rendering](docs/images/GhostwritR_general_answer.png "Generated text based on the input")
+
+In addition GhostwritR provides details on the sources used for text generation.
+
+![Feedback Rendering](docs/images/GhostwritR_details.png "Details on the sources")
+
+___
+
 ## Versioning
 
 To find out which CoreMedia versions are supported by this project, 
