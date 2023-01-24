@@ -16,6 +16,9 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class ApplyTextToContentJob implements Job {
   private static final Logger LOG = LoggerFactory.getLogger(ApplyTextToContentJob.class);
   public static final String DETAIL_TEXT_PROPERTY = "detailText";
@@ -67,7 +70,12 @@ public class ApplyTextToContentJob implements Job {
     String xmlStart = "<div xmlns=\"http://www.coremedia.com/2003/richtext-1.0\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">";
     String xmlEnd = "</div>";
 
-    String newXml = xmlStart + "<p>" + text + "</p>" + xmlEnd;
+    //split at blank lines
+    String xmlParagraphs = Arrays.stream(text.split("\\n\\n"))
+            .map(paragraph -> "<p>" + paragraph + "</p>")
+            .collect(Collectors.joining());
+
+    String newXml = xmlStart + xmlParagraphs + xmlEnd;
     return MarkupFactory.fromString(newXml);
   }
 
