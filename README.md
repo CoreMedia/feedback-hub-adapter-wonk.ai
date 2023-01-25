@@ -9,9 +9,9 @@ Please read the versioning section of the project to see what other CoreMedia ve
 If a project is inactive it means that the development has been discontinued and won't support future CoreMedia versions." 
 )
 
-# Feedback Hub Adapter for Wonky GhostwritR
+# Feedback Hub Adapter for Wonki GhostwritR
 
-This is an integration for Wonky GhostwritR, a powerful tool for Ai based tasks on natural language processing and content generation.
+This is an integration for Wonki GhostwritR, a powerful tool for Ai based tasks on natural language processing and content generation.
 
 It Enables CoreMedia Studio Business users to speed up the content creation process, by providing inspirational texts for given questions or phrases.
 
