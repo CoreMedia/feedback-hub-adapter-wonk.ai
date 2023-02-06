@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.coremedia.labs.plugins</groupId>
-  <artifactId>studio-server.feedback-hub-adapter-wonki-ghostwritr</artifactId>
+  <artifactId>studio-server.feedback-hub-adapter-wonki</artifactId>
   <version>1.0.2-SNAPSHOT</version>
 
   <properties>
@@ -122,6 +122,20 @@
       <version>${junit.jupiter.version}</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>

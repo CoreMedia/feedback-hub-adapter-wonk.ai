@@ -2,8 +2,8 @@ package com.coremedia.labs.plugins.feedbackhub.wonki.jobs;
 
 import com.coremedia.cap.multisite.Site;
 import com.coremedia.cap.multisite.SitesService;
-import com.coremedia.labs.plugins.feedbackhub.wonki.GhostwritrSettings;
-import com.coremedia.labs.plugins.feedbackhub.wonki.api.GhostWritrService;
+import com.coremedia.labs.plugins.feedbackhub.wonki.WonkiSettings;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.GhostwritRService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.FeedbackSettingsProvider;
 import com.coremedia.rest.cap.jobs.GenericJobErrorCode;
 import com.coremedia.rest.cap.jobs.Job;
@@ -19,9 +19,9 @@ import java.util.Locale;
 
 public class GenerateTextJob implements Job {
   private static final Logger LOG = LoggerFactory.getLogger(GenerateTextJob.class);
-  public static final String FALLBACK_LANGUAGE = "en";
+  public static final Locale FALLBACK_LOCALE = Locale.ENGLISH;
 
-  private final GhostWritrService service;
+  private final GhostwritRService service;
   private final FeedbackSettingsProvider feedbackSettingsProvider;
 
   private String siteId;
@@ -32,7 +32,7 @@ public class GenerateTextJob implements Job {
   private final SitesService sitesService;
 
 
-  public GenerateTextJob(GhostWritrService service, SitesService sitesService, FeedbackSettingsProvider feedbackSettingsProvider) {
+  public GenerateTextJob(GhostwritRService service, SitesService sitesService, FeedbackSettingsProvider feedbackSettingsProvider) {
     this.service = service;
     this.feedbackSettingsProvider = feedbackSettingsProvider;
     this.sitesService = sitesService;
@@ -62,20 +62,19 @@ public class GenerateTextJob implements Job {
   @Override
   public Object call(@NonNull JobContext jobContext) throws JobExecutionException {
     try {
-      GhostwritrSettings settings = getSettings();
-      String language = sitesService.findSite(siteId)
+      WonkiSettings settings = getSettings();
+      Locale siteLocale = sitesService.findSite(siteId)
               .map(Site::getLocale)
-              .map(Locale::getLanguage)
-              .orElse(FALLBACK_LANGUAGE);
+              .orElse(FALLBACK_LOCALE);
 
-      return service.generateTextFrom(question, language, settings);
+      return service.generateText(question, siteLocale, settings.getApiKey());
     } catch (Exception e) {
       LOG.error("Failed to generate text for given question: {} on content {}: {}", question, contentId, e.getMessage());
       throw new JobExecutionException(GenericJobErrorCode.FAILED, e.getMessage());
     }
   }
 
-  private GhostwritrSettings getSettings() {
+  private WonkiSettings getSettings() {
     return feedbackSettingsProvider.getSettings(groupId, siteId);
   }
 }

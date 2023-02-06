@@ -120,7 +120,7 @@ jobs:
       - name: Create Bundle
         env:
           VERSION: ${{ steps.output-version.outputs.version }}
-          DESCRIPTOR_TEMPLATE: 'feedback-hub-adapter-wonki-ghostwritr.json'
+          DESCRIPTOR_TEMPLATE: 'feedback-hub-adapter-wonki.json'
           CREATE_RELEASE: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
           RELEASE_TAG: ${{ steps.set-release-version.outputs.tag }}
           URL_PATTERN: 'https://github.com/${GITHUB_REPOSITORY}/releases/download/${RELEASE_TAG}/${REL_FILE}'
@@ -164,7 +164,7 @@ jobs:
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: feedback-hub-adapter-wonki-ghostwritr-${{ steps.output-version.outputs.version }}
+          name: feedback-hub-adapter-wonki-${{ steps.output-version.outputs.version }}
           path: target/bundle
           if-no-files-found: error
 

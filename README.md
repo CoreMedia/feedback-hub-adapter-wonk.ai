@@ -9,9 +9,9 @@ Please read the versioning section of the project to see what other CoreMedia ve
 If a project is inactive it means that the development has been discontinued and won't support future CoreMedia versions." 
 )
 
-# Feedback Hub Adapter for Wonki GhostwritR
+# Feedback Hub Adapter for Wonki AI
 
-This is an integration for Wonki GhostwritR, a powerful tool for Ai based tasks on natural language processing and content generation.
+This is an integration for Wonki AI services like GhostwritR, a powerful tool for Ai based tasks on natural language processing and content generation.
 
 It Enables CoreMedia Studio Business users to speed up the content creation process, by providing inspirational texts for given questions or phrases.
 
@@ -23,7 +23,7 @@ Based on your input GhostwritR will generate a text an entirely new text based o
 
 ![Feedback Rendering](docs/images/GhostwritR_general_answer.png "Generated text based on the input")
 
-In addition GhostwritR provides details on the sources used for text generation.
+In addition, GhostwritR provides details on the sources used for text generation.
 
 ![Feedback Rendering](docs/images/GhostwritR_details.png "Details on the sources")
 
