@@ -1,4 +1,4 @@
-package com.coremedia.labs.plugins.feedbackhub.wonki.adapter;
+package com.coremedia.labs.plugins.feedbackhub.wonki.provider;
 
 import com.coremedia.feedbackhub.adapter.FeedbackContext;
 import com.coremedia.feedbackhub.items.FeedbackItem;
@@ -13,6 +13,7 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -25,6 +26,8 @@ import static com.coremedia.labs.plugins.feedbackhub.wonki.WonkiFeedbackCollecti
  */
 @DefaultAnnotation(NonNull.class)
 public class WonkiFeedbackProvider implements FeedbackProvider {
+
+  public static Locale FALLBACK_LOCALE = Locale.ENGLISH;
 
   private final WonkiSettings settings;
 

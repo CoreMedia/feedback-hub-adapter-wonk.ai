@@ -1,10 +1,10 @@
-package com.coremedia.labs.plugins.feedbackhub.wonki.jobs;
+package com.coremedia.labs.plugins.feedbackhub.wonki.jobs.ghostwritr;
 
 import com.coremedia.cap.multisite.Site;
 import com.coremedia.cap.multisite.SitesService;
+import com.coremedia.labs.plugins.feedbackhub.wonki.FeedbackSettingsProvider;
 import com.coremedia.labs.plugins.feedbackhub.wonki.WonkiSettings;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.GhostwritRService;
-import com.coremedia.labs.plugins.feedbackhub.wonki.FeedbackSettingsProvider;
 import com.coremedia.rest.cap.jobs.GenericJobErrorCode;
 import com.coremedia.rest.cap.jobs.Job;
 import com.coremedia.rest.cap.jobs.JobContext;
@@ -17,20 +17,18 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
 
+import static com.coremedia.labs.plugins.feedbackhub.wonki.provider.WonkiFeedbackProvider.FALLBACK_LOCALE;
+
 public class GenerateTextJob implements Job {
   private static final Logger LOG = LoggerFactory.getLogger(GenerateTextJob.class);
-  public static final Locale FALLBACK_LOCALE = Locale.ENGLISH;
-
   private final GhostwritRService service;
+  private final SitesService sitesService;
   private final FeedbackSettingsProvider feedbackSettingsProvider;
 
   private String siteId;
   private String question;
   private String contentId;
   private String groupId;
-
-  private final SitesService sitesService;
-
 
   public GenerateTextJob(GhostwritRService service, SitesService sitesService, FeedbackSettingsProvider feedbackSettingsProvider) {
     this.service = service;
@@ -62,7 +60,7 @@ public class GenerateTextJob implements Job {
   @Override
   public Object call(@NonNull JobContext jobContext) throws JobExecutionException {
     try {
-      WonkiSettings settings = getSettings();
+      WonkiSettings settings = feedbackSettingsProvider.getSettings(groupId, siteId);
       Locale siteLocale = sitesService.findSite(siteId)
               .map(Site::getLocale)
               .orElse(FALLBACK_LOCALE);
@@ -74,7 +72,4 @@ public class GenerateTextJob implements Job {
     }
   }
 
-  private WonkiSettings getSettings() {
-    return feedbackSettingsProvider.getSettings(groupId, siteId);
-  }
 }

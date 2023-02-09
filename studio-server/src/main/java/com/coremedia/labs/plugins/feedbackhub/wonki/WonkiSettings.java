@@ -9,6 +9,7 @@ public interface WonkiSettings {
 
   /**
    * Returns the API key used for API calls.
+   *
    * @return the api key
    */
   @NonNull

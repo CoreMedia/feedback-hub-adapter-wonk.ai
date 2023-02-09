@@ -1,4 +1,4 @@
-package com.coremedia.labs.plugins.feedbackhub.wonki.adapter;
+package com.coremedia.labs.plugins.feedbackhub.wonki.provider;
 
 import com.coremedia.feedbackhub.adapter.FeedbackHubException;
 import com.coremedia.feedbackhub.provider.FeedbackProvider;

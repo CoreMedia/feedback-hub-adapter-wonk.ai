@@ -1,4 +1,4 @@
-package com.coremedia.labs.plugins.feedbackhub.wonki.jobs;
+package com.coremedia.labs.plugins.feedbackhub.wonki.jobs.ghostwritr;
 
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.GhostwritRService;
