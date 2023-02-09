@@ -30,32 +30,28 @@ import static com.coremedia.labs.plugins.feedbackhub.wonki.provider.WonkiFeedbac
 public class SummarizRJob implements Job {
   private static final Logger LOG = LoggerFactory.getLogger(SummarizRJob.class);
   public static final String DETAIL_TEXT_PROPERTY = "detailText";
+  public static final String ABSTRACTIVE_STRATEGY = "abstractive";
 
-  private String contentId;
+  private Content content;
   private String strategy;
   private boolean greedy;
-  private Integer sentenceCount;
+  private Integer sentences;
   private String groupId;
   private String siteId;
-
-
-  private final ContentRepository contentRepository;
   private final SummarizRService service;
-
   private final SitesService sitesService;
   private final FeedbackSettingsProvider feedbackSettingsProvider;
 
 
-  public SummarizRJob(CapConnection capConnection, SummarizRService service, SitesService sitesService, FeedbackSettingsProvider feedbackSettingsProvider) {
-    this.contentRepository = capConnection.getContentRepository();
+  public SummarizRJob(SummarizRService service, SitesService sitesService, FeedbackSettingsProvider feedbackSettingsProvider) {
     this.service = service;
     this.sitesService = sitesService;
     this.feedbackSettingsProvider = feedbackSettingsProvider;
   }
 
-  @SerializedName("contentId")
-  public void setContentId(String contentId) {
-    this.contentId = contentId;
+  @SerializedName("content")
+  public void setContent(Content content) {
+    this.content = content;
   }
 
   @SerializedName("strategy")
@@ -69,8 +65,8 @@ public class SummarizRJob implements Job {
   }
 
   @SerializedName("sentences")
-  public void setSentenceCount(Integer sentenceCount) {
-    this.sentenceCount = sentenceCount;
+  public void setSentences(Integer sentences) {
+    this.sentences = sentences;
   }
 
   @SerializedName("groupId")
@@ -88,7 +84,6 @@ public class SummarizRJob implements Job {
   public Object call(@NonNull JobContext jobContext) throws JobExecutionException {
     try {
 
-      Content content = contentRepository.getContent(contentId);
 
       WonkiSettings settings = getSettings();
       Locale siteLocale = sitesService.findSite(siteId)
@@ -99,15 +94,15 @@ public class SummarizRJob implements Job {
       String detailText = MarkupUtil.asPlainText(detailTextMarkup);
 
       SummaryResponse summaryResponse;
-      if (Objects.equals(strategy, "abstractive")) {
-        summaryResponse = service.getAbstractiveSummary(detailText, siteLocale, greedy, sentenceCount, settings.getApiKey()).orElseThrow();
+      if (Objects.equals(strategy, ABSTRACTIVE_STRATEGY)) {
+        summaryResponse = service.getAbstractiveSummary(detailText, siteLocale, greedy, sentences, settings.getApiKey()).orElseThrow();
       } else {
-        summaryResponse = service.getExtractiveSummary(detailText, siteLocale, greedy, sentenceCount, settings.getApiKey()).orElseThrow();
+        summaryResponse = service.getExtractiveSummary(detailText, siteLocale, greedy, sentences, settings.getApiKey()).orElseThrow();
       }
       return Map.of("data", summaryResponse.getSummary());
 
     } catch (Exception e) {
-      LOG.error("Failed summarize text for content {}: {}", contentId, e.getMessage());
+      LOG.error("Failed summarize text for content {}: {}", content.getId(), e.getMessage());
       throw new JobExecutionException(GenericJobErrorCode.FAILED);
     }
   }

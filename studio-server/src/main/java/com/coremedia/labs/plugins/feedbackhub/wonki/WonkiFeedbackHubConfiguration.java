@@ -75,11 +75,10 @@ public class WonkiFeedbackHubConfiguration {
   }
 
   @Bean
-  public SummarizRJobFactory summarizeJobFactory(@NonNull CapConnection capConnection,
-                                                 @NonNull SitesService sitesService,
+  public SummarizRJobFactory summarizeJobFactory(@NonNull SitesService sitesService,
                                                  @NonNull FeedbackSettingsProvider ghostwritrFeedbackSettingsProvider,
                                                  @NonNull SummarizRService summarizRService
                                                  ) {
-    return new SummarizRJobFactory(capConnection, summarizRService, sitesService, ghostwritrFeedbackSettingsProvider);
+    return new SummarizRJobFactory(summarizRService, sitesService, ghostwritrFeedbackSettingsProvider);
   }
 }

@@ -10,18 +10,13 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 
 public class SummarizRJobFactory implements JobFactory {
 
-  private final CapConnection capConnection;
-
   private final SummarizRService summarizRService;
 
   private final SitesService sitesService;
 
   private final FeedbackSettingsProvider feedbackSettingsProvider;
 
-
-
-  public SummarizRJobFactory(CapConnection capConnection, SummarizRService summarizRService, SitesService sitesService, FeedbackSettingsProvider feedbackSettingsProvider) {
-    this.capConnection = capConnection;
+  public SummarizRJobFactory( SummarizRService summarizRService, SitesService sitesService, FeedbackSettingsProvider feedbackSettingsProvider) {
     this.summarizRService = summarizRService;
     this.sitesService = sitesService;
     this.feedbackSettingsProvider = feedbackSettingsProvider;
@@ -35,6 +30,6 @@ public class SummarizRJobFactory implements JobFactory {
   @NonNull
   @Override
   public Job createJob() {
-    return new SummarizRJob(capConnection, summarizRService, sitesService, feedbackSettingsProvider);
+    return new SummarizRJob(summarizRService, sitesService, feedbackSettingsProvider);
   }
 }
