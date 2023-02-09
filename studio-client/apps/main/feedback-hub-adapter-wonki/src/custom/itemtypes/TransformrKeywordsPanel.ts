@@ -1,7 +1,6 @@
 import Config from "@jangaroo/runtime/Config";
 import Panel from "@jangaroo/ext-ts/panel/Panel";
 import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpression";
-import ArrayUtils from "@coremedia/studio-client.client-core/util/ArrayUtils";
 import ConfigUtils from "@jangaroo/runtime/ConfigUtils";
 import Button from "@jangaroo/ext-ts/button/Button";
 import ButtonSkin from "@coremedia/studio-client.ext.ui-components/skins/ButtonSkin";
@@ -88,11 +87,12 @@ class TransformrKeywordsPanel extends Panel {
   }
 
   generateKeywords(): void {
-    console.log("Generate keywords");
-    WonkiService.generateKeywords().then((keywords) => {
-      this.#getKeywordsExpression().setValue(keywords);
-      this.refresh();
-    });
+    const content = this.contentExpression.getValue();
+    WonkiService.generateKeywords(content)
+            .then((keywords) => {
+              this.#getKeywordsExpression().setValue(keywords);
+              this.refresh();
+            });
   }
 
   createKeywordsFeedbackItem(): KeywordsFeedbackItem {

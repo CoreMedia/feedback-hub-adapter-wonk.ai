@@ -46,12 +46,13 @@ class TransformrPanel extends FeedbackItemPanel {
 
       ],
       defaults: Config({
+        bodyStyle: 'padding: 6px 6px 18px 6px',
         contentExpression: config.contentExpression,
         forceReadOnlyValueExpression: config.forceReadOnlyValueExpression,
         premular: config.premular
       }),
       layout: Config(AccordionLayout),
-      ui: PanelSkin.ACCORDION.getSkin()
+      ui: PanelSkin.EMBEDDED_TRANSPARENT.getSkin()
     }), config));
   }
 

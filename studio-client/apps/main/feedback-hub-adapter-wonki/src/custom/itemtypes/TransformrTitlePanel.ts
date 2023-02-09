@@ -97,7 +97,8 @@ class TransformrTitlePanel extends Panel {
 
   generateTitle(): void {
     console.log("Generate title");
-    WonkiService.generateTitle().then((metaDescription) => {
+    const content = this.contentExpression.getValue();
+    WonkiService.generateTitle(content).then((metaDescription) => {
       this.#getTitleExpression().setValue(metaDescription);
     });
   }

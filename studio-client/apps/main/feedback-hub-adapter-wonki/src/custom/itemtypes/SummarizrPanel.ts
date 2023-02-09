@@ -7,9 +7,7 @@ import Container from "@jangaroo/ext-ts/container/Container";
 import Button from "@jangaroo/ext-ts/button/Button";
 import ButtonSkin from "@coremedia/studio-client.ext.ui-components/skins/ButtonSkin";
 import { bind } from "@jangaroo/runtime";
-import VBoxLayout from "@jangaroo/ext-ts/layout/container/VBox";
 import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpression";
-import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
 import TextArea from "@jangaroo/ext-ts/form/field/TextArea";
 import BindPropertyPlugin from "@coremedia/studio-client.ext.ui-components/plugins/BindPropertyPlugin";
 import NumberField from "@jangaroo/ext-ts/form/field/Number";
@@ -22,6 +20,10 @@ import AnchorLayout from "@jangaroo/ext-ts/layout/container/Anchor";
 import Spacer from "@jangaroo/ext-ts/toolbar/Spacer";
 import VerticalSpacingPlugin from "@coremedia/studio-client.ext.ui-components/plugins/VerticalSpacingPlugin";
 import WonkiService from "../../util/WonkiService";
+import Bean from "@coremedia/studio-client.client-core/data/Bean";
+import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
+import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
+import BoundRadioGroup from "@coremedia/studio-client.ext.ui-components/components/BoundRadioGroup";
 
 interface SummarizrPanelConfig extends Config<FeedbackItemPanel> {
 
@@ -31,7 +33,14 @@ class SummarizrPanel extends FeedbackItemPanel {
 
   declare Config: SummarizrPanelConfig;
 
-  private summaryExpression: ValueExpression;
+  static readonly SUMMARY: string = "summary";
+  static readonly STRATEGY: string = "strategy";
+  static readonly STRATEGY_ABSTRACTIVE: string = "abstractive";
+  static readonly STRATEGY_EXTRACTIVE: string = "extractive";
+  static readonly SENTENCES: string = "sentences";
+  static readonly GREEDY: string = "greedy";
+
+  private model: Bean;
 
   constructor(config: Config<SummarizrPanel> = null) {
     // @ts-expect-error Ext JS semantics
@@ -39,32 +48,51 @@ class SummarizrPanel extends FeedbackItemPanel {
     super(ConfigUtils.apply(Config(SummarizrPanel, {
       items: [
         Config(DisplayField, {
-          value: "<p>The wonki SummarizR is able to summarize texts using various strategies.</p>" +
-                  "<p>" +
-                  "<ul><i>Extracted summaries</i> keep the original sentences and remove less relevant content.</ul>" +
-                  "<ul><i>Abstract summaries</i> are rewritten texts that can differ significantly from the original.</ul>" +
-                  "</p>",
-          htmlEncode: false
+          value: "The wonki SummarizR is able to summarize texts using various strategies."
+        }),
+
+        Config(BoundRadioGroup, {
+          itemId: SummarizrPanel.STRATEGY,
+          hideLabel: true,
+          width: "auto",
+          columns: 1,
+          bindTo: ValueExpressionFactory.create(SummarizrPanel.STRATEGY, this$.#getModel()),
+          items: [
+            Config(Radio, {
+              itemId: SummarizrPanel.STRATEGY_ABSTRACTIVE,
+              boxLabel: "<i>Abstract summaries</i> are rewritten texts that can differ significantly from the original",
+            }),
+            Config(Radio, {
+              itemId: SummarizrPanel.STRATEGY_EXTRACTIVE,
+              boxLabel: "<i>Extracted summaries</i> keep the original sentences and remove less relevant content",
+            }),
+          ],
         }),
 
         Config(Container, {
           items: [
-            Config(DisplayField, { value: "Strategy:", margin: "0 6 0 0"}),
-            Config(RadioGroup, {
-              name: "summary-strategy",
-              flex: 1,
-              items: [
-                Config(Radio, { boxLabel: "Extracted", checked: true }),
-                Config(Radio, { boxLabel: "Abstract" })
+            Config(DisplayField, { value: "Sentences:", margin: "0 6 0 0" }),
+            Config(NumberField, {
+              minValue: 1,
+              width: 40,
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: ValueExpressionFactory.create(SummarizrPanel.SENTENCES, this$.#getModel()),
+                  bidirectional: true
+                })
               ]
             }),
             Config(Spacer, { flex: 1 }),
 
-            Config(DisplayField, { value: "Sentences:", margin: "0 6 0 0"}),
-            Config(NumberField, { value: 5, minValue: 1, width: 40 }),
-            Config(Spacer, { flex: 1 }),
-
-            Config(CheckboxField, { boxLabel: "Greedy Mode" }),
+            Config(CheckboxField, {
+              boxLabel: "Greedy Mode",
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: ValueExpressionFactory.create(SummarizrPanel.GREEDY, this$.#getModel()),
+                  bidirectional: true
+                })
+              ]
+            }),
             Config(Spacer, { flex: 1 }),
 
             Config(Button, {
@@ -81,12 +109,12 @@ class SummarizrPanel extends FeedbackItemPanel {
           height: 200,
           plugins: [
             Config(BindPropertyPlugin, {
-              bindTo: this$.#getSummaryExpression()
+              bindTo: ValueExpressionFactory.create(SummarizrPanel.SUMMARY, this$.#getModel())
             }),
             Config(BindPropertyPlugin, {
-              bindTo: this$.#getSummaryExpression(),
+              bindTo: ValueExpressionFactory.create(SummarizrPanel.SUMMARY, this$.#getModel()),
               componentProperty: "visible",
-              transformer: (value) => {return value && value !== ""}
+              transformer: (value) => {return value && value !== "";}
             })
           ]
         })
@@ -100,18 +128,26 @@ class SummarizrPanel extends FeedbackItemPanel {
     }), config));
   }
 
-  #getSummaryExpression(): ValueExpression {
-    if (!this.summaryExpression) {
-      this.summaryExpression = ValueExpressionFactory.createFromValue("");
+  #getModel() {
+    if (!this.model) {
+      this.model = beanFactory._.createLocalBean();
+      this.model.set(SummarizrPanel.SUMMARY, "");
+      this.model.set(SummarizrPanel.STRATEGY, SummarizrPanel.STRATEGY_ABSTRACTIVE);
+      this.model.set(SummarizrPanel.SENTENCES, 5);
+      this.model.set(SummarizrPanel.GREEDY, false);
     }
-    return this.summaryExpression;
+    return this.model;
   }
 
   generateSummary(): void {
     console.log("Generate summary");
-    WonkiService.generateSummary().then((summary) => {
-      summary && this.#getSummaryExpression().setValue(summary);
-    })
+    const content = this.contentExpression.getValue();
+    const strategy = this.#getModel().get(SummarizrPanel.STRATEGY);
+    const sentences = this.#getModel().get(SummarizrPanel.SENTENCES);
+    const greedy = this.#getModel().get(SummarizrPanel.GREEDY);
+    WonkiService.generateSummary(content, strategy, sentences, greedy).then((summary) => {
+      summary && this.#getModel().set(SummarizrPanel.SUMMARY, summary);
+    });
   }
 
 }

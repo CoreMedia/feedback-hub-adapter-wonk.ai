@@ -104,7 +104,8 @@ class TransformrMetaDescriptionPanel extends Panel {
 
   generateMetaDescription(): void {
     console.log("Generate META description");
-    WonkiService.generateMetaDescription().then((metaDescription) => {
+    const content = this.contentExpression.getValue();
+    WonkiService.generateMetaDescription(content).then((metaDescription) => {
       this.#getMetaDescriptionExpression().setValue(metaDescription);
     });
   }
