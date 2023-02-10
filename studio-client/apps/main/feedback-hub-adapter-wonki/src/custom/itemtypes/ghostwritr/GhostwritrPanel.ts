@@ -246,7 +246,7 @@ class GhostwritrPanel extends FeedbackItemPanel {
                   contentId: content.getId(),
                 };
 
-                const JOB_TYPE = "ApplyTextToContent";
+                const JOB_TYPE = "wonkiApplyTextToContent";
                 console.log(`request params: ${params}`);
                 jobService._.executeJob(
                         new GenericRemoteJob(JOB_TYPE, params),
@@ -276,7 +276,7 @@ class GhostwritrPanel extends FeedbackItemPanel {
       groupId: this.feedbackGroup.name,
     };
 
-    const JOB_TYPE = "generateText";
+    const JOB_TYPE = "wonkiGenerateText";
     console.log(`request params: ${params}`);
 
     //this.hideDetailsTab();
@@ -312,7 +312,7 @@ class GhostwritrPanel extends FeedbackItemPanel {
             //on error
             (error: JobExecutionError): void => {
               this.getActiveStateExpression().setValue(GhostwritrPanel.EMPTY_STATE);
-              trace("[ERROR]", "Error assigning briefing: " + error);
+              console.error("Could not generate text: " + error);
             },
     );
 
