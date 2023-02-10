@@ -7,10 +7,10 @@ import feedbackService from "@coremedia/studio-client.main.feedback-hub-editor-c
 import Config from "@jangaroo/runtime/Config";
 import ConfigUtils from "@jangaroo/runtime/ConfigUtils";
 import resourceManager from "@jangaroo/runtime/l10n/resourceManager";
-import FeedbackHubGhostwritrStudioPlugin_properties from "./FeedbackHubWonkiStudioPlugin_properties";
-import GhostwritrPanel from "./custom/itemtypes/GhostwritrPanel";
-import TransformrPanel from "./custom/itemtypes/TransformrPanel";
-import SummarizrPanel from "./custom/itemtypes/SummarizrPanel";
+import FeedbackHubGhostwritrStudioPlugin_properties from "./WonkiStudioPlugin_properties";
+import GhostwritrPanel from "./custom/itemtypes/ghostwritr/GhostwritrPanel";
+import TransformrPanel from "./custom/itemtypes/transformr/TransformrPanel";
+import SummarizrPanel from "./custom/itemtypes/summarizr/SummarizrPanel";
 
 interface FeedbackHubWonkiStudioPluginConfig extends Config<StudioPlugin> {
 }
@@ -39,8 +39,8 @@ class FeedbackHubWonkiStudioPlugin extends StudioPlugin {
 
   #__initialize__(config: Config<FeedbackHubWonkiStudioPlugin>): void {
     feedbackService._.registerFeedbackItemPanel("GhostwritrFeedbackItem", Config(GhostwritrPanel));
-    feedbackService._.registerFeedbackItemPanel("TransformrFeedbackItem", Config(TransformrPanel));
     feedbackService._.registerFeedbackItemPanel("SummarizrFeedbackItem", Config(SummarizrPanel));
+    feedbackService._.registerFeedbackItemPanel("TransformrFeedbackItem", Config(TransformrPanel));
   }
 }
 

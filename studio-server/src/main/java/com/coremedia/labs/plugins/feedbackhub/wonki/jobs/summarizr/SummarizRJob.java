@@ -1,8 +1,6 @@
 package com.coremedia.labs.plugins.feedbackhub.wonki.jobs.summarizr;
 
-import com.coremedia.cap.common.CapConnection;
 import com.coremedia.cap.content.Content;
-import com.coremedia.cap.content.ContentRepository;
 import com.coremedia.cap.multisite.Site;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.FeedbackSettingsProvider;

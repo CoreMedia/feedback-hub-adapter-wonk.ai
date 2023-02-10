@@ -45,11 +45,11 @@ public class WonkiFeedbackProvider implements FeedbackProvider {
     // GhostwritR
     items.add(new WonkiFeedbackItem(GHOSTWRITR, "GhostwritrFeedbackItem"));
 
-    // TransformR
-    items.add(new WonkiFeedbackItem(TRANSFORMR, "TransformrFeedbackItem"));
-
     // SummarizR
     items.add(new WonkiFeedbackItem(SUMMARIZR, "SummarizrFeedbackItem"));
+
+    // TransformR
+    items.add(new WonkiFeedbackItem(TRANSFORMR, "TransformrFeedbackItem"));
 
     return CompletableFuture.completedFuture(items);
   }

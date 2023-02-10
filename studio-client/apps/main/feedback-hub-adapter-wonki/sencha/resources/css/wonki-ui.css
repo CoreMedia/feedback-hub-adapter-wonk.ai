@@ -1,6 +1,12 @@
 .ghostwritr-general-panel__default-state-icon:before,
 .ghostwritr-general-panel__empty-state-icon:before,
-.ghostwritr-general-panel__loading-state-icon:before {
+.ghostwritr-general-panel__loading-state-icon:before,
+.wonki-summarizr__default-state-icon:before,
+.wonki-summarizr__empty-state-icon:before,
+.wonki-summarizr__loading-state-icon:before,
+.wonki-transformr__default-state-icon:before,
+.wonki-transformr__empty-state-icon:before,
+.wonki-transformr__loading-state-icon:before {
   content: "";
   display: block;
   margin: auto;
@@ -12,18 +18,35 @@
 }
 
 .ghostwritr-general-panel__default-state-icon:before {
-   background-image: url('../img/default-state.png');
+   background-image: url('../img/wonkighost.png');
 }
 
 .ghostwritr-general-panel__empty-state-icon:before {
-  background-image: url('../img/empty-state.png');
+  background-image: url('../img/wonkighost-error.png');
 }
 
 .ghostwritr-general-panel__loading-state-icon:before {
-  background-image: url('../img/loading.gif');
+  background-image: url('../img/wonkighost-loader.gif');
 }
 
-.ghostwritr-general-panel__credit_link {
+.wonki-summarizr__default-state-icon:before,
+.wonki-transformr__default-state-icon:before {
+  background-image: url('../img/wonkifant.png');
+}
+
+.wonki-summarizr__empty-state-icon:before,
+.wonki-transformr__empty-state-icon:before {
+  background-image: url('../img/wonkifant-error.png');
+}
+
+.wonki-summarizr__loading-state-icon:before,
+.wonki-transformr__loading-state-icon:before {
+  background-image: url('../img/wonkifant-loader.gif');
+}
+
+.ghostwritr-general-panel__credit_link,
+.wonki-summarizr__credit_link,
+.wonki-transformr__credit_link {
   text-align: center;
   opacity: .5;
 }
@@ -41,4 +64,11 @@
 
 .ghostwritr-source-container__quote .x-form-display-field {
   font-style: italic;
+}
+
+/* hide first display field in keywords result panel */
+.wonki-transformr__keywords-property .x-autocontainer-innerCt div.x-container.x-container-default.x-box-layout-ct:nth-child(2) .x-form-item-no-label:nth-child(1) {
+  display: none;
+  width: 0;
+  height: 0;
 }

@@ -21,7 +21,10 @@ class WonkiService {
    */
   static generateKeywords(content: Content): Promise<string[]> {
     return new Promise((resolve: AnyFunction, reject: AnyFunction) => {
-      this.executeJob(this.GENERATE_KEYWORDS_JOB, this.buildJobParams(content), resolve, reject);
+      //this.executeJob(this.GENERATE_KEYWORDS_JOB, this.buildJobParams(content), resolve, reject);
+      window.setTimeout(() => {
+        resolve(["Productivity", "Experience", "Integrated Technology", "Handheld Ordering", "Payment Devices", "Inquire Devices", "New Technology", "Perfect Bill", "Immediate Payment"]);
+      }, 1000);
     });
   }
 

@@ -2,9 +2,9 @@ import SvgIconUtil from "@coremedia/studio-client.base-models/util/SvgIconUtil";
 import icon from "./icons/ghost-icon.svg";
 
 /**
- * Interface values for ResourceBundle "FeedbackHubWonkiStudioPlugin".
+ * Interface values for ResourceBundle "WonkiStudioPlugin".
  */
-interface FeedbackHubWonkiStudioPlugin_properties {
+interface WonkiStudioPlugin_properties {
 
 /**
  * General
@@ -14,6 +14,7 @@ interface FeedbackHubWonkiStudioPlugin_properties {
   wonki_title: string;
   wonki_tooltip: string;
   wonki_ariaLabel: string;
+  wonki_credit_link: string;
   wonki_ghostwritr_tab_title: string;
   wonki_transformr_tab_title: string;
   wonki_summarizr_tab_title: string;
@@ -24,47 +25,47 @@ interface FeedbackHubWonkiStudioPlugin_properties {
    */
 
   ghostwritr_question_label: string;
-
   ghostwritr_question_emptyText: string;
-
   ghostwritr_question_blank_validation_text: string;
-
   ghostwritr_question_submit_button_label: string;
-
   ghostwritr_generated_text_header: string;
-
   ghostwritr_apply_text_button_label: string;
-
   ghostwritr_apply_text_popup_message: string;
-
   ghostwritr_apply_text_popup_submit_button_label: string;
-
   ghostwritr_confidence_bar_label: string;
-
   ghostwritr_default_state_title: string;
   ghostwritr_default_state_text: string;
-
   ghostwritr_empty_state_title: string;
   ghostwritr_empty_state_text: string;
-
   ghostwritr_loading_state_title: string;
   ghostwritr_loading_state_text: string;
   ghostwritr_sources_title: string;
 
-  ghostwritr_credit_link: string;
+  transformr_default_state_title: string;
+  transformr_default_state_text: string;
+  transformr_loading_state_title: string;
+  transformr_loading_state_text: string;
+  transformr_empty_state_title: string;
+  transformr_empty_state_text: string;
 
-
+  summarizr_default_state_title:string;
+  summarizr_default_state_text: string;
+  summarizr_loading_state_title:string;
+  summarizr_loading_state_text:string;
+  summarizr_empty_state_title:string;
+  summarizr_empty_state_text:string;
 }
 
 /**
- * Singleton for the current user Locale's instance of ResourceBundle "FeedbackHubWonkiStudioPlugin".
- * @see FeedbackHubWonkiStudioPlugin_properties
+ * Singleton for the current user Locale's instance of ResourceBundle "WonkiStudioPlugin".
+ * @see WonkiStudioPlugin_properties
  */
-const FeedbackHubWonkiStudioPlugin_properties: FeedbackHubWonkiStudioPlugin_properties = {
+const WonkiStudioPlugin_properties: WonkiStudioPlugin_properties = {
   wonki_iconCls: SvgIconUtil.getIconStyleClassForSvgIcon(icon),
   wonki_title: "Wonki",
   wonki_tooltip: "AI driven text generation",
   wonki_ariaLabel: "Wonki",
+  wonki_credit_link: "service provided by <a href=\"https://wonki.tech/\" target=\"_blank\">wonki</a>.",
   wonki_ghostwritr_tab_title: "GhostwritR",
   wonki_transformr_tab_title: "TransformR",
   wonki_summarizr_tab_title: "SummarizR",
@@ -84,7 +85,18 @@ const FeedbackHubWonkiStudioPlugin_properties: FeedbackHubWonkiStudioPlugin_prop
   ghostwritr_loading_state_title: "Writing ...",
   ghostwritr_loading_state_text: "Please have some patience while GhostwritR generates the text.",
   ghostwritr_sources_title: "Sources",
-  ghostwritr_credit_link: "service provided by <a href=\"https://wonki.tech/\" target=\"_blank\">wonki</a>."
+  transformr_default_state_title: "TransformR",
+  transformr_default_state_text: "Transferring content to new formats or expanding it has never been easier! A bursting toolbox of computational linguistics.",
+  transformr_empty_state_title: "No result",
+  transformr_empty_state_text: "TransformR was not able to generate a result. Please try again later.",
+  transformr_loading_state_title: "Transforming ...",
+  transformr_loading_state_text: "Please have some patience while TransformR is processing your request.",
+  summarizr_default_state_title: "SummarizR",
+  summarizr_default_state_text: "Summarize texts with the SummarizR AI assistant.",
+  summarizr_empty_state_title: "No result",
+  summarizr_empty_state_text: "SummarizR was not able to generate a result. Please try again later.",
+  summarizr_loading_state_title: "Summarizing ...",
+  summarizr_loading_state_text: "Please have some patience while SummarizR creates a summary.",
 };
 
-export default FeedbackHubWonkiStudioPlugin_properties;
+export default WonkiStudioPlugin_properties;

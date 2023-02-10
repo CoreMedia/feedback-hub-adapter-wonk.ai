@@ -25,7 +25,7 @@ import { as, bind } from "@jangaroo/runtime";
 import Config from "@jangaroo/runtime/Config";
 import ConfigUtils from "@jangaroo/runtime/ConfigUtils";
 import trace from "@jangaroo/runtime/trace";
-import FeedbackHubGhostwritrStudioPlugin_properties from "../../FeedbackHubWonkiStudioPlugin_properties";
+import WonkiLabels from "../../../WonkiStudioPlugin_properties";
 import FeedbackItem from "@coremedia/studio-client.feedback-hub-models/FeedbackItem";
 import GhostwritrValueHolder from "./GhostwritrValueHolder";
 import PercentageBarFeedbackItemPanel
@@ -37,7 +37,6 @@ import EmptyContainer from "@coremedia/studio-client.ext.ui-components/component
 import ContainerSkin from "@coremedia/studio-client.ext.ui-components/skins/ContainerSkin";
 import SwitchingContainer from "@coremedia/studio-client.ext.ui-components/components/SwitchingContainer";
 import TextArea from "@jangaroo/ext-ts/form/field/TextArea";
-import TabPanel from "@jangaroo/ext-ts/tab/Panel";
 import Panel from "@jangaroo/ext-ts/panel/Panel";
 import BindComponentsPlugin from "@coremedia/studio-client.ext.ui-components/plugins/BindComponentsPlugin";
 import SourcesPanel from "./SourcesPanel";
@@ -79,10 +78,10 @@ class GhostwritrPanel extends FeedbackItemPanel {
           items: [
             Config(TextField, {
               flex: 1,
-              fieldLabel: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_question_label,
+              fieldLabel: WonkiLabels.ghostwritr_question_label,
               allowBlank: false,
-              blankText: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_question_blank_validation_text,
-              emptyText: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_question_emptyText,
+              blankText: WonkiLabels.ghostwritr_question_blank_validation_text,
+              emptyText: WonkiLabels.ghostwritr_question_emptyText,
               plugins: [
                 Config(BindPropertyPlugin, {
                   bindTo: this$.getQuestionInputExpression(),
@@ -102,7 +101,7 @@ class GhostwritrPanel extends FeedbackItemPanel {
               formBind: true,
               ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
               handler: bind(this$, this$.applyQuestion),
-              text: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_question_submit_button_label,
+              text: WonkiLabels.ghostwritr_question_submit_button_label,
             }),
           ],
           layout: Config(HBoxLayout, {
@@ -124,31 +123,31 @@ class GhostwritrPanel extends FeedbackItemPanel {
               iconElementName: "default-state-icon",
               bemBlockName: GhostwritrPanel.BLOCK_CLASS_NAME,
               ui: ContainerSkin.GRID_100.getSkin(),
-              title: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_default_state_title,
-              text: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_default_state_text,
+              title: WonkiLabels.ghostwritr_default_state_title,
+              text: WonkiLabels.ghostwritr_default_state_text,
             }),
             Config(EmptyContainer, {
               itemId: GhostwritrPanel.EMPTY_STATE,
               iconElementName: "empty-state-icon",
               bemBlockName: GhostwritrPanel.BLOCK_CLASS_NAME,
               ui: ContainerSkin.GRID_100.getSkin(),
-              title: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_empty_state_title,
-              text: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_empty_state_text,
+              title: WonkiLabels.ghostwritr_empty_state_title,
+              text: WonkiLabels.ghostwritr_empty_state_text,
             }),
             Config(EmptyContainer, {
               itemId: GhostwritrPanel.LOADING_STATE,
               iconElementName: "loading-state-icon",
               bemBlockName: GhostwritrPanel.BLOCK_CLASS_NAME,
               ui: ContainerSkin.GRID_100.getSkin(),
-              title: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_loading_state_title,
-              text: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_loading_state_text,
+              title: WonkiLabels.ghostwritr_loading_state_title,
+              text: WonkiLabels.ghostwritr_loading_state_text,
             }),
             Config(Container, {
               itemId: GhostwritrPanel.SUCCESS_STATE,
               items: [
                 Config(DisplayField, {
                   ui: DisplayFieldSkin.BOLD.getSkin(),
-                  value: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_generated_text_header,
+                  value: WonkiLabels.ghostwritr_generated_text_header,
                 }),
                 Config(TextArea, {
                   autoScroll: true,
@@ -166,11 +165,11 @@ class GhostwritrPanel extends FeedbackItemPanel {
                   formBind: true,
                   ui: ButtonSkin.VIVID.getSkin(),
                   handler: bind(this$, this$.applyTextToContent),
-                  text: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_apply_text_button_label,
+                  text: WonkiLabels.ghostwritr_apply_text_button_label,
                 }),
                 Config(Panel, {
                   itemId: "sourcesPanel",
-                  title: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_sources_title,
+                  title: WonkiLabels.ghostwritr_sources_title,
                   collapsible: true,
                   collapsed: false,
                   flex: 1,
@@ -189,7 +188,7 @@ class GhostwritrPanel extends FeedbackItemPanel {
         }),
         Config(DisplayField, {
           cls: `${GhostwritrPanel.BLOCK_CLASS_NAME}__credit_link`,
-          value: FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_credit_link,
+          value: WonkiLabels.wonki_credit_link,
           htmlEncode: false
         })
       ],
@@ -234,9 +233,9 @@ class GhostwritrPanel extends FeedbackItemPanel {
   }
 
   applyTextToContent(b: Button): void {
-    let title = FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_apply_text_button_label;
-    let msg = FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_apply_text_popup_message;
-    let buttonLabel = FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_apply_text_popup_submit_button_label;
+    let title = WonkiLabels.ghostwritr_apply_text_button_label;
+    let msg = WonkiLabels.ghostwritr_apply_text_popup_message;
+    let buttonLabel = WonkiLabels.ghostwritr_apply_text_popup_submit_button_label;
     MessageBoxUtil.showConfirmation(title, msg, buttonLabel,
             (btn: any): void => {
               if (btn === "ok") {
@@ -331,8 +330,8 @@ class GhostwritrPanel extends FeedbackItemPanel {
     console.log(`Confidence: ${confidence} -> ${confidencePercent}%`);
     const targetConfidence = 75;
 
-    const confidenceFeedback: FeedbackItem = new FeedbackItem("confidenceFeedback", "bar", FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_confidence_bar_label, null);
-    confidenceFeedback["label"] = FeedbackHubGhostwritrStudioPlugin_properties.ghostwritr_confidence_bar_label;
+    const confidenceFeedback: FeedbackItem = new FeedbackItem("confidenceFeedback", "bar", WonkiLabels.ghostwritr_confidence_bar_label, null);
+    confidenceFeedback["label"] = WonkiLabels.ghostwritr_confidence_bar_label;
     confidenceFeedback["value"] = confidencePercent;
     confidenceFeedback["maxValue"] = 100;
     confidenceFeedback["targetValue"] = targetConfidence;

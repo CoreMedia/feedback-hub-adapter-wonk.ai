@@ -1,10 +1,10 @@
 import ResourceBundleUtil from "@jangaroo/runtime/l10n/ResourceBundleUtil";
-import FeedbackHubWonkiStudioPlugin_properties from "./FeedbackHubWonkiStudioPlugin_properties";
+import WonkiStudioPlugin_properties from "./WonkiStudioPlugin_properties";
 
 /**
- * Overrides of ResourceBundle "FeedbackHubWonkiStudioPlugin" for Locale "de".
+ * Overrides of ResourceBundle "WonkiStudioPlugin" for Locale "de".
  */
-ResourceBundleUtil.override(FeedbackHubWonkiStudioPlugin_properties, {
+ResourceBundleUtil.override(WonkiStudioPlugin_properties, {
   wonki_tooltip: "AI basierte Text-Generierung",
   wonki_ghostwritr_tab_title: "Allgemein",
   wonki_transformr_tab_title: "Details",
@@ -16,5 +16,4 @@ ResourceBundleUtil.override(FeedbackHubWonkiStudioPlugin_properties, {
   ghostwritr_apply_text_button_label: "Text übernehmen",
   ghostwritr_apply_text_popup_message: "Der bestehende Artikeltext wird überschrieben",
   ghostwritr_apply_text_popup_submit_button_label: "Bestätigen"
-
 });

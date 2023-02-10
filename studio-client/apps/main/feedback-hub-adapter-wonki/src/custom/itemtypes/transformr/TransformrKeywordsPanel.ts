@@ -11,20 +11,27 @@ import FeedbackGroup from "@coremedia/studio-client.feedback-hub-models/Feedback
 import FeedbackHubPropertyNames
   from "@coremedia/studio-client.main.feedback-hub-editor-components/util/FeedbackHubPropertyNames";
 import VBoxLayout from "@jangaroo/ext-ts/layout/container/VBox";
-import WonkiService from "../../util/WonkiService";
 import Premular from "@coremedia/studio-client.main.editor-components/sdk/premular/Premular";
 import KeywordsFeedbackItem from "@coremedia/studio-client.feedback-hub-models/KeywordsFeedbackItem";
 import Keyword from "@coremedia/studio-client.feedback-hub-models/Keyword";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
 import Container from "@jangaroo/ext-ts/container/Container";
-import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import DisplayField from "@jangaroo/ext-ts/form/field/Display";
+import WonkiLabels from "../../../WonkiStudioPlugin_properties";
+import WonkiService from "../../../util/WonkiService";
+import CollapsiblePanel from "@coremedia/studio-client.ext.ui-components/components/panel/CollapsiblePanel";
+import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
+import TransformrPanel from "./TransformrPanel";
+import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 
 interface TransformrKeywordsPanelConfig extends Config<Panel>, Partial<Pick<TransformrKeywordsPanel,
-        "contentExpression" | "forceReadOnlyValueExpression" | "premular"
+        "contentExpression" |
+        "forceReadOnlyValueExpression" |
+        "premular" |
+        "activeStateExpression"
 >> {}
 
-class TransformrKeywordsPanel extends Panel {
+class TransformrKeywordsPanel extends CollapsiblePanel {
 
   declare Config: TransformrKeywordsPanelConfig;
 
@@ -33,6 +40,8 @@ class TransformrKeywordsPanel extends Panel {
   contentExpression: ValueExpression;
   forceReadOnlyValueExpression: ValueExpression;
   premular: Premular;
+  activeStateExpression: ValueExpression;
+
   private keywordsExpression: ValueExpression;
 
   constructor(config: Config<TransformrKeywordsPanel> = null) {
@@ -41,11 +50,15 @@ class TransformrKeywordsPanel extends Panel {
     super(ConfigUtils.apply(Config(TransformrKeywordsPanel, {
       itemId: "keywordsPanel",
       title: "Generate Keywords",
+      ui: PanelSkin.ACCORDION.getSkin(),
+      cls: "wonki-transformr__keywords-panel",
+      bodyPadding: "6 0",
       items: [
 
         Config(Container, {
           items: [
             Config(DisplayField, {
+              flex: 1,
               value: "Generate keywords based on the existing text."
             }),
             Config(Button, {
@@ -54,7 +67,7 @@ class TransformrKeywordsPanel extends Panel {
               handler: bind(this$, this$.generateKeywords)
             }),
           ],
-          layout: Config(VBoxLayout, { align: "begin" })
+          layout: Config(HBoxLayout, { align: "stretch" })
         }),
 
         // Keyword selection editor will be added dynamically here
@@ -64,6 +77,8 @@ class TransformrKeywordsPanel extends Panel {
         align: "stretch"
       })
     }), config));
+
+    this.activeStateExpression = config.activeStateExpression;
   }
 
   #getKeywordsExpression() {
@@ -76,6 +91,7 @@ class TransformrKeywordsPanel extends Panel {
   refresh() {
     const keywordsProperty = Config(KeywordsPropertyFeedbackItemPanel, {
       itemId: TransformrKeywordsPanel.KEYWORDS_PROPERTY_ITEM_ID,
+      cls: "wonki-transformr__keywords-property",
       feedbackGroup: new FeedbackGroup("keywords", FeedbackHubPropertyNames.RELOAD_MODE_NONE, []),
       feedbackItem: this.createKeywordsFeedbackItem(),
       contentExpression: this.contentExpression,
@@ -88,10 +104,15 @@ class TransformrKeywordsPanel extends Panel {
 
   generateKeywords(): void {
     const content = this.contentExpression.getValue();
+    this.activeStateExpression.setValue(TransformrPanel.LOADING_STATE);
     WonkiService.generateKeywords(content)
             .then((keywords) => {
               this.#getKeywordsExpression().setValue(keywords);
               this.refresh();
+              this.activeStateExpression.setValue(TransformrPanel.SUCCESS_STATE);
+            })
+            .catch(() => {
+              this.activeStateExpression.setValue(TransformrPanel.EMPTY_STATE);
             });
   }
 
