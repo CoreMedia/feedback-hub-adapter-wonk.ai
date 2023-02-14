@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.stream.Collectors.toList;
+
 public class TransformRJob implements Job {
   private static final Logger LOG = LoggerFactory.getLogger(TransformRJob.class);
   public static final String DETAIL_TEXT_PROPERTY = "detailText";
@@ -82,7 +84,10 @@ public class TransformRJob implements Job {
 
   private Map<String, List<String>> generateKeywords(String text) {
     List<String> keywordsResponse = service.generateKeywords(text, getSettings().getApiKey());
-    return Map.of(DATA, keywordsResponse);
+    List<String> trimmedKeywords = keywordsResponse.stream()
+            .map(String::trim)
+            .collect(toList());
+    return Map.of(DATA, trimmedKeywords);
   }
 
   private Map<String, String> generateTitle(String text) {
