@@ -7,10 +7,12 @@ import com.coremedia.feedbackhub.FeedbackHubConfigurationProperties;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.GhostwritRService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.LoggingRequestInterceptor;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.SummarizRService;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.TransformRService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.WonkiApiConnector;
 import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.ghostwritr.ApplyTextToContentJobFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.ghostwritr.GenerateTextJobFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.summarizr.SummarizRJobFactory;
+import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.transformr.TransformRJobFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonki.provider.WonkiFeedbackProviderFactory;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import org.springframework.context.annotation.Bean;
@@ -32,7 +34,7 @@ public class WonkiFeedbackHubConfiguration {
   }
 
   @Bean
-  public FeedbackSettingsProvider ghostwritrFeedbackSettingsProvider(@NonNull SitesService sitesService, @NonNull CapConnection capConnection) {
+  public FeedbackSettingsProvider wonkiFeedbackSettingsProvider(@NonNull SitesService sitesService, @NonNull CapConnection capConnection) {
     return new FeedbackSettingsProvider(capConnection,
             sitesService,
             new FeedbackHubConfigurationProperties.Bindings(),
@@ -51,6 +53,11 @@ public class WonkiFeedbackHubConfiguration {
   }
 
   @Bean
+  public TransformRService transformRService(WonkiApiConnector connector) {
+    return new TransformRService(connector);
+  }
+
+  @Bean
   public WonkiApiConnector wonkiApiConnector(RestTemplate wonkiApiRestTemplate) {
     return new WonkiApiConnector(wonkiApiRestTemplate);
   }
@@ -64,9 +71,9 @@ public class WonkiFeedbackHubConfiguration {
 
   @Bean
   public GenerateTextJobFactory generateTextJobFactory(@NonNull GhostwritRService ghostWritrService,
-                                                       @NonNull FeedbackSettingsProvider ghostwritrFeedbackSettingsProvider,
+                                                       @NonNull FeedbackSettingsProvider wonkiFeedbackSettingsProvider,
                                                        @NonNull SitesService sitesService) {
-    return new GenerateTextJobFactory(ghostWritrService, ghostwritrFeedbackSettingsProvider, sitesService);
+    return new GenerateTextJobFactory(ghostWritrService, wonkiFeedbackSettingsProvider, sitesService);
   }
 
   @Bean
@@ -76,9 +83,16 @@ public class WonkiFeedbackHubConfiguration {
 
   @Bean
   public SummarizRJobFactory summarizeJobFactory(@NonNull SitesService sitesService,
-                                                 @NonNull FeedbackSettingsProvider ghostwritrFeedbackSettingsProvider,
+                                                 @NonNull FeedbackSettingsProvider wonkiFeedbackSettingsProvider,
                                                  @NonNull SummarizRService summarizRService
-                                                 ) {
-    return new SummarizRJobFactory(summarizRService, sitesService, ghostwritrFeedbackSettingsProvider);
+  ) {
+    return new SummarizRJobFactory(summarizRService, sitesService, wonkiFeedbackSettingsProvider);
   }
+
+  @Bean
+  public TransformRJobFactory transformRJobFactory(@NonNull TransformRService transformRService,
+                                                   @NonNull FeedbackSettingsProvider wonkiFeedbackSettingsProvider) {
+    return new TransformRJobFactory(transformRService, wonkiFeedbackSettingsProvider);
+  }
+
 }
