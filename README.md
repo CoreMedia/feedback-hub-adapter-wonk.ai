@@ -12,21 +12,33 @@ If a project is inactive it means that the development has been discontinued and
 
 # Feedback Hub Adapter wonk.ai
 
-This is an integration for wonk.ai services like GhostwritR, a powerful tool for Ai based tasks on natural language processing and content generation.
+This is an integration for wonk.ai services like GhostwritR, TransformR & SummarizR, a powerful tool for Ai based tasks on natural language processing and content generation.
 
-It Enables CoreMedia Studio Business users to speed up the content creation process, by providing inspirational texts for given questions or phrases.
+## GhostwritR
+GhostwritR Enables CoreMedia Studio Business users to speed up the content creation process, by providing inspirational texts for given questions or phrases.
 
 Simply type in a question or phrase on your topic of interest. 
 
-![Question Tab](docs/images/GhostwritR_general_question.png "Provide a question or phrase")
+![Question Tab](docs/images/GhostwritR_question.png "Provide a question or phrase")
 
 Based on your input GhostwritR will generate a text an entirely new text based on knowledge graphs and web searches. This text can then be applied to the content with a simple click of a button.
 
-![Feedback Rendering](docs/images/GhostwritR_general_answer.png "Generated text based on the input")
+![Feedback Rendering](docs/images/GhostwritR_answer.png "Generated text based on the input")
 
 In addition, GhostwritR provides details on the sources used for text generation.
 
-![Feedback Rendering](docs/images/GhostwritR_details.png "Details on the sources")
+![Feedback Rendering](docs/images/GhostwritR_sources.png "Details on the sources")
+
+## TransformR
+
+The wonk.ai TransformR service supports the editor with the creation of search optimized content by generating relevant
+keywords and HTML metadata for a given text
+
+![Generate Keywords](docs/images/TransformR_keywords.png "Generate Keywords")
+
+![Generate HTML Title](docs/images/TransformR_title.png "Generate HTML Title")
+
+![Generate HTML Meta Description](docs/images/TransformR_description.png "Generate HTML Meta Description")
 
 ___
 
