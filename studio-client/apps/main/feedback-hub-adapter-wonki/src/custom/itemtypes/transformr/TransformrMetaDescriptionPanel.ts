@@ -17,6 +17,7 @@ import Premular from "@coremedia/studio-client.main.editor-components/sdk/premul
 import CollapsiblePanel from "@coremedia/studio-client.ext.ui-components/components/panel/CollapsiblePanel";
 import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
+import WonkiLabels from "../../../WonkiStudioPlugin_properties";
 
 interface TransformrMetaDescriptionPanelConfig extends Config<Panel>, Partial<Pick<TransformrMetaDescriptionPanel,
         "contentExpression" | "contentProperty" | "premular"
@@ -39,7 +40,7 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
     const this$ = this;
     super(ConfigUtils.apply(Config(TransformrMetaDescriptionPanel, {
       itemId: "metaDescriptionPanel",
-      title: "Generate Meta Description",
+      title: WonkiLabels.transformr_generate_meta_description_title,
       ui: PanelSkin.ACCORDION.getSkin(),
       bodyPadding: "6 0",
       items: [
@@ -48,10 +49,10 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
           items: [
             Config(DisplayField, {
               flex: 1,
-              value: "Generate meta description based on the existing text."
+              value: WonkiLabels.transformr_generate_meta_description_description
             }),
             Config(Button, {
-              text: "Generate Meta Description",
+              text: WonkiLabels.wonki_generate_button_label,
               ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
               handler: bind(this$, this$.generateMetaDescription)
             }),
@@ -73,7 +74,7 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
           ]
         }),
         Config(Button, {
-          text: "Apply to Html Meta Description field",
+          text: WonkiLabels.wonki_apply_button_label,
           handler: bind(this$, this$.applyToPropertyField),
           ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
           plugins: [

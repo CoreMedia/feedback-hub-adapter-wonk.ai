@@ -5,7 +5,7 @@ import Container from "@jangaroo/ext-ts/container/Container";
 import DisplayField from "@jangaroo/ext-ts/form/field/Display";
 import Button from "@jangaroo/ext-ts/button/Button";
 import ButtonSkin from "@coremedia/studio-client.ext.ui-components/skins/ButtonSkin";
-import { bind } from "@jangaroo/runtime";
+import {bind} from "@jangaroo/runtime";
 import VBoxLayout from "@jangaroo/ext-ts/layout/container/VBox";
 import TextArea from "@jangaroo/ext-ts/form/field/TextArea";
 import BindPropertyPlugin from "@coremedia/studio-client.ext.ui-components/plugins/BindPropertyPlugin";
@@ -17,6 +17,8 @@ import Premular from "@coremedia/studio-client.main.editor-components/sdk/premul
 import CollapsiblePanel from "@coremedia/studio-client.ext.ui-components/components/panel/CollapsiblePanel";
 import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
+import WonkiLabels from "../../../WonkiStudioPlugin_properties";
+
 
 interface TransformrMetaTitlePanelConfig extends Config<Panel>, Partial<Pick<TransformrTitlePanel,
         "contentExpression" | "premular"
@@ -37,7 +39,7 @@ class TransformrTitlePanel extends CollapsiblePanel {
     const this$ = this;
     super(ConfigUtils.apply(Config(TransformrTitlePanel, {
       itemId: "titlePanel",
-      title: "Generate Title",
+      title: WonkiLabels.transformr_generate_title_title,
       ui: PanelSkin.ACCORDION.getSkin(),
       bodyPadding: "6 0",
       items: [
@@ -46,10 +48,10 @@ class TransformrTitlePanel extends CollapsiblePanel {
           items: [
             Config(DisplayField, {
               flex: 1,
-              value: "Generate title based on the existing text."
+              value: WonkiLabels.transformr_generate_title_description
             }),
             Config(Button, {
-              text: "Generate Title",
+              text: WonkiLabels.wonki_generate_button_label,
               ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
               handler: bind(this$, this$.generateTitle)
             }),
@@ -70,7 +72,7 @@ class TransformrTitlePanel extends CollapsiblePanel {
           ]
         }),
         Config(Button, {
-          text: "Apply to Html Title field",
+          text: WonkiLabels.wonki_apply_button_label,
           handler: bind(this$, this$.applyToPropertyField),
           ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
           plugins: [

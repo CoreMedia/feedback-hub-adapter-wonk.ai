@@ -1,6 +1,6 @@
 ![CoreMedia Labs Logo](https://documentation.coremedia.com/badges/banner_coremedia_labs_wide.png "CoreMedia Labs Logo")
 
-![CoreMedia Content Cloud Version](https://img.shields.io/static/v1?message=2210&label=CoreMedia%20Content%20Cloud&style=for-the-badge&labelColor=666666&color=672779 
+![CoreMedia Content Cloud Version](https://img.shields.io/static/v1?message=2301&label=CoreMedia%20Content%20Cloud&style=for-the-badge&labelColor=666666&color=672779 
 "This badge shows the CoreMedia version this project is compatible with. 
 Please read the versioning section of the project to see what other CoreMedia versions are supported and how to find them."
 )
@@ -8,14 +8,15 @@ Please read the versioning section of the project to see what other CoreMedia ve
 "The status badge describes if the project is maintained. Possible values are active and inactive. 
 If a project is inactive it means that the development has been discontinued and won't support future CoreMedia versions." 
 )
+<img style="float: right;" src="docs/images/wonkAI-Logo.png"  width="30%">
 
-# Feedback Hub Adapter for Wonki AI
+# Feedback Hub Adapter wonk.ai
 
-This is an integration for Wonki AI services like GhostwritR, a powerful tool for Ai based tasks on natural language processing and content generation.
+This is an integration for wonk.ai services like GhostwritR, a powerful tool for Ai based tasks on natural language processing and content generation.
 
 It Enables CoreMedia Studio Business users to speed up the content creation process, by providing inspirational texts for given questions or phrases.
 
-Simply type in a question or phrase on your topic of interest.
+Simply type in a question or phrase on your topic of interest. 
 
 ![Question Tab](docs/images/GhostwritR_general_question.png "Provide a question or phrase")
 

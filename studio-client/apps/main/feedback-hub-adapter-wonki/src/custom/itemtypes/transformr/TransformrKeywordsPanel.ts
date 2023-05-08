@@ -49,7 +49,7 @@ class TransformrKeywordsPanel extends CollapsiblePanel {
     const this$ = this;
     super(ConfigUtils.apply(Config(TransformrKeywordsPanel, {
       itemId: "keywordsPanel",
-      title: "Generate Keywords",
+      title: WonkiLabels.transformr_generate_keywords_title,
       ui: PanelSkin.ACCORDION.getSkin(),
       cls: "wonki-transformr__keywords-panel",
       bodyPadding: "6 0",
@@ -59,10 +59,10 @@ class TransformrKeywordsPanel extends CollapsiblePanel {
           items: [
             Config(DisplayField, {
               flex: 1,
-              value: "Generate keywords based on the existing text."
+              value: WonkiLabels.transformr_generate_keywords_description
             }),
             Config(Button, {
-              text: "Generate Keywords",
+              text: WonkiLabels.wonki_generate_button_label,
               ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
               handler: bind(this$, this$.generateKeywords)
             }),

@@ -59,7 +59,7 @@ class SummarizrPanel extends FeedbackItemPanel {
     super(ConfigUtils.apply(Config(SummarizrPanel, {
       items: [
         Config(DisplayField, {
-          value: "The wonki SummarizR is able to summarize texts using various strategies."
+          value: WonkiLabels.summarizr_strategy_description
         }),
 
         Config(BoundRadioGroup, {
@@ -71,18 +71,18 @@ class SummarizrPanel extends FeedbackItemPanel {
           items: [
             Config(Radio, {
               itemId: SummarizrPanel.STRATEGY_ABSTRACTIVE,
-              boxLabel: "<i>Abstract summaries</i> are rewritten texts that can differ significantly from the original",
+              boxLabel: WonkiLabels.summarizr_abstract_strategy_label,
             }),
             Config(Radio, {
               itemId: SummarizrPanel.STRATEGY_EXTRACTIVE,
-              boxLabel: "<i>Extracted summaries</i> keep the original sentences and remove less relevant content",
+              boxLabel: WonkiLabels.summarizr_extractive_strategy_label,
             }),
           ],
         }),
 
         Config(Container, {
           items: [
-            Config(DisplayField, { value: "Sentences:", margin: "0 6 0 0" }),
+            Config(DisplayField, { value: WonkiLabels.summarizr_sentences_label, margin: "0 6 0 0" }),
             Config(NumberField, {
               minValue: 1,
               width: 40,
