@@ -105,8 +105,8 @@ public class GhostwritRService extends AbstractWonkiService {
    *
    * @return
    */
-  public GWTextsResponse generateText(@NonNull String question, @NonNull Locale targetLocale, @NonNull String apiKey) {
-    return generateText(question, targetLocale, true, Collections.emptyList(), Collections.emptyList(), apiKey);
+  public GWTextsResponse generateText(@NonNull String question, @NonNull String apiKey,  List<String> denyList, List<String> allowList, @NonNull Locale targetLocale) {
+    return generateText(question, targetLocale, true, denyList, allowList, apiKey);
   }
 
   /**
@@ -123,7 +123,7 @@ public class GhostwritRService extends AbstractWonkiService {
   public GWTextsResponse generateText(@NonNull String question, @NonNull Locale targetLocale, boolean returnSources,
                                       @NonNull List<String> excludedSources, @NonNull List<String> includedSources,
                                       @NonNull String apiKey) {
-    GWTextsRequest GWTextsRequest = new GWTextsRequest(question, targetLocale.getLanguage(), true);
+    GWTextsRequest GWTextsRequest = new GWTextsRequest(question, targetLocale.getLanguage(), includedSources, excludedSources, true);
     Optional<GWTextsResponse> textsResponse = getApiConnector().postResource(apiKey, TEXTS_PATH, GWTextsRequest, GWTextsResponse.class);
     return textsResponse.orElseThrow();
   }

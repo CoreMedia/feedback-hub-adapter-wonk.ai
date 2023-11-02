@@ -7,6 +7,7 @@ import com.coremedia.labs.plugins.feedbackhub.wonki.api.dto.GWTextsResponse;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -66,8 +67,16 @@ public class GhostWritRServiceIT extends AbstractWonkiServiceIT {
 
   @Test
   public void testGenerateText() {
-    GWTextsResponse response = ghostwritRService.generateText("Was ist CoreMedia?", Locale.GERMAN, getApiKey());
+    GWTextsResponse response = ghostwritRService.generateText("Was ist CoreMedia?", getApiKey(), List.of("www.coremedia.com"), Collections.emptyList(), Locale.GERMAN);
     assertThat(response.getText()).isNotEmpty();
+    assertThat(!(response.getSources().contains("www.coremedia.com")));
+  }
+  @Test
+  public void testSources() {
+    GWTextsResponse response = ghostwritRService.generateText("Was ist CoreMedia?", getApiKey(), Collections.emptyList(), List.of("www.coremedia.com"), Locale.GERMAN);
+    assertThat(response.getText()).isNotEmpty();
+    assertThat(response.getSources().size()).isEqualTo(1);
+
   }
 
 }

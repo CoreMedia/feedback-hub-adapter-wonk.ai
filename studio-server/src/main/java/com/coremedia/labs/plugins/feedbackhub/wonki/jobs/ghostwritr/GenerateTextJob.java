@@ -65,7 +65,7 @@ public class GenerateTextJob implements Job {
               .map(Site::getLocale)
               .orElse(FALLBACK_LOCALE);
 
-      return service.generateText(question, siteLocale, settings.getApiKey());
+      return service.generateText(question, settings.getApiKey(), settings.getDenyList(), settings.getAllowList(), siteLocale);
     } catch (Exception e) {
       LOG.error("Failed to generate text for given question: {} on content {}: {}", question, contentId, e.getMessage());
       throw new JobExecutionException(GenericJobErrorCode.FAILED, e.getMessage());

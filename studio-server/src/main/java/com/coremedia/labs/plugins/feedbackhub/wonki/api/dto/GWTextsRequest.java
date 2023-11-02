@@ -20,11 +20,11 @@ public class GWTextsRequest {
   @SerializedName("blacklist")
   private List<String> denyList;
 
-  public GWTextsRequest(String question, String targetLanguage, boolean sources) {
-    this(question, targetLanguage, sources, Collections.emptyList(), Collections.emptyList());
+  public GWTextsRequest(String question, String targetLanguage, boolean sources, List<String> allowList, List<String> denyList) {
+    this(question, targetLanguage, denyList, allowList, sources);
   }
 
-  public GWTextsRequest(String question, String targetLanguage, boolean sources, List<String> allowList, List<String> denyList) {
+  public GWTextsRequest(String question, String targetLanguage, List<String> allowList, List<String> denyList, boolean sources) {
     this.question = question;
     this.targetLanguage = targetLanguage;
     this.sources = sources;
