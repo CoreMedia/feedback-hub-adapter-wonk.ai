@@ -46,17 +46,21 @@ class TransformrPanel extends FeedbackItemPanel {
           height: 300,
           tabPosition: "left",
           items: [
+
             // Keywords
             Config(TransformrKeywordsPanel, {
-              activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel())
+              activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel()),
+              contentExpression: config.contentExpression
             }),
             // META title
             Config(TransformrTitlePanel, {
-              activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel())
+              activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel()),
+              contentExpression: config.contentExpression
             }),
             // META description
             Config(TransformrMetaDescriptionPanel, {
-              activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel())
+              activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel()),
+              contentExpression: config.contentExpression
             }),
 
           ]
