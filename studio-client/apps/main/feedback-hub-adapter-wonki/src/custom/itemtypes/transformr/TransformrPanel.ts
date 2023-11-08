@@ -15,6 +15,8 @@ import Bean from "@coremedia/studio-client.client-core/data/Bean";
 import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
 import SwitchingContainer from "@coremedia/studio-client.ext.ui-components/components/SwitchingContainer";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
+import Panel from "@jangaroo/ext-ts/panel/Panel";
+import TabPanel from "@jangaroo/ext-ts/tab/Panel";
 
 interface TransformrPanelConfig extends Config<FeedbackItemPanel> {
 
@@ -39,21 +41,26 @@ class TransformrPanel extends FeedbackItemPanel {
     const this$ = this;
     super(ConfigUtils.apply(Config(TransformrPanel, {
       items: [
-        // Keywords
-        Config(TransformrKeywordsPanel, {
-          activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel())
-        }),
+        Config(TabPanel, {
+          tabRotation: 0,
+          height: 300,
+          tabPosition: "left",
+          items: [
+            // Keywords
+            Config(TransformrKeywordsPanel, {
+              activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel())
+            }),
+            // META title
+            Config(TransformrTitlePanel, {
+              activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel())
+            }),
+            // META description
+            Config(TransformrMetaDescriptionPanel, {
+              activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel())
+            }),
 
-        // META title
-        Config(TransformrTitlePanel, {
-          collapsed: true,
+          ]
         }),
-
-        // META description
-        Config(TransformrMetaDescriptionPanel, {
-          collapsed: true
-        }),
-
         Config(SwitchingContainer, {
           activeItemValueExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel()),
           items: [

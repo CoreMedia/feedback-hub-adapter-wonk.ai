@@ -18,10 +18,11 @@ import CollapsiblePanel from "@coremedia/studio-client.ext.ui-components/compone
 import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import WonkiLabels from "../../../WonkiStudioPlugin_properties";
+import TransformrPanel from "./TransformrPanel";
 
 
 interface TransformrMetaTitlePanelConfig extends Config<Panel>, Partial<Pick<TransformrTitlePanel,
-        "contentExpression" | "premular"
+        "contentExpression" | "premular" | "activeStateExpression"
 >> {}
 
 class TransformrTitlePanel extends CollapsiblePanel {
@@ -33,6 +34,7 @@ class TransformrTitlePanel extends CollapsiblePanel {
   contentExpression: ValueExpression;
 
   premular: Premular;
+  activeStateExpression: ValueExpression;
 
   constructor(config: Config<TransformrTitlePanel> = null) {
     // @ts-expect-error Ext JS semantics
@@ -94,6 +96,8 @@ class TransformrTitlePanel extends CollapsiblePanel {
       })
     }), config));
 
+    this.activeStateExpression = config.activeStateExpression;
+
   }
 
   #getTitleExpression(): ValueExpression {
@@ -103,12 +107,20 @@ class TransformrTitlePanel extends CollapsiblePanel {
     return this.titleExpression;
   }
 
+
+
   generateTitle(): void {
-    console.log("Generate title");
+    console.log("Generate Title");
     const content = this.contentExpression.getValue();
-    WonkiService.generateTitle(content).then((metaDescription) => {
-      this.#getTitleExpression().setValue(metaDescription);
-    });
+    this.activeStateExpression.setValue(TransformrPanel.LOADING_STATE);
+    WonkiService.generateTitle(content)
+            .then((metaDescription) => {
+              this.#getTitleExpression().setValue(metaDescription);
+              this.activeStateExpression.setValue(TransformrPanel.SUCCESS_STATE);
+            })
+            .catch(() => {
+              this.activeStateExpression.setValue(TransformrPanel.EMPTY_STATE);
+            });
   }
 
   applyToPropertyField(): void {

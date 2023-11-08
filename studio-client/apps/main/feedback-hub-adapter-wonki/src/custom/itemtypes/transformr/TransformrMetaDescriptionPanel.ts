@@ -18,9 +18,10 @@ import CollapsiblePanel from "@coremedia/studio-client.ext.ui-components/compone
 import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import WonkiLabels from "../../../WonkiStudioPlugin_properties";
+import TransformrPanel from "./TransformrPanel";
 
 interface TransformrMetaDescriptionPanelConfig extends Config<Panel>, Partial<Pick<TransformrMetaDescriptionPanel,
-        "contentExpression" | "contentProperty" | "premular"
+        "contentExpression" | "contentProperty" | "premular" | "activeStateExpression"
 >> {}
 
 class TransformrMetaDescriptionPanel extends CollapsiblePanel {
@@ -30,6 +31,7 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
   private metaDescriptionExpression: ValueExpression;
 
   contentExpression: ValueExpression;
+  activeStateExpression: ValueExpression;
 
   contentProperty: string;
 
@@ -96,9 +98,12 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
       })
     }), config));
 
+    this.activeStateExpression = config.activeStateExpression;
+
     if (!config.contentProperty) {
       this$.contentProperty = "htmlDescription";
     }
+
 
   }
 
@@ -109,12 +114,26 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
     return this.metaDescriptionExpression;
   }
 
+//  generateMetaDescription(): void {
+//    console.log("Generate META description");
+ //   const content = this.contentExpression.getValue();
+//    WonkiService.generateMetaDescription(content).then((metaDescription) => {
+//      this.#getMetaDescriptionExpression().setValue(metaDescription);
+//    });
+//  }
+
   generateMetaDescription(): void {
     console.log("Generate META description");
     const content = this.contentExpression.getValue();
-    WonkiService.generateMetaDescription(content).then((metaDescription) => {
-      this.#getMetaDescriptionExpression().setValue(metaDescription);
-    });
+    this.activeStateExpression.setValue(TransformrPanel.LOADING_STATE);
+    WonkiService.generateMetaDescription(content)
+            .then((metaDescription) => {
+              this.#getMetaDescriptionExpression().setValue(metaDescription);
+              this.activeStateExpression.setValue(TransformrPanel.SUCCESS_STATE);
+            })
+            .catch(() => {
+              this.activeStateExpression.setValue(TransformrPanel.EMPTY_STATE);
+            });
   }
 
   applyToPropertyField(): void {
