@@ -1,6 +1,6 @@
 package com.coremedia.labs.plugins.feedbackhub.wonki.jobs.transformr;
 
-import com.coremedia.labs.plugins.feedbackhub.wonki.FeedbackSettingsProvider;
+import com.coremedia.labs.plugins.feedbackhub.wonki.WonkAISettingsProvider;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.TransformRService;
 import com.coremedia.rest.cap.jobs.Job;
 import com.coremedia.rest.cap.jobs.JobFactory;
@@ -10,11 +10,11 @@ public class TransformRJobFactory implements JobFactory {
 
   private final TransformRService transformRService;
 
-  private final FeedbackSettingsProvider feedbackSettingsProvider;
+  private final WonkAISettingsProvider wonkAISettingsProvider;
 
-  public TransformRJobFactory(TransformRService transformRService, FeedbackSettingsProvider feedbackSettingsProvider) {
+  public TransformRJobFactory(TransformRService transformRService, WonkAISettingsProvider wonkAISettingsProvider) {
     this.transformRService = transformRService;
-    this.feedbackSettingsProvider = feedbackSettingsProvider;
+    this.wonkAISettingsProvider = wonkAISettingsProvider;
   }
 
   @Override
@@ -25,6 +25,6 @@ public class TransformRJobFactory implements JobFactory {
   @NonNull
   @Override
   public Job createJob() {
-    return new TransformRJob(transformRService, feedbackSettingsProvider);
+    return new TransformRJob(transformRService, wonkAISettingsProvider);
   }
 }

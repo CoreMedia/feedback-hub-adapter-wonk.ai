@@ -1,7 +1,7 @@
 package com.coremedia.labs.plugins.feedbackhub.wonki.jobs.transformr;
 
 import com.coremedia.cap.content.Content;
-import com.coremedia.labs.plugins.feedbackhub.wonki.FeedbackSettingsProvider;
+import com.coremedia.labs.plugins.feedbackhub.wonki.WonkAISettingsProvider;
 import com.coremedia.labs.plugins.feedbackhub.wonki.WonkiSettings;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.TransformRService;
 import com.coremedia.rest.cap.jobs.GenericJobErrorCode;
@@ -31,11 +31,11 @@ public class TransformRJob implements Job {
   private String groupId;
   private String siteId;
   private final TransformRService service;
-  private final FeedbackSettingsProvider feedbackSettingsProvider;
+  private final WonkAISettingsProvider wonkAISettingsProvider;
 
-  public TransformRJob(TransformRService service, FeedbackSettingsProvider feedbackSettingsProvider) {
+  public TransformRJob(TransformRService service, WonkAISettingsProvider wonkAISettingsProvider) {
     this.service = service;
-    this.feedbackSettingsProvider = feedbackSettingsProvider;
+    this.wonkAISettingsProvider = wonkAISettingsProvider;
   }
 
   @SerializedName("tranformType")
@@ -101,7 +101,7 @@ public class TransformRJob implements Job {
   }
 
   private WonkiSettings getSettings() {
-    return feedbackSettingsProvider.getSettings(groupId, siteId);
+    return wonkAISettingsProvider.getSettings(groupId, siteId);
   }
 
 }

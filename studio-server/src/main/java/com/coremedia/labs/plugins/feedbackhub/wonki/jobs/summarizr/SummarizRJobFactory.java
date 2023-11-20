@@ -1,8 +1,7 @@
 package com.coremedia.labs.plugins.feedbackhub.wonki.jobs.summarizr;
 
-import com.coremedia.cap.common.CapConnection;
 import com.coremedia.cap.multisite.SitesService;
-import com.coremedia.labs.plugins.feedbackhub.wonki.FeedbackSettingsProvider;
+import com.coremedia.labs.plugins.feedbackhub.wonki.WonkAISettingsProvider;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.SummarizRService;
 import com.coremedia.rest.cap.jobs.Job;
 import com.coremedia.rest.cap.jobs.JobFactory;
@@ -14,12 +13,12 @@ public class SummarizRJobFactory implements JobFactory {
 
   private final SitesService sitesService;
 
-  private final FeedbackSettingsProvider feedbackSettingsProvider;
+  private final WonkAISettingsProvider wonkAISettingsProvider;
 
-  public SummarizRJobFactory( SummarizRService summarizRService, SitesService sitesService, FeedbackSettingsProvider feedbackSettingsProvider) {
+  public SummarizRJobFactory(SummarizRService summarizRService, SitesService sitesService, WonkAISettingsProvider wonkAISettingsProvider) {
     this.summarizRService = summarizRService;
     this.sitesService = sitesService;
-    this.feedbackSettingsProvider = feedbackSettingsProvider;
+    this.wonkAISettingsProvider = wonkAISettingsProvider;
   }
 
   @Override
@@ -30,6 +29,6 @@ public class SummarizRJobFactory implements JobFactory {
   @NonNull
   @Override
   public Job createJob() {
-    return new SummarizRJob(summarizRService, sitesService, feedbackSettingsProvider);
+    return new SummarizRJob(summarizRService, sitesService, wonkAISettingsProvider);
   }
 }

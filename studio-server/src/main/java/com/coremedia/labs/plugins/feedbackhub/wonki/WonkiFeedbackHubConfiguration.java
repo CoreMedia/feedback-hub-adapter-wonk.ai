@@ -2,8 +2,9 @@ package com.coremedia.labs.plugins.feedbackhub.wonki;
 
 import com.coremedia.cap.common.CapConnection;
 import com.coremedia.cap.multisite.SitesService;
-import com.coremedia.cms.common.plugins.beans_for_plugins.CommonBeansForPluginsConfiguration;
-import com.coremedia.feedbackhub.FeedbackHubConfigurationProperties;
+import com.coremedia.cms.common.plugins.beans_for_plugins2.CommonBeansForPluginsConfiguration;
+import com.coremedia.feedbackhub.beans_for_plugins.FeedbackHubBeansForPluginsConfiguration;
+import com.coremedia.feedbackhub.settings.FeedbackSettingsProvider;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.GhostwritRService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.LoggingRequestInterceptor;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.SummarizRService;
@@ -25,7 +26,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
 
 @Configuration
-@Import({CommonBeansForPluginsConfiguration.class})
+@Import({CommonBeansForPluginsConfiguration.class, FeedbackHubBeansForPluginsConfiguration.class})
 public class WonkiFeedbackHubConfiguration {
 
   @Bean
@@ -34,12 +35,8 @@ public class WonkiFeedbackHubConfiguration {
   }
 
   @Bean
-  public FeedbackSettingsProvider wonkiFeedbackSettingsProvider(@NonNull SitesService sitesService, @NonNull CapConnection capConnection) {
-    return new FeedbackSettingsProvider(capConnection,
-            sitesService,
-            new FeedbackHubConfigurationProperties.Bindings(),
-            WonkiSettings.class,
-            WonkiFeedbackProviderFactory.TYPE);
+  public WonkAISettingsProvider wonkAISettingsProvider(FeedbackSettingsProvider feedbackSettingsProvider) {
+    return new WonkAISettingsProvider(feedbackSettingsProvider, WonkiFeedbackProviderFactory.TYPE);
   }
 
   @Bean
@@ -71,9 +68,9 @@ public class WonkiFeedbackHubConfiguration {
 
   @Bean
   public GenerateTextJobFactory generateTextJobFactory(@NonNull GhostwritRService ghostWritrService,
-                                                       @NonNull FeedbackSettingsProvider wonkiFeedbackSettingsProvider,
+                                                       @NonNull WonkAISettingsProvider wonkAISettingsProvider,
                                                        @NonNull SitesService sitesService) {
-    return new GenerateTextJobFactory(ghostWritrService, wonkiFeedbackSettingsProvider, sitesService);
+    return new GenerateTextJobFactory(ghostWritrService, wonkAISettingsProvider, sitesService);
   }
 
   @Bean
@@ -83,16 +80,16 @@ public class WonkiFeedbackHubConfiguration {
 
   @Bean
   public SummarizRJobFactory summarizeJobFactory(@NonNull SitesService sitesService,
-                                                 @NonNull FeedbackSettingsProvider wonkiFeedbackSettingsProvider,
+                                                 @NonNull WonkAISettingsProvider wonkAISettingsProvider,
                                                  @NonNull SummarizRService summarizRService
   ) {
-    return new SummarizRJobFactory(summarizRService, sitesService, wonkiFeedbackSettingsProvider);
+    return new SummarizRJobFactory(summarizRService, sitesService, wonkAISettingsProvider);
   }
 
   @Bean
   public TransformRJobFactory transformRJobFactory(@NonNull TransformRService transformRService,
-                                                   @NonNull FeedbackSettingsProvider wonkiFeedbackSettingsProvider) {
-    return new TransformRJobFactory(transformRService, wonkiFeedbackSettingsProvider);
+                                                   @NonNull WonkAISettingsProvider wonkAISettingsProvider) {
+    return new TransformRJobFactory(transformRService, wonkAISettingsProvider);
   }
 
 }

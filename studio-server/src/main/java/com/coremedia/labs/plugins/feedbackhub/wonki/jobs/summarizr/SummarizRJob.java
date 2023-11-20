@@ -3,7 +3,7 @@ package com.coremedia.labs.plugins.feedbackhub.wonki.jobs.summarizr;
 import com.coremedia.cap.content.Content;
 import com.coremedia.cap.multisite.Site;
 import com.coremedia.cap.multisite.SitesService;
-import com.coremedia.labs.plugins.feedbackhub.wonki.FeedbackSettingsProvider;
+import com.coremedia.labs.plugins.feedbackhub.wonki.WonkAISettingsProvider;
 import com.coremedia.labs.plugins.feedbackhub.wonki.WonkiSettings;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.SummarizRService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.dto.SummaryResponse;
@@ -38,13 +38,13 @@ public class SummarizRJob implements Job {
   private String siteId;
   private final SummarizRService service;
   private final SitesService sitesService;
-  private final FeedbackSettingsProvider feedbackSettingsProvider;
+  private final WonkAISettingsProvider wonkAISettingsProvider;
 
 
-  public SummarizRJob(SummarizRService service, SitesService sitesService, FeedbackSettingsProvider feedbackSettingsProvider) {
+  public SummarizRJob(SummarizRService service, SitesService sitesService, WonkAISettingsProvider wonkAISettingsProvider) {
     this.service = service;
     this.sitesService = sitesService;
-    this.feedbackSettingsProvider = feedbackSettingsProvider;
+    this.wonkAISettingsProvider = wonkAISettingsProvider;
   }
 
   @SerializedName("content")
@@ -106,7 +106,7 @@ public class SummarizRJob implements Job {
   }
 
   private WonkiSettings getSettings() {
-    return feedbackSettingsProvider.getSettings(groupId, siteId);
+    return wonkAISettingsProvider.getSettings(groupId, siteId);
   }
 
 }
