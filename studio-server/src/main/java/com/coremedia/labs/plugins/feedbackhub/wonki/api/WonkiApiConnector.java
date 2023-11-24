@@ -15,9 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import java.net.URI;
 import java.util.Optional;
 
-import static org.springframework.http.HttpHeaders.ACCEPT;
-import static org.springframework.http.HttpHeaders.ACCEPT_CHARSET;
-import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
+import static org.springframework.http.HttpHeaders.*;
 import static org.springframework.http.HttpMethod.POST;
 
 /**
@@ -26,7 +24,7 @@ import static org.springframework.http.HttpMethod.POST;
 public class WonkiApiConnector {
 
   private static final Logger LOG = LoggerFactory.getLogger(WonkiApiConnector.class);
-  private static final String BASE_URL = "https://gate.wonki.tech/";
+  private static final String BASE_URL = "https://gate.wonk.ai/";
 
   public static final String API_SUBSCRIPTION_KEY = "Ocp-Apim-Subscription-Key";
   private final RestTemplate restTemplate;

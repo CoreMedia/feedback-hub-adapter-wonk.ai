@@ -5,15 +5,11 @@ import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.cms.common.plugins.beans_for_plugins2.CommonBeansForPluginsConfiguration;
 import com.coremedia.feedbackhub.beans_for_plugins.FeedbackHubBeansForPluginsConfiguration;
 import com.coremedia.feedbackhub.settings.FeedbackSettingsProvider;
-import com.coremedia.labs.plugins.feedbackhub.wonki.api.GhostwritRService;
-import com.coremedia.labs.plugins.feedbackhub.wonki.api.LoggingRequestInterceptor;
-import com.coremedia.labs.plugins.feedbackhub.wonki.api.SummarizRService;
-import com.coremedia.labs.plugins.feedbackhub.wonki.api.TransformRService;
-import com.coremedia.labs.plugins.feedbackhub.wonki.api.WonkiApiConnector;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.*;
 import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.ghostwritr.ApplyTextToContentJobFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.ghostwritr.GenerateTextJobFactory;
+import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.optimize.OptimizeJobFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.summarizr.SummarizRJobFactory;
-import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.transformr.TransformRJobFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonki.provider.WonkiFeedbackProviderFactory;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import org.springframework.context.annotation.Bean;
@@ -50,8 +46,8 @@ public class WonkiFeedbackHubConfiguration {
   }
 
   @Bean
-  public TransformRService transformRService(WonkiApiConnector connector) {
-    return new TransformRService(connector);
+  public OptimizeService transformRService(WonkiApiConnector connector) {
+    return new OptimizeService(connector);
   }
 
   @Bean
@@ -87,9 +83,10 @@ public class WonkiFeedbackHubConfiguration {
   }
 
   @Bean
-  public TransformRJobFactory transformRJobFactory(@NonNull TransformRService transformRService,
-                                                   @NonNull WonkAISettingsProvider wonkAISettingsProvider) {
-    return new TransformRJobFactory(transformRService, wonkAISettingsProvider);
+  public OptimizeJobFactory transformRJobFactory(@NonNull OptimizeService optimizeService,
+                                                 @NonNull WonkAISettingsProvider wonkAISettingsProvider,
+                                                 @NonNull SitesService sitesService) {
+    return new OptimizeJobFactory(optimizeService, wonkAISettingsProvider, sitesService);
   }
 
 }

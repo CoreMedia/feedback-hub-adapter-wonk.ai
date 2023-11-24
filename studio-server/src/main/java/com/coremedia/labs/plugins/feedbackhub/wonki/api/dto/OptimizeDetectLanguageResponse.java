@@ -2,31 +2,41 @@ package com.coremedia.labs.plugins.feedbackhub.wonki.api.dto;
 
 import com.google.gson.annotations.SerializedName;
 
-public class TransformerDetectLanguageResponse {
+public class OptimizeDetectLanguageResponse {
 
   @SerializedName("result")
-  private DetectedLanguageResult[] results;
+  private String result;
+  @SerializedName("candidates")
+  private Candidates[] candidates;
 
-  public TransformerDetectLanguageResponse(DetectedLanguageResult[] results) {
-    this.results = results;
+  public OptimizeDetectLanguageResponse(Candidates[] results) {
+    this.candidates = candidates;
   }
 
-  public DetectedLanguageResult[] getResults() {
-    return results;
+  public String getResult() {
+    return result;
   }
 
-  public void setResults(DetectedLanguageResult[] results) {
-    this.results = results;
+  public void setResult(String result) {
+    this.result = result;
   }
 
-  public class DetectedLanguageResult {
+  public Candidates[] getCandidates() {
+    return candidates;
+  }
+
+  public void setCandidates(Candidates[] results) {
+    this.candidates = candidates;
+  }
+
+  public static class Candidates {
     @SerializedName("lang")
     private String language;
 
     @SerializedName("prob")
     private double probability;
 
-    public DetectedLanguageResult(String language, double probability) {
+    public Candidates(String language, double probability) {
       this.language = language;
       this.probability = probability;
     }

@@ -1,9 +1,12 @@
-package com.coremedia.labs.plugins.feedbackhub.wonki.jobs.transformr;
+package com.coremedia.labs.plugins.feedbackhub.wonki.jobs.optimize;
 
 import com.coremedia.cap.content.Content;
+import com.coremedia.cap.multisite.Site;
+import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.WonkAISettingsProvider;
 import com.coremedia.labs.plugins.feedbackhub.wonki.WonkiSettings;
-import com.coremedia.labs.plugins.feedbackhub.wonki.api.TransformRService;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.OptimizeService;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.dto.OptimizeGenerationResponse;
 import com.coremedia.rest.cap.jobs.GenericJobErrorCode;
 import com.coremedia.rest.cap.jobs.Job;
 import com.coremedia.rest.cap.jobs.JobContext;
@@ -18,22 +21,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
+import static com.coremedia.labs.plugins.feedbackhub.wonki.provider.WonkiFeedbackProvider.FALLBACK_LOCALE;
 import static java.util.stream.Collectors.toList;
 
-public class TransformRJob implements Job {
-  private static final Logger LOG = LoggerFactory.getLogger(TransformRJob.class);
+public class OptimizeJob implements Job {
+  private static final Logger LOG = LoggerFactory.getLogger(OptimizeJob.class);
   public static final String DETAIL_TEXT_PROPERTY = "detailText";
   public static final String DATA = "data";
   private String transformType;
   private Content content;
   private String groupId;
   private String siteId;
-  private final TransformRService service;
+  private final SitesService sitesService;
+  private final OptimizeService service;
   private final WonkAISettingsProvider wonkAISettingsProvider;
 
-  public TransformRJob(TransformRService service, WonkAISettingsProvider wonkAISettingsProvider) {
+  public OptimizeJob(SitesService sitesService, OptimizeService service, WonkAISettingsProvider wonkAISettingsProvider) {
+    this.sitesService = sitesService;
     this.service = service;
     this.wonkAISettingsProvider = wonkAISettingsProvider;
   }
@@ -64,14 +72,17 @@ public class TransformRJob implements Job {
     try {
       Markup detailTextMarkup = content.getMarkup(DETAIL_TEXT_PROPERTY);
       String detailText = MarkupUtil.asPlainText(detailTextMarkup);
+      Locale siteLocale = sitesService.findSite(siteId)
+              .map(Site::getLocale)
+              .orElse(FALLBACK_LOCALE);
 
       switch (transformType) {
         case "keywords":
-          return generateKeywords(detailText);
+          return generateKeywords(detailText, siteLocale);
         case "title":
-          return generateTitle(detailText);
+          return generateTitle(detailText, siteLocale);
         case "metaDescription":
-          return generateMetaDescription(detailText);
+          return generateMetaDescription(detailText, siteLocale);
         default:
           throw new NotImplementedException();
       }
@@ -82,22 +93,25 @@ public class TransformRJob implements Job {
     }
   }
 
-  private Map<String, List<String>> generateKeywords(String text) {
-    List<String> keywordsResponse = service.generateKeywords(text, getSettings().getApiKey());
+  private Map<String, List<String>> generateKeywords(String text, Locale targetLocale) {
+    List<String> keywordsResponse = service.generateKeywords(text, targetLocale, getSettings().getApiKey());
     List<String> trimmedKeywords = keywordsResponse.stream()
             .map(String::trim)
             .collect(toList());
     return Map.of(DATA, trimmedKeywords);
   }
 
-  private Map<String, String> generateTitle(String text) {
-    String titleResponse = service.generateTitle(text, getSettings().getApiKey());
-    return Map.of(DATA, titleResponse);
+  private Map<String, String> generateTitle(String text, Locale siteLocale) {
+    Optional<OptimizeGenerationResponse> response = service.generateTitle(text, siteLocale, getSettings().getApiKey());
+    String title = response.map(OptimizeGenerationResponse::getResult).orElse(null);
+    return Map.of(DATA, title);
   }
 
-  private Map<String, String> generateMetaDescription(String text) {
-    String metaDescriptionResponse = service.generateMetaDescription(text, getSettings().getApiKey());
-    return Map.of(DATA, metaDescriptionResponse);
+  private Map<String, String> generateMetaDescription(String text, Locale siteLocale) {
+    Optional<OptimizeGenerationResponse> response = service.generateMetaDescription(text, siteLocale, getSettings().getApiKey());
+    String metaDescription = response.map(OptimizeGenerationResponse::getResult).orElse(null);
+
+    return Map.of(DATA, metaDescription);
   }
 
   private WonkiSettings getSettings() {
