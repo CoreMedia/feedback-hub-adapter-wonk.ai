@@ -2,21 +2,21 @@ package com.coremedia.labs.plugins.feedbackhub.wonki.jobs.summarizr;
 
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.WonkAISettingsProvider;
-import com.coremedia.labs.plugins.feedbackhub.wonki.api.SummarizRService;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.OptimizeService;
 import com.coremedia.rest.cap.jobs.Job;
 import com.coremedia.rest.cap.jobs.JobFactory;
 import edu.umd.cs.findbugs.annotations.NonNull;
 
 public class SummarizRJobFactory implements JobFactory {
 
-  private final SummarizRService summarizRService;
+  private final OptimizeService service;
 
   private final SitesService sitesService;
 
   private final WonkAISettingsProvider wonkAISettingsProvider;
 
-  public SummarizRJobFactory(SummarizRService summarizRService, SitesService sitesService, WonkAISettingsProvider wonkAISettingsProvider) {
-    this.summarizRService = summarizRService;
+  public SummarizRJobFactory(OptimizeService service, SitesService sitesService, WonkAISettingsProvider wonkAISettingsProvider) {
+    this.service = service;
     this.sitesService = sitesService;
     this.wonkAISettingsProvider = wonkAISettingsProvider;
   }
@@ -29,6 +29,6 @@ public class SummarizRJobFactory implements JobFactory {
   @NonNull
   @Override
   public Job createJob() {
-    return new SummarizRJob(summarizRService, sitesService, wonkAISettingsProvider);
+    return new SummarizRJob(service, sitesService, wonkAISettingsProvider);
   }
 }

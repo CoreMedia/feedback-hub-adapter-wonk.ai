@@ -5,7 +5,10 @@ import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.cms.common.plugins.beans_for_plugins2.CommonBeansForPluginsConfiguration;
 import com.coremedia.feedbackhub.beans_for_plugins.FeedbackHubBeansForPluginsConfiguration;
 import com.coremedia.feedbackhub.settings.FeedbackSettingsProvider;
-import com.coremedia.labs.plugins.feedbackhub.wonki.api.*;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.GhostwritRService;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.LoggingRequestInterceptor;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.OptimizeService;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.WonkiApiConnector;
 import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.ghostwritr.ApplyTextToContentJobFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.ghostwritr.GenerateTextJobFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.optimize.OptimizeJobFactory;
@@ -41,11 +44,6 @@ public class WonkiFeedbackHubConfiguration {
   }
 
   @Bean
-  public SummarizRService summarizrService(WonkiApiConnector connector) {
-    return new SummarizRService(connector);
-  }
-
-  @Bean
   public OptimizeService transformRService(WonkiApiConnector connector) {
     return new OptimizeService(connector);
   }
@@ -77,9 +75,9 @@ public class WonkiFeedbackHubConfiguration {
   @Bean
   public SummarizRJobFactory summarizeJobFactory(@NonNull SitesService sitesService,
                                                  @NonNull WonkAISettingsProvider wonkAISettingsProvider,
-                                                 @NonNull SummarizRService summarizRService
+                                                 @NonNull OptimizeService optimizeService
   ) {
-    return new SummarizRJobFactory(summarizRService, sitesService, wonkAISettingsProvider);
+    return new SummarizRJobFactory(optimizeService, sitesService, wonkAISettingsProvider);
   }
 
   @Bean

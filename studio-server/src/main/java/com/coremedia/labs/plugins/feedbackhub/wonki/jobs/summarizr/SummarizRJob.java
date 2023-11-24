@@ -5,8 +5,8 @@ import com.coremedia.cap.multisite.Site;
 import com.coremedia.cap.multisite.SitesService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.WonkAISettingsProvider;
 import com.coremedia.labs.plugins.feedbackhub.wonki.WonkiSettings;
-import com.coremedia.labs.plugins.feedbackhub.wonki.api.SummarizRService;
-import com.coremedia.labs.plugins.feedbackhub.wonki.api.dto.SummaryResponse;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.OptimizeService;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.dto.OptimizeLengthResponse;
 import com.coremedia.rest.cap.jobs.GenericJobErrorCode;
 import com.coremedia.rest.cap.jobs.Job;
 import com.coremedia.rest.cap.jobs.JobContext;
@@ -21,14 +21,12 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 import static com.coremedia.labs.plugins.feedbackhub.wonki.provider.WonkiFeedbackProvider.FALLBACK_LOCALE;
 
 public class SummarizRJob implements Job {
   private static final Logger LOG = LoggerFactory.getLogger(SummarizRJob.class);
   public static final String DETAIL_TEXT_PROPERTY = "detailText";
-  public static final String ABSTRACTIVE_STRATEGY = "abstractive";
 
   private Content content;
   private String strategy;
@@ -36,12 +34,12 @@ public class SummarizRJob implements Job {
   private Integer sentences;
   private String groupId;
   private String siteId;
-  private final SummarizRService service;
+  private final OptimizeService service;
   private final SitesService sitesService;
   private final WonkAISettingsProvider wonkAISettingsProvider;
 
 
-  public SummarizRJob(SummarizRService service, SitesService sitesService, WonkAISettingsProvider wonkAISettingsProvider) {
+  public SummarizRJob(OptimizeService service, SitesService sitesService, WonkAISettingsProvider wonkAISettingsProvider) {
     this.service = service;
     this.sitesService = sitesService;
     this.wonkAISettingsProvider = wonkAISettingsProvider;
@@ -81,8 +79,6 @@ public class SummarizRJob implements Job {
   @Override
   public Object call(@NonNull JobContext jobContext) throws JobExecutionException {
     try {
-
-
       WonkiSettings settings = getSettings();
       Locale siteLocale = sitesService.findSite(siteId)
               .map(Site::getLocale)
@@ -91,13 +87,9 @@ public class SummarizRJob implements Job {
       Markup detailTextMarkup = content.getMarkup(DETAIL_TEXT_PROPERTY);
       String detailText = MarkupUtil.asPlainText(detailTextMarkup);
 
-      SummaryResponse summaryResponse;
-      if (Objects.equals(strategy, ABSTRACTIVE_STRATEGY)) {
-        summaryResponse = service.getAbstractiveSummary(detailText, siteLocale, greedy, sentences, settings.getApiKey()).orElseThrow();
-      } else {
-        summaryResponse = service.getExtractiveSummary(detailText, siteLocale, greedy, sentences, settings.getApiKey()).orElseThrow();
-      }
-      return Map.of("data", summaryResponse.getSummary());
+      OptimizeLengthResponse response = service.optimizeLength(detailText, siteLocale, settings.getApiKey());
+
+      return Map.of("data", response.getResult());
 
     } catch (Exception e) {
       LOG.error("Failed summarize text for content {}: {}", content.getId(), e.getMessage());
