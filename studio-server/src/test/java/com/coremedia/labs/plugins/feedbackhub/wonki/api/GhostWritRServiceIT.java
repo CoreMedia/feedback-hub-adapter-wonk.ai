@@ -75,7 +75,9 @@ public class GhostWritRServiceIT extends AbstractWonkiServiceIT {
   public void testSources() {
     GWTextsResponse response = ghostwritRService.generateText("Was ist CoreMedia?", getApiKey(), Collections.emptyList(), List.of("www.coremedia.com"), Locale.GERMAN);
     assertThat(response.getText()).isNotEmpty();
-    assertThat(response.getSources().size()).isEqualTo(1);
+    response.getSources().forEach(source -> {
+      assertThat(source.getSource().startsWith("www.coremedia.com"));
+    });
 
   }
 

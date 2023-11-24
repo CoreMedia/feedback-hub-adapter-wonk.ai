@@ -81,9 +81,9 @@ const WonkiStudioPlugin_properties: WonkiStudioPlugin_properties = {
   wonki_tooltip: "AI driven text generation",
   wonki_ariaLabel: "wonk.ai",
   wonki_credit_link: "service provided by <a href=\"https://wonk.ai/\" target=\"_blank\">wonk.ai</a>.",
-  wonki_ghostwritr_tab_title: "GhostwritR",
-  wonki_transformr_tab_title: "TransformR",
-  wonki_summarizr_tab_title: "SummarizR",
+  wonki_ghostwritr_tab_title: "Write",
+  wonki_transformr_tab_title: "Optimize",
+  wonki_summarizr_tab_title: "Summarize",
   wonki_generate_button_label: "Generate",
   wonki_apply_button_label: "Apply to Content",
 
