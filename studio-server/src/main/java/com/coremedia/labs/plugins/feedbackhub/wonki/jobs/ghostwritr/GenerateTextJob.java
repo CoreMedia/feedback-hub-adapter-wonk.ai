@@ -14,7 +14,6 @@ import edu.umd.cs.findbugs.annotations.NonNull;
 import edu.umd.cs.findbugs.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import scala.Tuple2;
 
 import java.util.List;
 import java.util.Locale;
@@ -74,7 +73,7 @@ public class GenerateTextJob implements Job {
     }
   }
 
-  private static  List<String> getAllowListIfPossible(WonkiSettings settings) {
+  private static List<String> getAllowListIfPossible(WonkiSettings settings) {
     List<String> allowList = List.of();
     try {
       allowList = settings.getAllowList();
@@ -84,7 +83,7 @@ public class GenerateTextJob implements Job {
     return allowList;
   }
 
-  private static  List<String> getDenyListIfPossible(WonkiSettings settings) {
+  private static List<String> getDenyListIfPossible(WonkiSettings settings) {
     List<String> denyList = List.of();
     try {
       denyList = settings.getDenyList();

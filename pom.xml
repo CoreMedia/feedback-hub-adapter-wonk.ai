@@ -3,7 +3,7 @@
 
   <groupId>com.coremedia.labs.plugins</groupId>
   <artifactId>feedback-hub-adapter-wonki</artifactId>
-  <version>1.0.11-SNAPSHOT</version>
+  <version>2401.1.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <modules>
@@ -42,7 +42,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.2.1</version>
+        <version>3.3.0</version>
         <executions>
           <execution>
             <id>attach-sources</id>
