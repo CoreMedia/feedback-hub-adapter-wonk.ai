@@ -2,7 +2,7 @@
   "name": "@coremedia-labs/studio-client.main.feedback-hub-adapter-wonki",
   "author": "CoreMedia GmbH",
   "license": "CoreMedia Open Source License",
-  "version": "1.0.11-SNAPSHOT",
+  "version": "2401.1.1-SNAPSHOT",
   "private": true,
   "dependencies": {
     "@coremedia/studio-client.cap-rest-client": "2401.1.0",
