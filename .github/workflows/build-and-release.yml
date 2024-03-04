@@ -1,5 +1,8 @@
 name: Build & Release
 
+on:
+  workflow_dispatch:
+
 jobs:
   release:
     name: Build & Release
