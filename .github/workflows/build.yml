@@ -60,36 +60,6 @@ jobs:
           NPM_CONFIG_@jangaroo:registry: 'https://npm.coremedia.io'
         run: pnpm install
 
-      - name: Set Release Version
-        id: set-release-version
-        if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
-        env:
-          PLUGINS_NEXUS_USER: ${{ secrets.PLUGINS_NEXUS_USER }}
-          PLUGINS_NEXUS_PASSWORD: ${{ secrets.PLUGINS_NEXUS_PASSWORD }}
-        run: |
-          mvn --batch-mode org.codehaus.mojo:versions-maven-plugin:2.8.1:set -DremoveSnapshot -DartifactId='*'
-          release_version=$(mvn --batch-mode org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout)
-
-          cd studio-client
-          pnpm set-version ${release_version}
-          cd ..
-
-          git add .
-          git commit -m "set release version: ${release_version}"
-          release_tag="v${release_version}"
-          git tag "${release_tag}"
-          echo "::set-output name=version::${release_version}"
-          echo "::set-output name=tag::${release_tag}"
-
-      - name: Output Version
-        id: output-version
-        env:
-          PLUGINS_NEXUS_USER: ${{ secrets.PLUGINS_NEXUS_USER }}
-          PLUGINS_NEXUS_PASSWORD: ${{ secrets.PLUGINS_NEXUS_PASSWORD }}
-        run: |
-          version=$(mvn --batch-mode org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo "::set-output name=version::${version}"
-
       - name: Build with Pnpm
         working-directory: studio-client
         run: |
@@ -106,9 +76,6 @@ jobs:
         env:
           VERSION: ${{ steps.output-version.outputs.version }}
           DESCRIPTOR_TEMPLATE: 'feedback-hub-adapter-wonki.json'
-          CREATE_RELEASE: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' }}
-          RELEASE_TAG: ${{ steps.set-release-version.outputs.tag }}
-          URL_PATTERN: 'https://github.com/${GITHUB_REPOSITORY}/releases/download/${RELEASE_TAG}/${REL_FILE}'
         run: |
           mkdir -p target/bundle
           RESULT="$(cat ${DESCRIPTOR_TEMPLATE})"
@@ -118,33 +85,9 @@ jobs:
             FILE=$(eval echo ${FILE_TEMPLATE})
             REL_FILE=$(echo "${FILE}" | sed 's#.*/##g')
             cp "${FILE}" target/bundle
-            if [ "${CREATE_RELEASE}" = true ]; then
-              URL=$(eval echo ${URL_PATTERN})
-              RESULT="$(echo ${RESULT} | jq -r --arg APP "${APP}" --arg URL "${URL}" '.plugins[$APP] = {"url": $URL}')"
-            else
-              RESULT="$(echo ${RESULT} | jq -r --arg APP "${APP}" --arg REL_FILE "${REL_FILE}" '.plugins[$APP] = {"file": $REL_FILE}')"
-            fi
+            RESULT="$(echo ${RESULT} | jq -r --arg APP "${APP}" --arg REL_FILE "${REL_FILE}" '.plugins[$APP] = {"file": $REL_FILE}')"
           done
           echo "${RESULT}" > "target/bundle/$(echo ${DESCRIPTOR_TEMPLATE} | sed 's#.*/##g' | cut -d '.' -f1)-${VERSION}.json"
-
-      - name: Set Next Snapshot Version
-        id: set-snapshot-version
-        if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
-        env:
-          PLUGINS_NEXUS_USER: ${{ secrets.PLUGINS_NEXUS_USER }}
-          PLUGINS_NEXUS_PASSWORD: ${{ secrets.PLUGINS_NEXUS_PASSWORD }}
-        run: |
-          mvn --batch-mode org.codehaus.mojo:versions-maven-plugin:2.8.1:set -DnextSnapshot -DartifactId='*'
-          snapshot_version=$(mvn --batch-mode org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout)
-
-          cd studio-client
-          pnpm set-version ${snapshot_version}
-          cd ..
-
-          git add .
-          git commit -m "set next snapshot version"
-          git push && git push --tags
-          echo "::set-output name=version::${snapshot_version}"
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v2
@@ -153,9 +96,3 @@ jobs:
           path: target/bundle
           if-no-files-found: error
 
-      - name: Upload Release Artifacts
-        if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ steps.set-release-version.outputs.version }}
-          files: target/bundle/*
