@@ -33,35 +33,35 @@ importers:
   apps/main/feedback-hub-adapter-wonki:
     dependencies:
       '@coremedia/studio-client.base-models':
-        specifier: 2401.2.0
-        version: 2401.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@coremedia/studio-client.cap-rest-client':
-        specifier: 2401.2.0
-        version: 2401.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@coremedia/studio-client.cap-rest-client-impl':
-        specifier: 2401.2.0
-        version: 2401.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@coremedia/studio-client.client-core':
-        specifier: 2401.2.0
-        version: 2401.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@coremedia/studio-client.client-core-impl':
-        specifier: 2401.2.0
-        version: 2401.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@coremedia/studio-client.core-icons':
-        specifier: 2401.2.0
-        version: 2401.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@coremedia/studio-client.ext.ui-components':
-        specifier: 2401.2.0
-        version: 2401.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@coremedia/studio-client.feedback-hub-models':
-        specifier: 2401.2.0
-        version: 2401.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@coremedia/studio-client.main.editor-components':
-        specifier: 2401.2.0
-        version: 2401.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@coremedia/studio-client.main.feedback-hub-editor-components':
-        specifier: 2401.2.0
-        version: 2401.2.0
+        specifier: 2404.1.0
+        version: 2404.1.0
       '@jangaroo/ext-ts':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1304,8 +1304,64 @@ packages:
     engines: {node: '>=0.1.90'}
     dev: true
 
-  /@coremedia/service-agent@1.1.5:
-    resolution: {integrity: sha512-yPdNaqvpE3W1seg6uZEPgMZSs1Ov1dRbMQxluNaYLCdU736j9j7aN/XqmjZWfDVncfVTLYNCNuIFfMS3dE/I1g==}
+  /@coremedia/sencha-ext-classic-locale@1.1.0:
+    resolution: {integrity: sha512-6Pe77Eo45asANvDZPSUN6Pj1n3IPmxActjcdkflVqS6dPw8skP29NDdpkaXGuul+zVlpVjXNdqYRPvWyWB5ePw==}
+    dependencies:
+      '@coremedia/sencha-ext-classic': 1.1.0
+    dev: false
+
+  /@coremedia/sencha-ext-classic-theme-base@1.1.0:
+    resolution: {integrity: sha512-EELV4yEqB+syo4eqCg7H6/FRSm5Kk+bdNcJrjiIwXUZZQTAaoz8uKeSjdLKMn+ffTPvPOqN+B7soPjIr13EIVQ==}
+    dependencies:
+      '@coremedia/sencha-ext-classic': 1.1.0
+    dev: false
+
+  /@coremedia/sencha-ext-classic-theme-neptune@1.1.0:
+    resolution: {integrity: sha512-3mxap+xRJZ/JtGPSmc9JyZupDP7Hv65FmbZSrOIoW07YGBFgeXzrMtZZDWEVwWBlmYUliEKfTafnqRyGA5VRTw==}
+    dependencies:
+      '@coremedia/sencha-ext-classic-theme-neutral': 1.1.0
+    dev: false
+
+  /@coremedia/sencha-ext-classic-theme-neutral@1.1.0:
+    resolution: {integrity: sha512-N6T43jnBnoT09X8cDAL9dBALXvZETfroPnGEflpTXLVM/HhZII9y7Zj8cviwtQCXy9HVowCxVkyGGQwYlcYWKw==}
+    dependencies:
+      '@coremedia/sencha-ext-classic-theme-base': 1.1.0
+    dev: false
+
+  /@coremedia/sencha-ext-classic-theme-triton@1.1.0:
+    resolution: {integrity: sha512-cwlqBSKTRSQEl+XPhkAesBHYq/5i91pgWKdXQnSfKEb6FFqtUvdYPycQ2Ca7QRuWYc21pe+oMvUwETCeZ9f9UQ==}
+    dependencies:
+      '@coremedia/sencha-ext-classic-theme-neptune': 1.1.0
+      '@coremedia/sencha-ext-font-awesome': 1.1.0
+      '@coremedia/sencha-ext-font-ext': 1.1.0
+    dev: false
+
+  /@coremedia/sencha-ext-classic@1.1.0:
+    resolution: {integrity: sha512-iK5ugEz5V6PnUJHVfnI9uthALaMKc6nJ3w45xHq1NTO8j4VUWbphyE8f6tpLy8EfkjtgG+aL6RAl0uGypAbL1g==}
+    dependencies:
+      '@coremedia/sencha-ext-core': 1.1.0
+    dev: false
+
+  /@coremedia/sencha-ext-core@1.1.0:
+    resolution: {integrity: sha512-f8gLCl/jsDt+fEE+VkbIhFAaRoTS4v/SvielUPQAhubynKlErY5GehseocBQCqUcoezE4FzoUsa9Hn8v1IM7vw==}
+    dependencies:
+      '@coremedia/sencha-ext': 1.1.0
+    dev: false
+
+  /@coremedia/sencha-ext-font-awesome@1.1.0:
+    resolution: {integrity: sha512-TGmUx9AoooF8Otk1ZmD8SZUWi5M25fAN261ZahJJwAzm8AaNvOJ6bQLFuz9vPfLKuok4zDfSeLzy+ph+ZgJYyw==}
+    dev: false
+
+  /@coremedia/sencha-ext-font-ext@1.1.0:
+    resolution: {integrity: sha512-y5VO0sG8QTDTUS42Q8ZH3bHrk1oG6LklKzOxgvcNNNI4M6B/JIfF00s4kGwJIBItTn8AEUJKh+BMJb4p/yMhRw==}
+    dev: false
+
+  /@coremedia/sencha-ext@1.1.0:
+    resolution: {integrity: sha512-Nwyyg5Qj9ilzDIfh91hc/SH7+vct0MiW9O2HbdxA2+VxqsUYne2N5FVp9pmfhbgZTLT7dQgKWzhrgQp7y+uhaA==}
+    dev: false
+
+  /@coremedia/service-agent@2.1.0:
+    resolution: {integrity: sha512-CPVDVFT//zh+gupQ8uNPRIsf7JnMuD8V2fha4rE2CK1m463i3fOXiKJJR3A2OUkQNtrcNTFEsqVG/GkkrCkhtw==}
     dependencies:
       lodash: 4.17.21
       rxjs: 7.8.1
@@ -1324,102 +1380,111 @@ packages:
       yargs: 16.2.0
     dev: true
 
-  /@coremedia/studio-client.app-context-models@2401.2.0:
-    resolution: {integrity: sha512-lImzafLSpBKtcw5gPi88jJ++xxh3HcygDZf/kxkqGwIdeztfwVr8AS0HIHB02UCvZE/PVgVr9dbN7siJkbd0+g==}
+  /@coremedia/studio-client.app-context-models@2404.1.0:
+    resolution: {integrity: sha512-5KqQ2VZirhfwLAo4Ig0JR2Bo296rEaSQpGEGxD/l9fRZTlGc1S7slTC0yJFci2jZxSuCU/BOMISxfhSqxAD+jw==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.embed-app-services-api': 2401.2.0
-      '@coremedia/studio-client.rxjs-utils': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.embed-app-services-api': 2404.1.0
+      '@coremedia/studio-client.rxjs-utils': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
+      lodash: 4.17.21
       rxjs: 7.8.1
     dev: false
 
-  /@coremedia/studio-client.base-models@2401.2.0:
-    resolution: {integrity: sha512-ZyaPGi2pptJpVhfphy3aQ2qR4Ph68EN0JRAnDw2STGi2X0U2kLo9IvbYN7aIagpXso5MSM3Jdw/obCwzc0M/qg==}
+  /@coremedia/studio-client.base-models@2404.1.0:
+    resolution: {integrity: sha512-kb6DTtVrhO8PXyWw/CBov7chCd7EsaPBJEHu2TMvx3xNapBDcDjp0gdyM0vtqMiOTOtR75ubLgqwksrJcnMDbQ==}
     dependencies:
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.cap-base-models@2401.2.0:
-    resolution: {integrity: sha512-fyDbGzzQowAzEQf/koatONppm9c93D/zT5TYWQZLDxLIk+NOHYB/gmT25zs9gmqcS48mUk8l+ys9hGKeWg2zlg==}
+  /@coremedia/studio-client.cap-base-models@2404.1.0:
+    resolution: {integrity: sha512-Rvcwvkv4hvsjQzYKyeqdqFARIJ5sOQcBvMRQIRw6lL83fo17hPTkI+LgHEKwhP9SZ0WQjs7Yz7Cga3899HZFOw==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-services-api': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client-impl': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-services-api': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
       '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.default-picture-service': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.default-picture-service': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
       lodash: 4.17.21
     dev: false
 
-  /@coremedia/studio-client.cap-base-services-api@2401.2.0:
-    resolution: {integrity: sha512-/pPS0dTxvtvgOtKKziJ+8onWGP0EensSDTf6f0VHVtzHSha8awlHienbz4cqnqrPUR7vSudux52LJ6zGwCx05w==}
+  /@coremedia/studio-client.cap-base-services-api@2404.1.0:
+    resolution: {integrity: sha512-hHLy14/72yRoS84Yx/KwCkYKKJW45o/1CBD98eDeIMB8KtfwlRvSuk6vpqseoP39z6ORfMqsXcuwj+NFw5bWpA==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/service-agent': 2.1.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.cap-base-services-toolkit@2401.2.0:
-    resolution: {integrity: sha512-kpSw4XZ5TQBufbQvsVNblvQ+BNouJMFBmu6XB83ugsc+Zu3AXGiBfFubOfGS1w5YTo7QOEJZI37S+fSHC4eoEQ==}
+  /@coremedia/studio-client.cap-base-services-toolkit@2404.1.0:
+    resolution: {integrity: sha512-tcfErejNWx3in5z8zZHURP6pQNEcwOLvF5jrTnY+OZ0BCaCkyQGoktoR6ZZZzJ+tDP2AEB3/lonXV0KUbAQ30Q==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.cap-base-services-api': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client-impl': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.cap-base-services-api': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.cap-rest-client-impl@2401.2.0:
-    resolution: {integrity: sha512-3G5rsGWTB6RbnyHLmtXynjRgW6dkr5kX+ymnRaPm1kLPoZWH/hAkw9IDpCt6caIfTtBGxp8HUsEOBHo21ufX5A==}
+  /@coremedia/studio-client.cap-rest-client-impl@2404.1.0:
+    resolution: {integrity: sha512-YRQs9gfF5+lwq6UVpwULGkEfIgUOwhJczLEViVbYNxRCFnx7jwTtG/7qkqZ8438WHUKTjFl0G9Gc5CqVBxYBLQ==}
     dependencies:
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.uuid': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.uuid': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
       rxjs: 7.8.1
     dev: false
 
-  /@coremedia/studio-client.cap-rest-client@2401.2.0:
-    resolution: {integrity: sha512-J9VCzH72ul1tSG0dvVphONbINXcmV1FekZW2ZwrkW1DfmVsUKmyQ2Ie7mFF2jwIJLAo+f/YyVG3kM+jdy9QAGg==}
+  /@coremedia/studio-client.cap-rest-client@2404.1.0:
+    resolution: {integrity: sha512-VZHXV0TDLiRBnNQpKapnQr8sJxLvR07XnXPgl+RogCyxm0889eOH4k+ElgXXVP97w3LL/xlF7syWEF9ZexFeOQ==}
     dependencies:
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.uuid': 2401.2.0
-      '@jangaroo/jangaroo-net': 1.5.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.uuid': 2404.1.0
+      '@jangaroo/jangaroo-net': 3.0.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.ckeditor-common@2401.2.0:
-    resolution: {integrity: sha512-7wel12c5vSjJxhFMTLZNCJyHB+Abz1zPj+shofbVqugqP/8/R+w+bvXPVeRigsYj/rcAYtufZflWUJnqeQWdaA==}
+  /@coremedia/studio-client.ckeditor-common@2404.1.0:
+    resolution: {integrity: sha512-jC2Gla0wGo2MKKb5PXhX/8pPg+y2dQ+pcGvg+G++C57VqfBNDbCo1Ba0tevA7JxCRxDLdaIfn/feVaCVAYswig==}
     dev: false
 
-  /@coremedia/studio-client.client-core-impl@2401.2.0:
-    resolution: {integrity: sha512-hQ4dVCnP/GgbIkr9NS/NgdjC3OoBgFWHe2vMPN9vPyZiD9eHn9ZtsLhvR+CNR2VPQDyCLXXRpYVsKb8BIkDlJQ==}
+  /@coremedia/studio-client.client-core-impl@2404.1.0:
+    resolution: {integrity: sha512-N0QF4SG36zSb6+mbrZ1//AALNNXLFAysY5TkWfDD+r97hfvnvlY355UE6XeGnb0PqRQLv+UA2YuvJFEDYId5Jg==}
     dependencies:
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.uuid': 2401.2.0
-      '@jangaroo/jangaroo-net': 1.5.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.uuid': 2404.1.0
+      '@jangaroo/jangaroo-net': 3.0.0
+      '@jangaroo/runtime': 3.0.0
       rxjs: 7.8.1
     dev: false
 
-  /@coremedia/studio-client.client-core@2401.2.0:
-    resolution: {integrity: sha512-30zg/yoevMOGOc5RVB3w2y16Ei/b82Ci84Lq7hN2KAoDf2+FHjf6FmTz56oaYLnk3WgPupvEUK/MznOqmtIkAA==}
+  /@coremedia/studio-client.client-core@2404.1.0:
+    resolution: {integrity: sha512-Izje6Uqv8SkRcZw7TjqdLPktibsOQ8tGKGYeZbbJxYc75c/fwob0e71jnDZUDKPjqp9GmoAEYnrmeAd4fvr9bQ==}
     dependencies:
-      '@jangaroo/jangaroo-net': 1.5.0
-      '@jangaroo/runtime': 1.5.0
+      '@jangaroo/jangaroo-net': 3.0.0
+      '@jangaroo/runtime': 3.0.0
+      rxjs: 7.8.1
+    dev: false
+
+  /@coremedia/studio-client.collection-view-services-api@2404.1.0:
+    resolution: {integrity: sha512-tQgl4nYddwN2TuHo4ZkM7+/3aBThnwqC36WsgjOrXlGEtBkwN7ZYOVAKNnDPUFvPhXA/mWQ2M9cUGrfmBvwZog==}
+    dependencies:
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.app-context-models': 2404.1.0
       rxjs: 7.8.1
     dev: false
 
@@ -1427,665 +1492,761 @@ packages:
     resolution: {integrity: sha512-7lApUQbyaTDbTFmCma7eUbolKamSU7qLbLnUnvToktYDHglpUKIy7EB7nP2Dy6VXCP8iRAi2Ay9HVWqs2Z2hXQ==}
     dev: false
 
-  /@coremedia/studio-client.content-link-list-models@2401.2.0:
-    resolution: {integrity: sha512-wJgSc39VaJTGqR+Lvivkxd3rmtHEo+1ifWrLsRyJ0FaviK29MV2Nkx1LNe7nbVWrBN2n0ppTF//yzwgiy4Y+Qw==}
+  /@coremedia/studio-client.content-link-list-models@2404.1.0:
+    resolution: {integrity: sha512-WHt/nj+//spXfdrHUVQSCECUGlzlHX6f4D+D9CnPWgqszICMTQNQ+gHX0pqD2WA+aZ7B8Z8blMcuPh8W3jyL7g==}
     dependencies:
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-services-api': 2401.2.0
-      '@coremedia/studio-client.cap-base-services-toolkit': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.interaction-services-api': 2401.2.0
-      '@coremedia/studio-client.interaction-services-impl': 2401.2.0
-      '@coremedia/studio-client.link-list-models': 2401.2.0
-      '@coremedia/studio-client.multi-site-models': 2401.2.0
-      '@coremedia/studio-client.uuid': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-services-api': 2404.1.0
+      '@coremedia/studio-client.cap-base-services-toolkit': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.interaction-services-api': 2404.1.0
+      '@coremedia/studio-client.interaction-services-impl': 2404.1.0
+      '@coremedia/studio-client.link-list-models': 2404.1.0
+      '@coremedia/studio-client.multi-site-models': 2404.1.0
+      '@coremedia/studio-client.uuid': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.core-icons@2401.2.0:
-    resolution: {integrity: sha512-Shb77bF+xHcve2o79uUfBSwHg87fCbHSNNrv/N3m0b/OvDxSmu0NPrGR+0pbOJZ0vDHWVtqUZl57h9VaRJypgg==}
+  /@coremedia/studio-client.content-services-api@2404.1.0:
+    resolution: {integrity: sha512-pxzWiPp6Ng0wyGuRETLt4FpwiQ6SnvKRGLgDt35lUhT7IsabdTfmyCBk+hrQpG+lrIqJVERpZYuoe7zX6L0USg==}
     dependencies:
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.default-picture-service@2401.2.0:
-    resolution: {integrity: sha512-DVp+sa+MKFtJsi8Ewh6PvFr3W5kv2ltQxWtJryCJfOv1dsZiFWmYi+VFn68G+3htU4Mgi7QOAHcH5uaeoFkRAg==}
-    dependencies:
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.rxjs-utils': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.app-context-models': 2404.1.0
       rxjs: 7.8.1
     dev: false
 
-  /@coremedia/studio-client.embed-app-services-api@2401.2.0:
-    resolution: {integrity: sha512-nQZw21Ysv9qZtPgNNY8n0laKkBNfKpbvQv0hPVaPo0U7mEHxrQHadAzUwrnhkn/JPvwdS6fjoofeAYpUjxcZYQ==}
+  /@coremedia/studio-client.core-icons@2404.1.0:
+    resolution: {integrity: sha512-8FPUKNmliSGywLn6ArZp+TavZtiZYkPvydmtmcbEnm+riND7H6oxBDkXSrBS2A+YZvzUsvytoKraMLCP2b4cCA==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.ext.animation-components@2401.2.0:
-    resolution: {integrity: sha512-/4X/6ZEmrB/hfn0lXTak1JzUhwU73XlrXQSloJX/KTP3b8qDk0RZOYanAeXuhSnGUbvgJnNsQD0KXQ74ZfL9/w==}
+  /@coremedia/studio-client.default-picture-service@2404.1.0:
+    resolution: {integrity: sha512-rmnVix0ziU4dzUe7bvrRFXMbzo2H+1ppHiPfPiCHhpgeOOrzElExE7MBVlOxQ99lVxZ8uNwZmAfc05yyjjeiCw==}
     dependencies:
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.ext.base-components@2401.2.0:
-    resolution: {integrity: sha512-PwEkupAun1ZLzDde01eS57x99dit/di4p0QyXzxikWcJO7eD8M2xJPJR+sZTD2OvH7svH9PxmjaXTPbu64ESBQ==}
-    dependencies:
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.ext.startup-plugins': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.ext.cap-base-components@2401.2.0:
-    resolution: {integrity: sha512-TbEcjQh5q8zfNjF8jzLkOlxeqfQ5EDQQ1ccSjpyXqats6horTD8kC6k1hVSrQ4TNMesampN5BZ6bcWIk+6u66Q==}
-    dependencies:
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client-impl': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.core-icons': 2401.2.0
-      '@coremedia/studio-client.ext.base-components': 2401.2.0
-      '@coremedia/studio-client.ext.interaction-components': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.multi-site-models': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.ext.ckeditor5-components@2401.2.0:
-    resolution: {integrity: sha512-NCHqHy6Id45I6wnNMpBO6ddshoJlJNteuUgm0hj9d7U4U+GBlguVCzRivlo8kNhLCgtL/y7VBTviuw0jp/bSDg==}
-    dependencies:
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.ckeditor-common': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.ext.richtext-components-toolkit': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.js.richtext-toolkit': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.ext.content-link-list-components@2401.2.0:
-    resolution: {integrity: sha512-jJzcKX+K2c7Sj0ORTuFNyhtPmiIUtr00AqOIx7GYv6xv8RN+5mYz1yOCQgLGB0Us6yUc3NLZJSACIiR2PvKBuQ==}
-    dependencies:
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.ext.cap-base-components': 2401.2.0
-      '@coremedia/studio-client.ext.link-list-components': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.multi-site-models': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.ext.errors-validation-components@2401.2.0:
-    resolution: {integrity: sha512-oQ6IYJLLtC/ilVPx8saIg+6DQmduVJ7ZddXY3zG5pHDUVaV7uy3FGqDWcoa5TMEVSsbzMxJFMk9w6mJcNAQ/kg==}
-    dependencies:
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client-impl': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.ext.cap-base-components': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.ext.form-services-toolkit@2401.2.0:
-    resolution: {integrity: sha512-iKzd1DyvxVJuerzf9V21Rq0qll6Jq3GsD+ctruPEuL8WlIfvo6UZotRkT/XTigPdc7AJCp9KnpHmxVN0QBopoA==}
-    dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.ext.cap-base-components': 2401.2.0
-      '@coremedia/studio-client.ext.startup-plugins': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.form-models': 2401.2.0
-      '@coremedia/studio-client.form-services-api': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.rxjs-utils': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
       rxjs: 7.8.1
     dev: false
 
-  /@coremedia/studio-client.ext.frame-components@2401.2.0:
-    resolution: {integrity: sha512-Xd2HZ4Qc0WeoRjIyIQdoQ0Xz9VcJnx5pOCr4yFGuwKozki+i64uSE4+x3EJydNfFaJzXYsJO9NKtp1d+1Uo+cg==}
+  /@coremedia/studio-client.embed-app-services-api@2404.1.0:
+    resolution: {integrity: sha512-AQ7A4t39EC/6Pp2IXDLtFWHeRMxlG+2u3ftVniGr0A9m0BPKydMgEUK3m5TNEDEqfp0jJ5Sf0bmrSdqjVe5oxw==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.app-context-models': 2401.2.0
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client-impl': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
+      '@coremedia/service-agent': 2.1.0
+    dev: false
+
+  /@coremedia/studio-client.ext.animation-components@2404.1.0:
+    resolution: {integrity: sha512-6dEs+rZL/ZDe+kyCsRPBGdmLN/0N0etpipc96d3byNuo48Y+7n3nOGHb9yb5ztXVKC/ogzhF28skGBpuzTIG0g==}
+    dependencies:
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.ext.base-components@2404.1.0:
+    resolution: {integrity: sha512-SWdOAcXkBPrbJGwWbxoHcDpnQJxTAkt9EVdDcn3hS8wPQy+jhtNb2+mFpyRfZUDcjqNMZ7wK9zn2tLlgIdkOIg==}
+    dependencies:
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
       '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.ext.base-components': 2401.2.0
-      '@coremedia/studio-client.ext.cap-base-components': 2401.2.0
-      '@coremedia/studio-client.ext.errors-validation-components': 2401.2.0
-      '@coremedia/studio-client.ext.logger-components': 2401.2.0
-      '@coremedia/studio-client.ext.split-main-view-components': 2401.2.0
-      '@coremedia/studio-client.ext.startup-components': 2401.2.0
-      '@coremedia/studio-client.ext.startup-plugins': 2401.2.0
-      '@coremedia/studio-client.ext.toast-components': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.multi-site-models': 2401.2.0
-      '@coremedia/studio-client.tracking-service': 2401.2.0
-      '@coremedia/studio-client.user-consent-service': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-      rxjs: 7.8.1
-    transitivePeerDependencies:
-      - supports-color
+      '@coremedia/studio-client.ext.animation-components': 2404.1.0
+      '@coremedia/studio-client.ext.startup-plugins': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.ext.interaction-components@2401.2.0:
-    resolution: {integrity: sha512-shg7WoKQRXi76P6Oqdhd87/ggpHmnKzoL5K/Szwf5ZL++a/li9KATeAgn2ZqdKblILqcByCB6KNaSuCdDtkuLw==}
+  /@coremedia/studio-client.ext.cap-base-components@2404.1.0:
+    resolution: {integrity: sha512-lfB9CLU+wRdTajIF9Tfdl00bj98jyFDFJEQvKfSNEN9FWwOFfUwdRNXpT2SS2ZSXXySbXmx5NTdia9rFC3oEQg==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.interaction-services-api': 2401.2.0
-      '@coremedia/studio-client.interaction-services-impl': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-      rxjs: 7.8.1
-    dev: false
-
-  /@coremedia/studio-client.ext.library-services-toolkit@2401.2.0:
-    resolution: {integrity: sha512-T5n+Y5NCuODAbq6ZEFDiXkOIBgSXblXBwHGAlIr5j6jv4XU24OUU2aExpZPmSOEnWzVbXbf4L7YuBNDaMG91/Q==}
-    dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
       '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.ext.cap-base-components': 2401.2.0
-      '@coremedia/studio-client.ext.startup-plugins': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.library-services-api': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.core-icons': 2404.1.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.interaction-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.multi-site-models': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.ext.link-list-components@2401.2.0:
-    resolution: {integrity: sha512-yJKlweyjJru/mAsYY+AjvDMwZUbIZulJ3+bP4lhWexpWylq6bJrc3D9EwHy2FDkSQOHVexIoNA4Dbu1pEsZ38w==}
+  /@coremedia/studio-client.ext.ckeditor5-components@2404.1.0:
+    resolution: {integrity: sha512-hlwGGQJQ987Iopt4k9DxoXtV8fPvKi7L5C1rt7fkxOKGJFi8khBDkdXrUODstPnd3VK3W9m2nDQAB4b2UYyLJw==}
     dependencies:
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.ckeditor-common': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.ext.richtext-components-toolkit': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.js.richtext-toolkit': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.ext.content-link-list-components@2404.1.0:
+    resolution: {integrity: sha512-Uixdhk1sLuJikkRyU908NXJndMSPmojwgs70F7mPwjtp/ytIFwGT8wSc07Rx90axD9/1s3h+nojkuowOQBtw4g==}
+    dependencies:
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.ext.cap-base-components': 2404.1.0
+      '@coremedia/studio-client.ext.link-list-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.multi-site-models': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.ext.errors-validation-components@2404.1.0:
+    resolution: {integrity: sha512-8+YPfd9GVGWq6W+ZdumLEgYP2wnnfl3HU+Wnnwg0IVOJwqKJEiDdDYkvlgHu8dA5FV3ce0AMUUBeYnpeKb7aYw==}
+    dependencies:
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
       '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.ext.base-components': 2401.2.0
-      '@coremedia/studio-client.ext.interaction-components': 2401.2.0
-      '@coremedia/studio-client.ext.startup-plugins': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.interaction-services-api': 2401.2.0
-      '@coremedia/studio-client.interaction-services-impl': 2401.2.0
-      '@coremedia/studio-client.link-list-models': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-      rxjs: 7.8.1
+      '@coremedia/studio-client.ext.cap-base-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.ext.logger-components@2401.2.0:
-    resolution: {integrity: sha512-UlljXBmN3299M7Ey0PrAMK1rjWiMkgtgfEy4j6Tt8Z/BtyohojQ1ysgbooU8Q4nnoDRvrpRlQea+l+p94GQkyA==}
+  /@coremedia/studio-client.ext.form-services-toolkit@2404.1.0:
+    resolution: {integrity: sha512-TMD1+CnvR5J4NQ2mtgWqsPvFDNnfJtUQIt4oILfwEvUNI0yzxyEGcT0tYrAERhOmsguYXo4aKuwqlVtuPPZ/gw==}
     dependencies:
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.ext.base-components': 2401.2.0
-      '@coremedia/studio-client.ext.errors-validation-components': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.ext.multi-site-components@2401.2.0:
-    resolution: {integrity: sha512-8/3i+OkbueV3TRYuS3zOAt5LU+IMDbNlWq7oKQbCX91T6QfcP9FckVGYlXOY6ar5SDgJ9isy2FniART2DOeXjw==}
-    dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
       '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.ext.base-components': 2401.2.0
-      '@coremedia/studio-client.ext.cap-base-components': 2401.2.0
-      '@coremedia/studio-client.ext.frame-components': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.form-services-api': 2401.2.0
-      '@coremedia/studio-client.multi-site-models': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /@coremedia/studio-client.ext.richtext-components-toolkit@2401.2.0:
-    resolution: {integrity: sha512-dM9LN7KsST8vmNLAH8aCUXfFJqKO/LqAHlxuskmwQfUAPF1FS/TfiJTbWv1tG1YH/ZowyrXBZDkcEdIxrEMifg==}
-    dependencies:
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.ext.split-main-view-components@2401.2.0:
-    resolution: {integrity: sha512-9byX4fc7nUvV8vG2JZ00u+nKxMdMxJcQrueNZkeb0kkraQbQFOdKJtbnSzYRdld2x1798dOZSGrFXkOyWD4r5A==}
-    dependencies:
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.ext.base-components': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.ext.startup-components@2401.2.0:
-    resolution: {integrity: sha512-o1199ICk8QaLp2SFDdO/i4ZibT+580hObWiiRWpdSAwlAssVmdPOxbFSpHgLGW1pSswT3mSw2DDDVU5axS+few==}
-    dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.app-context-models': 2401.2.0
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client-impl': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.ext.animation-components': 2401.2.0
-      '@coremedia/studio-client.ext.base-components': 2401.2.0
-      '@coremedia/studio-client.ext.errors-validation-components': 2401.2.0
-      '@coremedia/studio-client.ext.interaction-components': 2401.2.0
-      '@coremedia/studio-client.ext.startup-plugins': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.content-services-api': 2404.1.0
+      '@coremedia/studio-client.ext.cap-base-components': 2404.1.0
+      '@coremedia/studio-client.ext.startup-plugins': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.form-models': 2404.1.0
+      '@coremedia/studio-client.form-services-api': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
       rxjs: 7.8.1
     dev: false
 
-  /@coremedia/studio-client.ext.startup-plugins@2401.2.0:
-    resolution: {integrity: sha512-ZlWRY0q9sLFC6uX3xs8B1YG52McB1IFhaw0IRy13O1A43UaIIhIUWY2ouGW/ePNepkSRrSDDMd0vyZKEPCfhqw==}
+  /@coremedia/studio-client.ext.frame-components@2404.1.0:
+    resolution: {integrity: sha512-PlepkFqk9J2Ohhxl25bEvcfPmk4RPynI1PkIMH4zRfBEE9yvJe3ys3PWkstgVc3FLyJu9UYjrZm7S3w7sJ+Htg==}
     dependencies:
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.ext.toast-components@2401.2.0:
-    resolution: {integrity: sha512-N77DTCl1qtTGppU+WkV8Q61fnNA0QiP3zjJYSOPsktKEq6g6thgsRxhS57BoFtHaIHby9s2eQ/jYGMyO8UhZKg==}
-    dependencies:
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.app-context-models': 2404.1.0
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
       '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.ext.base-components': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.ext.ui-components@2401.2.0:
-    resolution: {integrity: sha512-iM+4Jkrbkr2TrH47l2ovmIQW5gfjTEEhsTuNJBBwcsuOwrcHtoSnzFry+8UYsKinJBI6JodOBAlmz4zHTIb5TA==}
-    dependencies:
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.common-icons': 1.3.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/jangaroo-net': 1.5.0
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.ext.workflow-components@2401.2.0:
-    resolution: {integrity: sha512-C6asNC3i4hEHNdb0yEheunHM5onB2k+30GOFbWMl1SLwdmX7Lk5hQFCiidlWGFRYWKsYoreCSb1yZ88rZDgTqQ==}
-    dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-services-toolkit': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client-impl': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.content-link-list-models': 2401.2.0
-      '@coremedia/studio-client.ext.base-components': 2401.2.0
-      '@coremedia/studio-client.ext.cap-base-components': 2401.2.0
-      '@coremedia/studio-client.ext.content-link-list-components': 2401.2.0
-      '@coremedia/studio-client.ext.errors-validation-components': 2401.2.0
-      '@coremedia/studio-client.ext.form-services-toolkit': 2401.2.0
-      '@coremedia/studio-client.ext.frame-components': 2401.2.0
-      '@coremedia/studio-client.ext.interaction-components': 2401.2.0
-      '@coremedia/studio-client.ext.library-services-toolkit': 2401.2.0
-      '@coremedia/studio-client.ext.link-list-components': 2401.2.0
-      '@coremedia/studio-client.ext.startup-plugins': 2401.2.0
-      '@coremedia/studio-client.ext.toast-components': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.ext.workflow-services-toolkit': 2401.2.0
-      '@coremedia/studio-client.form-models': 2401.2.0
-      '@coremedia/studio-client.form-services-api': 2401.2.0
-      '@coremedia/studio-client.library-services-api': 2401.2.0
-      '@coremedia/studio-client.link-list-models': 2401.2.0
-      '@coremedia/studio-client.multi-site-models': 2401.2.0
-      '@coremedia/studio-client.workflow-issues-services-api': 2401.2.0
-      '@coremedia/studio-client.workflow-models': 2401.2.0
-      '@coremedia/studio-client.workflow-plugin-models': 2401.2.0
-      '@coremedia/studio-client.workflow-services-api': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.cap-base-components': 2404.1.0
+      '@coremedia/studio-client.ext.errors-validation-components': 2404.1.0
+      '@coremedia/studio-client.ext.logger-components': 2404.1.0
+      '@coremedia/studio-client.ext.split-main-view-components': 2404.1.0
+      '@coremedia/studio-client.ext.startup-components': 2404.1.0
+      '@coremedia/studio-client.ext.startup-plugins': 2404.1.0
+      '@coremedia/studio-client.ext.toast-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.multi-site-models': 2404.1.0
+      '@coremedia/studio-client.tracking-service': 2404.1.0
+      '@coremedia/studio-client.user-consent-service': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
       rxjs: 7.8.1
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@coremedia/studio-client.ext.workflow-services-toolkit@2401.2.0:
-    resolution: {integrity: sha512-xzywDH12DimkRQ4kp+2d3lQW92fYhITQhLN27irEI/t6hMTJXvyPstp1Ea+R2jPyFbAuFtIwupVytwpidYEZCA==}
+  /@coremedia/studio-client.ext.interaction-components@2404.1.0:
+    resolution: {integrity: sha512-9UHrPkJpepNL5M0xOXc/m4RBMXvKZKWg+Y3hf0BpPBxQbqWcsYg0HVVeLYyEVUmxzuNkn1AwNNbaIrAILDWicw==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.workflow-services-api': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.feedback-hub-models@2401.2.0:
-    resolution: {integrity: sha512-d57R4KREQruzwKQAN+W99nZeGVe7/FaIS0sa2/gH5fs1M9G6lqBgkVhIciDw+JP7qwickFlft7Wx6O1ciLNEiQ==}
-    dependencies:
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client-impl': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.form-models@2401.2.0:
-    resolution: {integrity: sha512-+XbqkSZj6JxDscOrQgRpEYgmhYA0juOTwbUVOqlFTwys7joVzmKtQZt8p/ABzu7sdZXTGVg9xHaJUmQNEfJbTA==}
-    dependencies:
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client-impl': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.uuid': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.form-services-api@2401.2.0:
-    resolution: {integrity: sha512-IX/x93nXMj4u/26B3ce/lbeE0OuPIWR/2zu6JObB8bfFp2/wwsx5p88gYAEJCT2l0KTP3olGgFHCn6xG9BD93A==}
-    dependencies:
-      '@coremedia/service-agent': 1.1.5
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.interaction-services-api': 2404.1.0
+      '@coremedia/studio-client.interaction-services-impl': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
       rxjs: 7.8.1
     dev: false
 
-  /@coremedia/studio-client.interaction-services-api@2401.2.0:
-    resolution: {integrity: sha512-ntUsuHsIYiG8Yg3Ii7AbzgDtbshHKbFGhPUAFQLq9CbRmVrWQ6s7ibcs8wtlH3VroxdxwQ0z0nCijNGAWqJqVA==}
+  /@coremedia/studio-client.ext.job-components@2404.1.0:
+    resolution: {integrity: sha512-AGZIsHuBHIWHtbXNRUyq30zzLPq3vtNmX5MuzXJ+dlcbPylOiFG/ppCz9gZZFm20rGNp0N8TxaviYglKkyle7A==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.app-context-models': 2404.1.0
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.common-icons': 1.3.0
+      '@coremedia/studio-client.core-icons': 2404.1.0
+      '@coremedia/studio-client.ext.animation-components': 2404.1.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.cap-base-components': 2404.1.0
+      '@coremedia/studio-client.ext.frame-components': 2404.1.0
+      '@coremedia/studio-client.ext.interaction-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.form-models': 2404.1.0
+      '@coremedia/studio-client.form-services-api': 2404.1.0
+      '@coremedia/studio-client.info-center-models': 2404.1.0
+      '@coremedia/studio-client.interaction-services-api': 2404.1.0
+      '@coremedia/studio-client.interaction-services-impl': 2404.1.0
+      '@coremedia/studio-client.job-models': 2404.1.0
+      '@coremedia/studio-client.library-services-api': 2404.1.0
+      '@coremedia/studio-client.multi-site-models': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@coremedia/studio-client.ext.library-services-toolkit@2404.1.0:
+    resolution: {integrity: sha512-hh3yVGXziUD5LwJLC8Tv27sPQ1dAHIOhiZDnr4CIHdOkRrQdPOf9O1CjS8m9XrcZqrPVGHijq1xArDiqLZiu3A==}
+    dependencies:
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.collection-view-services-api': 2404.1.0
+      '@coremedia/studio-client.common-icons': 1.3.0
+      '@coremedia/studio-client.ext.cap-base-components': 2404.1.0
+      '@coremedia/studio-client.ext.startup-plugins': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.library-services-api': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.ext.link-list-components@2404.1.0:
+    resolution: {integrity: sha512-CJY/2saMQulPuBA+pihHcU7qxuXiekRiq66v4IpHPWWU8PU8W2eCJE6lQ3CiDr5oWy91MTeN9pbwT20vexwRGw==}
+    dependencies:
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.common-icons': 1.3.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.interaction-components': 2404.1.0
+      '@coremedia/studio-client.ext.startup-plugins': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.interaction-services-api': 2404.1.0
+      '@coremedia/studio-client.interaction-services-impl': 2404.1.0
+      '@coremedia/studio-client.link-list-models': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
       rxjs: 7.8.1
     dev: false
 
-  /@coremedia/studio-client.interaction-services-impl@2401.2.0:
-    resolution: {integrity: sha512-4VuLDsWkCrlpHOuuCHBITdAqE17N33mW9avwDDdowNcuB1xWQOBnu+WmcxEQyVPZob7k9e4GNNMlBEmJwxu/Kw==}
+  /@coremedia/studio-client.ext.logger-components@2404.1.0:
+    resolution: {integrity: sha512-ub21diDbXUQBPLlODP9XttA3gQqbfCuDk36rt099QqivLx7QuskCkKQLAg1BjVDFCn5wpEwG5GJ0K+wHThWhVQ==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.interaction-services-api': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.errors-validation-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.ext.multi-site-components@2404.1.0:
+    resolution: {integrity: sha512-pQ1122CFvTT8dnFYfusioQNgXCIKZFKARcg9whbXCT1YDLEENYfOEbrUAD49bQo65R8HMiUBmJgH1ewTwMa2iw==}
+    dependencies:
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.common-icons': 1.3.0
+      '@coremedia/studio-client.ext.animation-components': 2404.1.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.cap-base-components': 2404.1.0
+      '@coremedia/studio-client.ext.frame-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.form-services-api': 2404.1.0
+      '@coremedia/studio-client.multi-site-models': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@coremedia/studio-client.ext.notification-components@2404.1.0:
+    resolution: {integrity: sha512-5F/2nmanMjmOssnBXOYBZBArplHI3+Ke1wl/YQJjtG/H/Nu432bTmHs5E5T7gD+irvFlTTx2DKxZ7o0i1GbcOA==}
+    dependencies:
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.common-icons': 1.3.0
+      '@coremedia/studio-client.ext.animation-components': 2404.1.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.cap-base-components': 2404.1.0
+      '@coremedia/studio-client.ext.startup-plugins': 2404.1.0
+      '@coremedia/studio-client.ext.toast-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.info-center-models': 2404.1.0
+      '@coremedia/studio-client.notification-models': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@coremedia/studio-client.ext.richtext-components-toolkit@2404.1.0:
+    resolution: {integrity: sha512-3SuK1suAUtL67yGMMDZ20lU/BmxXiLs/mi5Em18oYTcHqAV89/XtPwF9ZOZ833kP6G0wd5mTKmLpkaWZiJtlkQ==}
+    dependencies:
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.ext.split-main-view-components@2404.1.0:
+    resolution: {integrity: sha512-LZ6cKPWYW37rN1I7zK/ZPLfZEADqpEtSd1DZbZdozSfakbPLHZmxmkhZBToZ1FHa7IapnlRYMMEa5mqhfvieZg==}
+    dependencies:
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.common-icons': 1.3.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.ext.startup-components@2404.1.0:
+    resolution: {integrity: sha512-qd39iNVHi0qsiYUdrM2bS5OHfSSLmDYvL8VfZcFmyaQbL+u75NtnZxSv8xEtB+pGyEGuwqZThcssDsqEdxwMEg==}
+    dependencies:
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.app-context-models': 2404.1.0
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.common-icons': 1.3.0
+      '@coremedia/studio-client.ext.animation-components': 2404.1.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.errors-validation-components': 2404.1.0
+      '@coremedia/studio-client.ext.interaction-components': 2404.1.0
+      '@coremedia/studio-client.ext.startup-plugins': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
       rxjs: 7.8.1
     dev: false
 
-  /@coremedia/studio-client.jest-helper@2401.2.0:
-    resolution: {integrity: sha512-NwhW9y4k7JabCr2vQwxTuYBwtQxzeqAf8+Ose2CXuxademR55OF+cTJWS+vV7hk9TSBGF+A6wpvYE2y+/mQaTw==}
+  /@coremedia/studio-client.ext.startup-plugins@2404.1.0:
+    resolution: {integrity: sha512-R8SfKXKUI1cAjUYm9WDwtLMmLq3YBXIxqd2wCN+POU829RGFHx7qJEPSOiBi5NU8ZB2BKb8X4Qx6o7XC5/+oHg==}
+    dependencies:
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.ext.toast-components@2404.1.0:
+    resolution: {integrity: sha512-o5WiHLaIo52wtmn0Qa8HlIAor/s1E6vOlgGAjhMaS7yr3aZJeZKc/d9BkG9yoE1ihACaLe9jbW0c0PHPkXWvog==}
+    dependencies:
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.common-icons': 1.3.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.ext.ui-components@2404.1.0:
+    resolution: {integrity: sha512-lhfd91C6TirAdsX4N5AzVuNYeknNa3dVDxzWKM5u8Dy4gHjszjZJy8URODt+blCykPmUiCrfggKVn4REGrIGZA==}
+    dependencies:
+      '@coremedia/sencha-ext-classic-theme-triton': 1.1.0
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.common-icons': 1.3.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/jangaroo-net': 3.0.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.ext.workflow-components@2404.1.0:
+    resolution: {integrity: sha512-BySH8G/Lz8HzrvRiCKkDVQAA9gbrHR0Xhl4lwD3J1rRUK6QyeqbnCVaNVHQsH3FUdsAqJwFUKpGKZcLe0s4Lbw==}
+    dependencies:
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-services-toolkit': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.collection-view-services-api': 2404.1.0
+      '@coremedia/studio-client.common-icons': 1.3.0
+      '@coremedia/studio-client.content-link-list-models': 2404.1.0
+      '@coremedia/studio-client.content-services-api': 2404.1.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.cap-base-components': 2404.1.0
+      '@coremedia/studio-client.ext.content-link-list-components': 2404.1.0
+      '@coremedia/studio-client.ext.errors-validation-components': 2404.1.0
+      '@coremedia/studio-client.ext.form-services-toolkit': 2404.1.0
+      '@coremedia/studio-client.ext.frame-components': 2404.1.0
+      '@coremedia/studio-client.ext.interaction-components': 2404.1.0
+      '@coremedia/studio-client.ext.library-services-toolkit': 2404.1.0
+      '@coremedia/studio-client.ext.link-list-components': 2404.1.0
+      '@coremedia/studio-client.ext.startup-plugins': 2404.1.0
+      '@coremedia/studio-client.ext.toast-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.ext.workflow-services-toolkit': 2404.1.0
+      '@coremedia/studio-client.form-models': 2404.1.0
+      '@coremedia/studio-client.form-services-api': 2404.1.0
+      '@coremedia/studio-client.library-services-api': 2404.1.0
+      '@coremedia/studio-client.link-list-models': 2404.1.0
+      '@coremedia/studio-client.multi-site-models': 2404.1.0
+      '@coremedia/studio-client.workflow-issues-services-api': 2404.1.0
+      '@coremedia/studio-client.workflow-models': 2404.1.0
+      '@coremedia/studio-client.workflow-plugin-models': 2404.1.0
+      '@coremedia/studio-client.workflow-services-api': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+      rxjs: 7.8.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@coremedia/studio-client.ext.workflow-services-toolkit@2404.1.0:
+    resolution: {integrity: sha512-7BGWtStjoFmy5mpNal4rlYG95olJSy3wxwpPY13nLbeMmdW6rbLqPZNJI5Djl7Ndu1qeAARLiZDIOmr6QYM+Fw==}
+    dependencies:
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.workflow-services-api': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.feedback-hub-models@2404.1.0:
+    resolution: {integrity: sha512-VsglS3hoqYofmb4MYcefL2WgSdNe83H71UAHgmvQR/Vdw1HquUoufQq4EozyKWieqnt3N5rrKFajm8Z2X3NPFA==}
+    dependencies:
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.form-models@2404.1.0:
+    resolution: {integrity: sha512-YuswVYj3agvZlDu85AH87s+k5fKeZM57afmnl3OitilWnc70ZEfPGmSoPriBLcAYKJZ7JlhVaUWKGjN2e9iRZw==}
+    dependencies:
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.uuid': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.form-services-api@2404.1.0:
+    resolution: {integrity: sha512-+/YKLrDcH+235EvwVOei9WSI9Aye7+n0rjpBncl1Go6cDoWlPc40+w3LoMtEVGasHn0wIKfi54wk3/yJ6n3zvw==}
+    dependencies:
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.app-context-models': 2404.1.0
+      rxjs: 7.8.1
+    dev: false
+
+  /@coremedia/studio-client.info-center-models@2404.1.0:
+    resolution: {integrity: sha512-MYYdmBGrqOrFLLP7Dcv6O9JRjY4XtFJIax/7qODTveEU34PlsKSZfT0kVmc+FdlzWH/vuMH+bKvbPRnPwxXQ8g==}
+    dependencies:
+      '@coremedia/studio-client.app-context-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.jest-helper': 2404.1.0
+      '@coremedia/studio-client.multi-site-models': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /@coremedia/studio-client.interaction-services-api@2404.1.0:
+    resolution: {integrity: sha512-OBeeZLRoL21NG1y3NyyIuoch0vf6wNA2alWciq3iouvY6I29nlGCgECRguYKiA/Eb7lzvyPBa/TsPb/QdEmcmA==}
+    dependencies:
+      '@coremedia/service-agent': 2.1.0
+      '@jangaroo/runtime': 3.0.0
+      rxjs: 7.8.1
+    dev: false
+
+  /@coremedia/studio-client.interaction-services-impl@2404.1.0:
+    resolution: {integrity: sha512-syClwVuMuhWKWsoSN3ErgZffvEsAEcP1E6GbmrEsH0EB+38JH6F/P0d3r5sPSQ2P5w55eyZ3GxtpO5pG6IcSsw==}
+    dependencies:
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.interaction-services-api': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
+      rxjs: 7.8.1
+    dev: false
+
+  /@coremedia/studio-client.jest-helper@2404.1.0:
+    resolution: {integrity: sha512-9cQAzzV7V4fEsa00HDS+VpEq+3svgOob8O42jhaSDKAlxs3wQHHnmC5IGKeG7e7a+vbOtHg7QKhkhqQwiVFIVQ==}
     dependencies:
       '@babel/core': 7.24.0
       '@babel/preset-env': 7.24.0(@babel/core@7.24.0)
       '@babel/preset-typescript': 7.23.3(@babel/core@7.24.0)
       babel-jest: 29.7.0(@babel/core@7.24.0)
-      jest-junit: 15.0.0
+      jest-junit: 16.0.0
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@coremedia/studio-client.js.richtext-toolkit@2401.2.0:
-    resolution: {integrity: sha512-nc/i0v4ft2yKZaNrjw9Ty4Ti7ZdBCWPnB0TP92qOKank+e+sLhy2F+oCYaQH/eEp8Bwl+TExj1/88+/McCrb+w==}
+  /@coremedia/studio-client.job-models@2404.1.0:
+    resolution: {integrity: sha512-FV0iIzPXYLZs/KvndMafEKy0Rji/FG8HiWGUD5JiubULP5R2gCDaJMsSjp4N/9OJQckh28dxIDqJFPplVYuW7Q==}
     dependencies:
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.app-context-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.library-services-api@2401.2.0:
-    resolution: {integrity: sha512-AopZplJ8uVW/XjvsrvAf4+arpsSdCgkFO5qRqKGsmb/KBxZmNfmg2nu6K6nqLu6rZIbjOIzRMgpTGwgLlNHGyQ==}
+  /@coremedia/studio-client.js.richtext-toolkit@2404.1.0:
+    resolution: {integrity: sha512-PBnZLKLoTygTfczPOurW2+1rJvsEkYcPlo/FoRiAgBrJdtTpqiTk/pkj/3MBEn2Hnn/Bgmo6kr/Vmo7dOY+Bww==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.link-list-models@2401.2.0:
-    resolution: {integrity: sha512-9527E3GzRvKyesMLC7Yvtn+I95O0rW7W8FAZQFECLnzVQLa7GN8mb4e8A00UjucN9GtHl9xCNI1p+66I1Tntow==}
+  /@coremedia/studio-client.library-services-api@2404.1.0:
+    resolution: {integrity: sha512-da5Go1Nzs4Cdi8krIKHcxHaVeacKG8+4mVhX9K4G7ciwqvUN0zOcsUwBlF2Ue4+UZzs5jw7MuzG3Wbh5lHiWPQ==}
     dependencies:
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.app-context-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.main.editor-components@2401.2.0:
-    resolution: {integrity: sha512-vNtOphJAI/lXkFcXCeDbXivJBjNeLxKv/9uz1T6UM1lIZfup7QZjG0IsPyG+YA413BXo+GXDTTOLHma1gib/0A==}
+  /@coremedia/studio-client.link-list-models@2404.1.0:
+    resolution: {integrity: sha512-bgibshD02L0geWOd9JD1KWF2DJxl/Rcwc3D8U+V8NyO68h5J/68zIpI9b+BNfhoBJbqF3UQQp0fL5XJNQ/Ezpg==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.app-context-models': 2401.2.0
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-services-api': 2401.2.0
-      '@coremedia/studio-client.cap-base-services-toolkit': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client-impl': 2401.2.0
-      '@coremedia/studio-client.ckeditor-common': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@coremedia/studio-client.main.editor-components@2404.1.0:
+    resolution: {integrity: sha512-k2ke00WQXhHdvvkvHPO2qooCYzHYNP36Oy6tugFTXhORchRiPEjiyp3gWq1kte5gxmFFmAhyLLTxGRGEicatxg==}
+    dependencies:
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.app-context-models': 2404.1.0
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-services-api': 2404.1.0
+      '@coremedia/studio-client.cap-base-services-toolkit': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.ckeditor-common': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.collection-view-services-api': 2404.1.0
       '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.content-link-list-models': 2401.2.0
-      '@coremedia/studio-client.embed-app-services-api': 2401.2.0
-      '@coremedia/studio-client.ext.base-components': 2401.2.0
-      '@coremedia/studio-client.ext.cap-base-components': 2401.2.0
-      '@coremedia/studio-client.ext.ckeditor5-components': 2401.2.0
-      '@coremedia/studio-client.ext.content-link-list-components': 2401.2.0
-      '@coremedia/studio-client.ext.errors-validation-components': 2401.2.0
-      '@coremedia/studio-client.ext.form-services-toolkit': 2401.2.0
-      '@coremedia/studio-client.ext.frame-components': 2401.2.0
-      '@coremedia/studio-client.ext.interaction-components': 2401.2.0
-      '@coremedia/studio-client.ext.library-services-toolkit': 2401.2.0
-      '@coremedia/studio-client.ext.link-list-components': 2401.2.0
-      '@coremedia/studio-client.ext.logger-components': 2401.2.0
-      '@coremedia/studio-client.ext.multi-site-components': 2401.2.0
-      '@coremedia/studio-client.ext.richtext-components-toolkit': 2401.2.0
-      '@coremedia/studio-client.ext.split-main-view-components': 2401.2.0
-      '@coremedia/studio-client.ext.startup-components': 2401.2.0
-      '@coremedia/studio-client.ext.toast-components': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.ext.workflow-components': 2401.2.0
-      '@coremedia/studio-client.form-models': 2401.2.0
-      '@coremedia/studio-client.form-services-api': 2401.2.0
-      '@coremedia/studio-client.interaction-services-api': 2401.2.0
-      '@coremedia/studio-client.interaction-services-impl': 2401.2.0
-      '@coremedia/studio-client.library-services-api': 2401.2.0
-      '@coremedia/studio-client.link-list-models': 2401.2.0
-      '@coremedia/studio-client.multi-site-models': 2401.2.0
-      '@coremedia/studio-client.tracking-service': 2401.2.0
-      '@coremedia/studio-client.user-consent-service': 2401.2.0
-      '@coremedia/studio-client.workflow-services-api': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/jangaroo-net': 1.5.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.content-link-list-models': 2404.1.0
+      '@coremedia/studio-client.content-services-api': 2404.1.0
+      '@coremedia/studio-client.embed-app-services-api': 2404.1.0
+      '@coremedia/studio-client.ext.animation-components': 2404.1.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.cap-base-components': 2404.1.0
+      '@coremedia/studio-client.ext.ckeditor5-components': 2404.1.0
+      '@coremedia/studio-client.ext.content-link-list-components': 2404.1.0
+      '@coremedia/studio-client.ext.errors-validation-components': 2404.1.0
+      '@coremedia/studio-client.ext.form-services-toolkit': 2404.1.0
+      '@coremedia/studio-client.ext.frame-components': 2404.1.0
+      '@coremedia/studio-client.ext.interaction-components': 2404.1.0
+      '@coremedia/studio-client.ext.job-components': 2404.1.0
+      '@coremedia/studio-client.ext.library-services-toolkit': 2404.1.0
+      '@coremedia/studio-client.ext.link-list-components': 2404.1.0
+      '@coremedia/studio-client.ext.logger-components': 2404.1.0
+      '@coremedia/studio-client.ext.multi-site-components': 2404.1.0
+      '@coremedia/studio-client.ext.richtext-components-toolkit': 2404.1.0
+      '@coremedia/studio-client.ext.split-main-view-components': 2404.1.0
+      '@coremedia/studio-client.ext.startup-components': 2404.1.0
+      '@coremedia/studio-client.ext.toast-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.ext.workflow-components': 2404.1.0
+      '@coremedia/studio-client.form-models': 2404.1.0
+      '@coremedia/studio-client.form-services-api': 2404.1.0
+      '@coremedia/studio-client.interaction-services-api': 2404.1.0
+      '@coremedia/studio-client.interaction-services-impl': 2404.1.0
+      '@coremedia/studio-client.job-models': 2404.1.0
+      '@coremedia/studio-client.library-services-api': 2404.1.0
+      '@coremedia/studio-client.link-list-models': 2404.1.0
+      '@coremedia/studio-client.multi-site-models': 2404.1.0
+      '@coremedia/studio-client.project-services-api': 2404.1.0
+      '@coremedia/studio-client.tracking-service': 2404.1.0
+      '@coremedia/studio-client.user-consent-service': 2404.1.0
+      '@coremedia/studio-client.uuid': 2404.1.0
+      '@coremedia/studio-client.workflow-services-api': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/jangaroo-net': 3.0.0
+      '@jangaroo/runtime': 3.0.0
       rxjs: 7.8.1
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@coremedia/studio-client.main.feedback-hub-editor-components@2401.2.0:
-    resolution: {integrity: sha512-wDZ9xjALfYDCshmK4exMEdSGFSSuXBg7TwREhC0uZTzKgrtI6fqucBISWgIw1/ZZgeFgtIKWzzo5KZD3HVsZqw==}
+  /@coremedia/studio-client.main.feedback-hub-editor-components@2404.1.0:
+    resolution: {integrity: sha512-E99VezaY6WccXy/GxXBzGc0tfo4zrjSVM2QAutBa/svvzOD1x1LqH1nTcqebJ7y1vwnMNlWYL5eFtFyH0+W2ag==}
     dependencies:
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client-impl': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
+      '@coremedia/studio-client.base-models': 2404.1.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
       '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.ext.base-components': 2401.2.0
-      '@coremedia/studio-client.ext.cap-base-components': 2401.2.0
-      '@coremedia/studio-client.ext.errors-validation-components': 2401.2.0
-      '@coremedia/studio-client.ext.frame-components': 2401.2.0
-      '@coremedia/studio-client.ext.toast-components': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.feedback-hub-models': 2401.2.0
-      '@coremedia/studio-client.form-models': 2401.2.0
-      '@coremedia/studio-client.main.editor-components': 2401.2.0
-      '@coremedia/studio-client.main.notification-studio-client': 2401.2.0
-      '@coremedia/studio-client.notification-models': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.ext.animation-components': 2404.1.0
+      '@coremedia/studio-client.ext.base-components': 2404.1.0
+      '@coremedia/studio-client.ext.cap-base-components': 2404.1.0
+      '@coremedia/studio-client.ext.errors-validation-components': 2404.1.0
+      '@coremedia/studio-client.ext.frame-components': 2404.1.0
+      '@coremedia/studio-client.ext.notification-components': 2404.1.0
+      '@coremedia/studio-client.ext.toast-components': 2404.1.0
+      '@coremedia/studio-client.ext.ui-components': 2404.1.0
+      '@coremedia/studio-client.feedback-hub-models': 2404.1.0
+      '@coremedia/studio-client.form-models': 2404.1.0
+      '@coremedia/studio-client.main.editor-components': 2404.1.0
+      '@coremedia/studio-client.notification-models': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@coremedia/studio-client.main.notification-studio-client@2401.2.0:
-    resolution: {integrity: sha512-1Q5LfHCtOGLS4bCWGVS3ooqrwDkS0OjWqemVgSXdERWVoPnjMJCp16PFHMXGP0xn83+UQe1IgYqud43tgQqC3Q==}
+  /@coremedia/studio-client.multi-site-models@2404.1.0:
+    resolution: {integrity: sha512-eI8gy2mGfISXonaj8FK5ydQK+/wcr7CbXh0gbP6VoteTcwF0uAbwhxC4m5KcQZNUcppczQf2nUIeBkhdM6YhzA==}
     dependencies:
-      '@coremedia/studio-client.base-models': 2401.2.0
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.common-icons': 1.3.0
-      '@coremedia/studio-client.ext.base-components': 2401.2.0
-      '@coremedia/studio-client.ext.cap-base-components': 2401.2.0
-      '@coremedia/studio-client.ext.toast-components': 2401.2.0
-      '@coremedia/studio-client.ext.ui-components': 2401.2.0
-      '@coremedia/studio-client.main.editor-components': 2401.2.0
-      '@coremedia/studio-client.notification-models': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
-    transitivePeerDependencies:
-      - supports-color
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.multi-site-models@2401.2.0:
-    resolution: {integrity: sha512-5M0dUxZ1VhI2Pq8JpuIvCQRWa+3w5NuIp0ugNXIspDHQWwyh4FbHD3VhWQfK8Ep9JFw3IG/27viSLDQCds/oTQ==}
+  /@coremedia/studio-client.notification-models@2404.1.0:
+    resolution: {integrity: sha512-PdM6a+KbwzdKzlBn/Myou6doMvDFixXdUNRdhNYHycyHsRQJnkRX6ftIy4Szajt0hU/dAUPF6xbPsMZbBR1Alg==}
     dependencies:
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.notification-models@2401.2.0:
-    resolution: {integrity: sha512-cV0L8ar7YkOpxQl0IO+dDON2SJjdcVcE6mny0p+ordZVg3ySqSXgJ5Z8rz39Fo7D3jZwFKp3wvMs/pop64keTg==}
+  /@coremedia/studio-client.project-services-api@2404.1.0:
+    resolution: {integrity: sha512-Lvqnc2BzkzlLOm6bEbR7pbuh6mSqsdyY4+6yIXpa/sJiRaGfnlkb4e5PAGYcQTDy1vWpNg2QAoY5BnIcsHiSjw==}
     dependencies:
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
-    dev: false
-
-  /@coremedia/studio-client.rxjs-utils@2401.2.0:
-    resolution: {integrity: sha512-rkBkdrhRN2LgwOjBbSK+2KBEDYr5HGiSbcyqAbEW0zcuGmxIZY9w3bal0tEqCl2ASNM9vrANdu/AOvP+t3mLXw==}
-    dependencies:
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.app-context-models': 2404.1.0
       rxjs: 7.8.1
     dev: false
 
-  /@coremedia/studio-client.tracking-service@2401.2.0:
-    resolution: {integrity: sha512-4dwUGV3vkPBfqZYyTLbSYGeExFVVFeq1bvykjrXtan4eGsc9ydf4mav6fg9H1AxKBeY/yzivgsYRunksWLfzXw==}
+  /@coremedia/studio-client.rxjs-utils@2404.1.0:
+    resolution: {integrity: sha512-ftLm3Wb2DED8xUOoJcCVsMxtOl2AoVBzOkUxSh8OcrhXUnh5wChHyC4Ec3MOULDqkYhLgacQqjwNty6DihXOGA==}
     dependencies:
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.jest-helper': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
+      rxjs: 7.8.1
+    dev: false
+
+  /@coremedia/studio-client.tracking-service@2404.1.0:
+    resolution: {integrity: sha512-lCm3/mL1zRDSP26HC1ZidY/9KowTLvQ2EioW34VuA2U8yEKh4HlsIERUgBi+gkYXoa2dhwtVeoL36sIDJVeMaw==}
+    dependencies:
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.jest-helper': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@coremedia/studio-client.user-consent-service@2401.2.0:
-    resolution: {integrity: sha512-25KZhVcshBtzyvt2SeAFpQubvyW4S5KUZ2Fgvxh0IFk2L1npM5gULI3Q/WXd5GhR1HNh587fiI6oebk7bQ2LKA==}
+  /@coremedia/studio-client.user-consent-service@2404.1.0:
+    resolution: {integrity: sha512-pKnhDiyw0SXXppVJspKKRCHq3LO7jxp+xpLDlgrq9PdnTuwx12+c9CPOVuj2IXgpzyVikqki+5g5AykKi80Qxg==}
     dependencies:
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.jest-helper': 2401.2.0
-      '@jangaroo/ext-ts': 1.0.3
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.jest-helper': 2404.1.0
+      '@jangaroo/ext-ts': 2.0.0
+      '@jangaroo/runtime': 3.0.0
+      rxjs: 7.8.1
     transitivePeerDependencies:
       - supports-color
     dev: false
 
-  /@coremedia/studio-client.uuid@2401.2.0:
-    resolution: {integrity: sha512-SI96v+bsh+AvPjbpWUTILs64VUA8905y4H2JSLRphbXBh404WiMolcDf7FglWxGibunDscjG3RU3tcmGBeTOGQ==}
+  /@coremedia/studio-client.uuid@2404.1.0:
+    resolution: {integrity: sha512-fP60LWF1iouTF+AuP1nSf9fudjcE5fTvMA48IXQvU+wbt3tN3itxLbXjkeeZYhOSJMJ/f2PRPQdFyUz8jXswcw==}
     dev: false
 
-  /@coremedia/studio-client.workflow-issues-services-api@2401.2.0:
-    resolution: {integrity: sha512-a+cCa3Kzi0OimFQOowomTbBDnPyHE5qgcnYVd7+WvwQO8HQdjmqq/JqfD8MQOljWUs/uUcrZviptY65EyhPSRg==}
+  /@coremedia/studio-client.workflow-issues-services-api@2404.1.0:
+    resolution: {integrity: sha512-0IXZkKHExR46pemBTVLOswNqFbfyeozfx6fxqUgdzzgce1RPvIVPdA0LweFBY0pW6PLHe59wZxnuqJMCUpePOw==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
+      '@coremedia/service-agent': 2.1.0
     dev: false
 
-  /@coremedia/studio-client.workflow-models@2401.2.0:
-    resolution: {integrity: sha512-zkUAG2uZHbpPibuVB06ZReTZbNM1O3f0WOgdXSiWYff/LgzVElVKkvpV27L0xA6M/yJs/9hMllBTDCsERv6i+w==}
+  /@coremedia/studio-client.workflow-models@2404.1.0:
+    resolution: {integrity: sha512-LeXxDtb/Ama2cItjrZTBnvE9xwYawcU1qumnWWN/DmtB3U9BOJXsQUML96cetQ9Xd32L9fI+BwTOYt+A5HYPCw==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
-      '@coremedia/studio-client.app-context-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client-impl': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.client-core-impl': 2401.2.0
-      '@coremedia/studio-client.multi-site-models': 2401.2.0
-      '@coremedia/studio-client.workflow-services-api': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.app-context-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client-impl': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.client-core-impl': 2404.1.0
+      '@coremedia/studio-client.multi-site-models': 2404.1.0
+      '@coremedia/studio-client.workflow-services-api': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
-  /@coremedia/studio-client.workflow-plugin-models@2401.2.0:
-    resolution: {integrity: sha512-KTCeyYbPUItffh9/twzfTtGzHjG0YE7WVlJp+DR4p5sa5LysEbibX3hZO50eIwWm6mN7P587N1vfUeDwPEGUTQ==}
+  /@coremedia/studio-client.workflow-plugin-models@2404.1.0:
+    resolution: {integrity: sha512-dtDsn8qyJoC4cAzQ9u6zCAs+vZ3weOUAV3PcCFfpgwn7oSwrTY4AiQ3H1KSwxKb6kw2qyl3pFIcNv1e8jk54Ig==}
     dependencies:
-      '@coremedia/studio-client.cap-base-models': 2401.2.0
-      '@coremedia/studio-client.cap-rest-client': 2401.2.0
-      '@coremedia/studio-client.client-core': 2401.2.0
-      '@coremedia/studio-client.workflow-models': 2401.2.0
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/studio-client.cap-base-models': 2404.1.0
+      '@coremedia/studio-client.cap-rest-client': 2404.1.0
+      '@coremedia/studio-client.client-core': 2404.1.0
+      '@coremedia/studio-client.workflow-models': 2404.1.0
+      '@jangaroo/runtime': 3.0.0
       lodash: 4.17.21
     dev: false
 
-  /@coremedia/studio-client.workflow-services-api@2401.2.0:
-    resolution: {integrity: sha512-2kiQcpWEWUvxJ+m9W5rO9N+I6gJRV4Q2FE7nTt/Ey0GHv1H8e20YRdSyf0uhYPuvnxmcpoxFM43NWEJy6zsRqQ==}
+  /@coremedia/studio-client.workflow-services-api@2404.1.0:
+    resolution: {integrity: sha512-eXLfo3bCiPor1L9l4e0ZQNRCz1jU/ZaRz9EWCp9q7qRS1rmQSPwed1bML+6C/1ZlKL+9KuiTaBTQ/tmXTIhR/A==}
     dependencies:
-      '@coremedia/service-agent': 1.1.5
+      '@coremedia/service-agent': 2.1.0
+      '@coremedia/studio-client.app-context-models': 2404.1.0
       rxjs: 7.8.1
     dev: false
 
@@ -2268,11 +2429,20 @@ packages:
       '@jangaroo/runtime': 1.5.0
     dev: false
 
-  /@jangaroo/jangaroo-net@1.5.0:
-    resolution: {integrity: sha512-5dcMslsBn0ATsTrplicxK48ncF0TVAJ7itRr/MHwlU0jeG2j0rbE7AVDa5OHFtAgFiszJBrlFRUVXZvuN4Uyyg==}
-    engines: {node: '>=16'}
+  /@jangaroo/ext-ts@2.0.0:
+    resolution: {integrity: sha512-urtYsOik8VEwqMzxBmreqilkN8oxnxZoh8RYmA5XgVWvXyGMA0CTq9tANktQZsfhpL0QL143fYya7QfiV874lQ==}
     dependencies:
-      '@jangaroo/runtime': 1.5.0
+      '@coremedia/sencha-ext': 1.1.0
+      '@coremedia/sencha-ext-classic': 1.1.0
+      '@coremedia/sencha-ext-classic-locale': 1.1.0
+      '@jangaroo/runtime': 3.0.0
+    dev: false
+
+  /@jangaroo/jangaroo-net@3.0.0:
+    resolution: {integrity: sha512-ge4nDC6SnXYfUPbNkjtTkKPV9Uie8ftvsQB7Zbkrww7RT1sU7WAhjb1V81TViXBYJJoQLcgNcdC++8dCH1ntzg==}
+    engines: {node: '>=20'}
+    dependencies:
+      '@jangaroo/runtime': 3.0.0
     dev: false
 
   /@jangaroo/publish@1.5.0:
@@ -2307,6 +2477,11 @@ packages:
   /@jangaroo/runtime@1.5.0:
     resolution: {integrity: sha512-qz0nDxCpckeAlFRvlKGvTIlJ+YrAzrVJKSRi2YQDtwky6lpxGFdIlIc3Hh/C+SL04dDwUSvXnB74GVJAvc7efw==}
     engines: {node: '>=16'}
+    dev: false
+
+  /@jangaroo/runtime@3.0.0:
+    resolution: {integrity: sha512-fo6//991uWGDMqMnCdzuezKt8tSBiBEbLQNsfZ8SVeKEzJdntomznZ6N3139V6dcyDxUQ0Z03TZa4yKK7pcUcQ==}
+    engines: {node: '>=20'}
     dev: false
 
   /@jest/schemas@29.6.3:
@@ -4628,8 +4803,8 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /jest-junit@15.0.0:
-    resolution: {integrity: sha512-Z5sVX0Ag3HZdMUnD5DFlG+1gciIFSy7yIVPhOdGUi8YJaI9iLvvBb530gtQL2CHmv0JJeiwRZenr0VrSR7frvg==}
+  /jest-junit@16.0.0:
+    resolution: {integrity: sha512-A94mmw6NfJab4Fg/BlvVOUXzXgF0XIH6EmTgJ5NDPp4xoKq0Kr7sErb+4Xs9nZvu58pJojz5RFGpqnZYJTrRfQ==}
     engines: {node: '>=10.12.0'}
     dependencies:
       mkdirp: 1.0.4
