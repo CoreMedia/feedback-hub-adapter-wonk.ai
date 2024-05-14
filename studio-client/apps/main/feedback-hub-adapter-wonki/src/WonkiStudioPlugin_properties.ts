@@ -19,6 +19,7 @@ interface WonkiStudioPlugin_properties {
   wonki_transformr_tab_title: string;
   wonki_summarizr_tab_title: string;
   wonki_generate_button_label:string;
+  wonki_redo_button_label: string;
   wonki_apply_button_label:string;
 
   /**
@@ -85,7 +86,8 @@ const WonkiStudioPlugin_properties: WonkiStudioPlugin_properties = {
   wonki_transformr_tab_title: "Optimize",
   wonki_summarizr_tab_title: "Summarize",
   wonki_generate_button_label: "Generate",
-  wonki_apply_button_label: "Apply to Content",
+  wonki_redo_button_label: "Redo",
+  wonki_apply_button_label: "Apply",
 
 
   ghostwritr_question_label: "Question/Idea",

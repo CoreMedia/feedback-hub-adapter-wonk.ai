@@ -23,6 +23,7 @@ import CollapsiblePanel from "@coremedia/studio-client.ext.ui-components/compone
 import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
 import TransformrPanel from "./TransformrPanel";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
+import BindPropertyPlugin from "@coremedia/studio-client.ext.ui-components/plugins/BindPropertyPlugin";
 
 interface TransformrKeywordsPanelConfig extends Config<Panel>, Partial<Pick<TransformrKeywordsPanel,
         "contentExpression" |
@@ -50,9 +51,9 @@ class TransformrKeywordsPanel extends CollapsiblePanel {
     super(ConfigUtils.apply(Config(TransformrKeywordsPanel, {
       itemId: "keywordsPanel",
       title: WonkiLabels.transformr_generate_keywords_title,
-      ui: PanelSkin.ACCORDION.getSkin(),
+      ui: PanelSkin.FRAME_PLAIN_200.getSkin(),
       cls: "wonki-transformr__keywords-panel",
-      bodyPadding: "6 0",
+      bodyPadding: "10 10 10 10",
       items: [
 
         Config(Container, {
@@ -63,8 +64,20 @@ class TransformrKeywordsPanel extends CollapsiblePanel {
             }),
             Config(Button, {
               text: WonkiLabels.wonki_generate_button_label,
-              ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
-              handler: bind(this$, this$.generateKeywords)
+              ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
+              handler: bind(this$, this$.generateKeywords),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getKeywordsExpression(),
+                  componentProperty: "visible",
+                  transformer: (value) => {return value || value.length === 0;}
+                }),
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getKeywordsExpression(),
+                  componentProperty: "disabled",
+                  transformer: (value) => {return !value || value.length > 0;}
+                }),
+              ]
             }),
           ],
           layout: Config(HBoxLayout, { align: "stretch" })

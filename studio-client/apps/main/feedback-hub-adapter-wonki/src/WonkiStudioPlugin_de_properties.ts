@@ -8,6 +8,7 @@ ResourceBundleUtil.override(WonkiStudioPlugin_properties, {
   wonki_tooltip: "AI basierte Text-Generierung",
   wonki_credit_link: "service bereitgestellt von <a href=\"https://wonk.ai/\" target=\"_blank\">wonk.ai</a>.",
   wonki_generate_button_label: "Generieren",
+  wonki_redo_button_label: "Generieren",
   wonki_apply_button_label: "Übernehmen",
 
 

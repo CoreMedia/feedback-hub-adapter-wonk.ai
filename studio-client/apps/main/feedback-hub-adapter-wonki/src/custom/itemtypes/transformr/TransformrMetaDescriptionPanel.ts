@@ -41,8 +41,8 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
     super(ConfigUtils.apply(Config(TransformrMetaDescriptionPanel, {
       itemId: "metaDescriptionPanel",
       title: WonkiLabels.transformr_generate_meta_description_title,
-      ui: PanelSkin.ACCORDION.getSkin(),
-      bodyPadding: "6 0",
+      ui: PanelSkin.FRAME_PLAIN_200.getSkin(),
+      bodyPadding: "10 10 10",
       items: [
 
         Config(Container, {
@@ -53,13 +53,54 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
             }),
             Config(Button, {
               text: WonkiLabels.wonki_generate_button_label,
-              ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
-              handler: bind(this$, this$.generateMetaDescription)
+              ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
+              handler: bind(this$, this$.generateMetaDescription),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getMetaDescriptionExpression(),
+                  componentProperty: "visible",
+                  transformer: (value) => {return !value || value === "";}
+                }),]
+            }),
+            Config(Button, {
+              margin: "0 6 0 6",
+              text: WonkiLabels.wonki_apply_button_label,
+              ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
+              handler: bind(this$, this$.applyToPropertyField),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getMetaDescriptionExpression(),
+                  componentProperty: "visible",
+                  transformer: (value) => {return value || value !== "";}
+                }),
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getMetaDescriptionExpression(),
+                  componentProperty: "hidden",
+                  transformer: (value) => {return !value || value === "";}
+                }),
+              ]
+            }),
+            Config(Button, {
+              text: WonkiLabels.wonki_redo_button_label,
+              ui: ButtonSkin.SECONDARY_LIGHT.getSkin(),
+              handler: bind(this$, this$.generateMetaDescription),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getMetaDescriptionExpression(),
+                  componentProperty: "visible",
+                  transformer: (value) => {return value || value !== "";}
+                }),
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getMetaDescriptionExpression(),
+                  componentProperty: "hidden",
+                  transformer: (value) => {return !value || value === "";}
+                }),
+              ]
             }),
           ],
           layout: Config(HBoxLayout, { align: "stretch" })
         }),
-
+        Config(Container, { height: 6 }),
         Config(TextArea, {
           emptyText: "META Description",
           plugins: [
@@ -73,23 +114,6 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
             }),
           ]
         }),
-        Config(Button, {
-          text: WonkiLabels.wonki_apply_button_label,
-          handler: bind(this$, this$.applyToPropertyField),
-          ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
-          plugins: [
-            Config(BindPropertyPlugin, {
-              bindTo: this$.#getMetaDescriptionExpression(),
-              componentProperty: "visible",
-              transformer: (value) => {return value && value !== "";}
-            }),
-            Config(BindPropertyPlugin, {
-              bindTo: this$.#getMetaDescriptionExpression(),
-              componentProperty: "disabled",
-              transformer: (value) => {return !value || value === "";}
-            }),
-          ]
-        })
       ],
       layout: Config(VBoxLayout, {
         align: "stretch"

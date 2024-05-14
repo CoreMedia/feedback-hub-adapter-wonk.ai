@@ -18,6 +18,7 @@ import CollapsiblePanel from "@coremedia/studio-client.ext.ui-components/compone
 import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import WonkiLabels from "../../../WonkiStudioPlugin_properties";
+import Spacer from "@jangaroo/ext-ts/toolbar/Spacer";
 
 
 interface TransformrMetaTitlePanelConfig extends Config<Panel>, Partial<Pick<TransformrTitlePanel,
@@ -40,8 +41,8 @@ class TransformrTitlePanel extends CollapsiblePanel {
     super(ConfigUtils.apply(Config(TransformrTitlePanel, {
       itemId: "titlePanel",
       title: WonkiLabels.transformr_generate_title_title,
-      ui: PanelSkin.ACCORDION.getSkin(),
-      bodyPadding: "6 0",
+      ui: PanelSkin.FRAME_PLAIN_200.getSkin(),
+      bodyPadding: "10 10 10",
       items: [
 
         Config(Container, {
@@ -52,13 +53,54 @@ class TransformrTitlePanel extends CollapsiblePanel {
             }),
             Config(Button, {
               text: WonkiLabels.wonki_generate_button_label,
-              ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
-              handler: bind(this$, this$.generateTitle)
+              ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
+              handler: bind(this$, this$.generateTitle),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                bindTo: this$.#getTitleExpression(),
+                componentProperty: "visible",
+                transformer: (value) => {return !value || value === "";}
+              }),]
+            }),
+            Config(Button, {
+              margin: "0 6 0 6",
+              text: WonkiLabels.wonki_apply_button_label,
+              ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
+              handler: bind(this$, this$.applyToPropertyField),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getTitleExpression(),
+                  componentProperty: "visible",
+                  transformer: (value) => {return value || value !== "";}
+                }),
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getTitleExpression(),
+                  componentProperty: "hidden",
+                  transformer: (value) => {return !value || value === "";}
+                }),
+              ]
+            }),
+            Config(Button, {
+              text: WonkiLabels.wonki_redo_button_label,
+              ui: ButtonSkin.SECONDARY_LIGHT.getSkin(),
+              handler: bind(this$, this$.generateTitle),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getTitleExpression(),
+                  componentProperty: "visible",
+                  transformer: (value) => {return value || value !== "";}
+                }),
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getTitleExpression(),
+                  componentProperty: "hidden",
+                  transformer: (value) => {return !value || value === "";}
+                }),
+              ]
             }),
           ],
           layout: Config(HBoxLayout, { align: "stretch" })
         }),
-
+        Config(Container, { height: 6 }),
         Config(TextArea, {
           plugins: [
             Config(BindPropertyPlugin, {
@@ -71,23 +113,6 @@ class TransformrTitlePanel extends CollapsiblePanel {
             }),
           ]
         }),
-        Config(Button, {
-          text: WonkiLabels.wonki_apply_button_label,
-          handler: bind(this$, this$.applyToPropertyField),
-          ui: ButtonSkin.MATERIAL_PRIMARY.getSkin(),
-          plugins: [
-            Config(BindPropertyPlugin, {
-              bindTo: this$.#getTitleExpression(),
-              componentProperty: "visible",
-              transformer: (value) => {return value && value !== "";}
-            }),
-            Config(BindPropertyPlugin, {
-              bindTo: this$.#getTitleExpression(),
-              componentProperty: "disabled",
-              transformer: (value) => {return !value || value === "";}
-            }),
-          ]
-        })
       ],
       layout: Config(VBoxLayout, {
         align: "stretch"
