@@ -71,6 +71,7 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
         Config(TextArea, {
           margin: "6px 0px 6px 0px",
           emptyText: "META Description",
+          grow: true,
           plugins: [
             Config(BindPropertyPlugin, {
               bindTo: this$.#getMetaDescriptionExpression()

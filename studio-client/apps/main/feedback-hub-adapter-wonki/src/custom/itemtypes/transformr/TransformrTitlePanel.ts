@@ -69,6 +69,7 @@ class TransformrTitlePanel extends CollapsiblePanel {
         }),
         Config(TextArea, {
           margin: "6px 0px 6px 0px",
+          grow: true,
           plugins: [
             Config(BindPropertyPlugin, {
               bindTo: this$.#getTitleExpression()
