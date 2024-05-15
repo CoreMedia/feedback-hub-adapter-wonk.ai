@@ -20,6 +20,7 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -33,6 +34,8 @@ public class OptimizeJob implements Job {
   public static final String DETAIL_TEXT_PROPERTY = "detailText";
   public static final String DATA = "data";
   private String transformType;
+  private String targetAudienceDescription;
+  private List<String> focusKeywords;
   private Content content;
   private String groupId;
   private String siteId;
@@ -61,10 +64,18 @@ public class OptimizeJob implements Job {
     this.groupId = groupId;
   }
 
+  @SerializedName("focusKeywords")
+  public void setFocusKeywords(List<String> focusKeywords) {
+    this.focusKeywords = Collections.unmodifiableList(focusKeywords);
+  }
+
   @SerializedName("siteId")
   public void setSiteId(String siteId) {
     this.siteId = siteId;
   }
+
+  @SerializedName("targetAudienceDescription")
+  public void setTargetAudienceDescription(String targetAudienceDescription) {this.targetAudienceDescription = targetAudienceDescription;}
 
   @Nullable
   @Override
@@ -83,6 +94,8 @@ public class OptimizeJob implements Job {
           return generateTitle(detailText, siteLocale);
         case "metaDescription":
           return generateMetaDescription(detailText, siteLocale);
+        case "teaserText":
+          return generateTeaserText(detailText, siteLocale);
         default:
           throw new NotImplementedException();
       }
@@ -112,6 +125,13 @@ public class OptimizeJob implements Job {
     String metaDescription = response.map(OptimizeGenerationResponse::getResult).orElse(null);
 
     return Map.of(DATA, metaDescription);
+  }
+
+  private Map<String, String> generateTeaserText(String text, Locale siteLocale) {
+    Optional<OptimizeGenerationResponse> response = service.generateTeaserText(text, targetAudienceDescription, focusKeywords, siteLocale, getSettings().getApiKey());
+    String teaserText = response.map(OptimizeGenerationResponse::getResult).orElse(null);
+
+    return Map.of(DATA, teaserText);
   }
 
   private WonkiSettings getSettings() {

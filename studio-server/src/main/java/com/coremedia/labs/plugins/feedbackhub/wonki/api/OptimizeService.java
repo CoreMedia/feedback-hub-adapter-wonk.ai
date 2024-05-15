@@ -66,7 +66,7 @@ public class OptimizeService extends AbstractWonkiService {
    */
   @NonNull
   public List<String> generateKeywords(@NonNull String text, Locale targetLocale, @NonNull String apiKey) {
-    return fetchTransformResponse(GENERATE_KEYWORDS_PATH, text, targetLocale, apiKey)
+    return fetchTransformResponse(GENERATE_KEYWORDS_PATH, text, null, null, targetLocale, apiKey)
             .map(OptimizeGenerationResponse::getCandidates)
             .orElse(Collections.emptyList());
   }
@@ -80,7 +80,18 @@ public class OptimizeService extends AbstractWonkiService {
    * @return
    */
   public Optional<OptimizeGenerationResponse> generateMetaDescription(@NonNull String text, Locale targetLocale, @NonNull String apiKey) {
-    return fetchTransformResponse(GENERATE_META_DESCRIPTION_PATH, text, targetLocale, apiKey);
+    return fetchTransformResponse(GENERATE_META_DESCRIPTION_PATH, text, null, null, targetLocale, apiKey);
+  }
+
+  /**
+   * This service creates teaser text based on the given text.
+   *
+   * @param text         input text
+   * @param targetLocale
+   * @return
+   */
+  public Optional<OptimizeGenerationResponse> generateTeaserText(@NonNull String text, String targetAudienceDescription, List<String> focusKeywords, Locale targetLocale, @NonNull String apiKey) {
+    return fetchTransformResponse(GENERATE_TEASER_PATH, text, targetAudienceDescription, focusKeywords, targetLocale, apiKey);
   }
 
   /**
@@ -107,11 +118,16 @@ public class OptimizeService extends AbstractWonkiService {
    * @return
    */
   public Optional<OptimizeGenerationResponse> generateTitle(@NonNull String text, Locale targetLocale, @NonNull String apiKey) {
-    return fetchTransformResponse(GENERATE_TITLE_PATH, text, targetLocale, apiKey);
+    return fetchTransformResponse(GENERATE_TITLE_PATH, text, null, null, targetLocale, apiKey);
   }
 
-  private Optional<OptimizeGenerationResponse> fetchTransformResponse(@NonNull String apiPath, @NonNull String text, Locale targetLocale, @NonNull String apiKey) {
-    OptimizeDefaultRequest requestEntity = new OptimizeDefaultRequest(text, targetLocale.getLanguage());
+  private Optional<OptimizeGenerationResponse> fetchTransformResponse(@NonNull String apiPath,
+                                                                      @NonNull String text,
+                                                                      String targetAudienceDescription,
+                                                                      List<String> focusKeywords,
+                                                                      Locale targetLocale,
+                                                                      @NonNull String apiKey) {
+    OptimizeDefaultRequest requestEntity = new OptimizeDefaultRequest(text, targetAudienceDescription, focusKeywords, targetLocale.getLanguage());
     Optional<OptimizeGenerationResponse> apiResponse = getApiConnector().postResource(apiKey, apiPath, requestEntity, OptimizeGenerationResponse.class);
     return apiResponse;
   }
