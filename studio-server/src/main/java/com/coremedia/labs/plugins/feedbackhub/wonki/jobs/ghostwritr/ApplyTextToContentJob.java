@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
 
 public class ApplyTextToContentJob implements Job {
   private static final Logger LOG = LoggerFactory.getLogger(ApplyTextToContentJob.class);
-  public static final String DETAIL_TEXT_PROPERTY = "detailText";
 
   private String text;
+  private String property;
   private String contentId;
 
   private final ContentRepository contentRepository;
@@ -43,6 +43,11 @@ public class ApplyTextToContentJob implements Job {
     this.contentId = contentId;
   }
 
+  @SerializedName("property")
+  public void setProperty(String property) {
+    this.property = property;
+  }
+
   @Nullable
   @Override
   public Object call(@NonNull JobContext jobContext) throws JobExecutionException {
@@ -55,10 +60,10 @@ public class ApplyTextToContentJob implements Job {
         content.checkIn();
       }
       content.checkOut();
-      content.set(DETAIL_TEXT_PROPERTY, newMarkup);
+      content.set(property, newMarkup);
       content.checkIn();
 
-      return content.getMarkup(DETAIL_TEXT_PROPERTY);
+      return content.getMarkup(property);
     } catch (Exception e) {
       LOG.error("Failed to apply text to content {}: {}", contentId, e.getMessage());
       throw new JobExecutionException(GenericJobErrorCode.FAILED);

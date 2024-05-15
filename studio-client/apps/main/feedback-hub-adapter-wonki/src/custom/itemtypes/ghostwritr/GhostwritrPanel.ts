@@ -243,6 +243,7 @@ class GhostwritrPanel extends FeedbackItemPanel {
                 const text = this.getGeneratedTextExpression().getValue();
                 const params: Record<string, any> = {
                   text: text,
+                  property: "detailText",
                   contentId: content.getId(),
                 };
 
