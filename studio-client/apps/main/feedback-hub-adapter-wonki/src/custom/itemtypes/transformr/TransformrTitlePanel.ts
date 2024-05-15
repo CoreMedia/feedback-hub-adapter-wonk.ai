@@ -18,7 +18,6 @@ import CollapsiblePanel from "@coremedia/studio-client.ext.ui-components/compone
 import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import WonkiLabels from "../../../WonkiStudioPlugin_properties";
-import Spacer from "@jangaroo/ext-ts/toolbar/Spacer";
 
 
 interface TransformrMetaTitlePanelConfig extends Config<Panel>, Partial<Pick<TransformrTitlePanel,
