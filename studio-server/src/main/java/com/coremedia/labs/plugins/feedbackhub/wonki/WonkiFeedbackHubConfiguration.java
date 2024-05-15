@@ -9,10 +9,9 @@ import com.coremedia.labs.plugins.feedbackhub.wonki.api.GhostwritRService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.LoggingRequestInterceptor;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.OptimizeService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.WonkiApiConnector;
-import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.ghostwritr.ApplyTextToContentJobFactory;
+import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.ApplyTextToContentJobFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.ghostwritr.GenerateTextJobFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.optimize.OptimizeJobFactory;
-import com.coremedia.labs.plugins.feedbackhub.wonki.jobs.summarizr.SummarizRJobFactory;
 import com.coremedia.labs.plugins.feedbackhub.wonki.provider.WonkiFeedbackProviderFactory;
 import edu.umd.cs.findbugs.annotations.NonNull;
 import org.springframework.context.annotation.Bean;
@@ -70,14 +69,6 @@ public class WonkiFeedbackHubConfiguration {
   @Bean
   public ApplyTextToContentJobFactory applyTextToContentJobFactory(@NonNull CapConnection capConnection) {
     return new ApplyTextToContentJobFactory(capConnection);
-  }
-
-  @Bean
-  public SummarizRJobFactory summarizeJobFactory(@NonNull SitesService sitesService,
-                                                 @NonNull WonkAISettingsProvider wonkAISettingsProvider,
-                                                 @NonNull OptimizeService optimizeService
-  ) {
-    return new SummarizRJobFactory(optimizeService, sitesService, wonkAISettingsProvider);
   }
 
   @Bean

@@ -18,7 +18,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 import static com.coremedia.labs.plugins.feedbackhub.wonki.WonkiFeedbackCollections.GHOSTWRITR;
-import static com.coremedia.labs.plugins.feedbackhub.wonki.WonkiFeedbackCollections.SUMMARIZR;
 import static com.coremedia.labs.plugins.feedbackhub.wonki.WonkiFeedbackCollections.TRANSFORMR;
 
 /**
@@ -45,10 +44,7 @@ public class WonkiFeedbackProvider implements FeedbackProvider {
     // GhostwritR
     items.add(new WonkiFeedbackItem(GHOSTWRITR, "GhostwritrFeedbackItem"));
 
-    // SummarizR
-    items.add(new WonkiFeedbackItem(SUMMARIZR, "SummarizrFeedbackItem"));
-
-    // TransformR
+    // Optimize
     items.add(new WonkiFeedbackItem(TRANSFORMR, "TransformrFeedbackItem"));
 
     return CompletableFuture.completedFuture(items);

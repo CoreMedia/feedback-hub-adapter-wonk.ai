@@ -17,7 +17,6 @@ interface WonkiStudioPlugin_properties {
   wonki_credit_link: string;
   wonki_ghostwritr_tab_title: string;
   wonki_transformr_tab_title: string;
-  wonki_summarizr_tab_title: string;
   wonki_generate_button_label:string;
   wonki_redo_button_label: string;
   wonki_apply_button_label:string;
@@ -59,19 +58,6 @@ interface WonkiStudioPlugin_properties {
   transformr_generate_teaser_text_title:string;
   transformr_generate_teaser_text_description:string;
 
-
-  summarizr_default_state_title:string;
-  summarizr_default_state_text: string;
-  summarizr_loading_state_title:string;
-  summarizr_loading_state_text:string;
-  summarizr_empty_state_title:string;
-  summarizr_empty_state_text:string;
-  summarizr_strategy_description:string;
-  summarizr_abstract_strategy_label:string;
-  summarizr_extractive_strategy_label:string;
-  summarizr_sentences_label:string;
-  summarizr_generate_button_label:string;
-
 }
 
 /**
@@ -86,7 +72,6 @@ const WonkiStudioPlugin_properties: WonkiStudioPlugin_properties = {
   wonki_credit_link: "service provided by <a href=\"https://wonk.ai/\" target=\"_blank\">wonk.ai</a>.",
   wonki_ghostwritr_tab_title: "Write",
   wonki_transformr_tab_title: "Optimize",
-  wonki_summarizr_tab_title: "Summarize",
   wonki_generate_button_label: "Generate",
   wonki_redo_button_label: "Redo",
   wonki_apply_button_label: "Apply",
@@ -123,18 +108,6 @@ const WonkiStudioPlugin_properties: WonkiStudioPlugin_properties = {
   transformr_generate_meta_description_description: "Generate meta description based on the existing text.",
   transformr_generate_teaser_text_title: "Teaser Text",
   transformr_generate_teaser_text_description: "Generate a teaser text based on the existing text.",
-
-  summarizr_default_state_title: "SummarizR",
-  summarizr_default_state_text: "Summarize texts with the SummarizR AI assistant.",
-  summarizr_empty_state_title: "No result",
-  summarizr_empty_state_text: "SummarizR was not able to generate a result. Please try again later.",
-  summarizr_loading_state_title: "Summarizing ...",
-  summarizr_loading_state_text: "Please have some patience while SummarizR creates a summary.",
-  summarizr_strategy_description: "The wonk.ai SummarizR is able to summarize texts using various strategies.",
-  summarizr_abstract_strategy_label: "<i>Abstract summaries</i> are rewritten texts that can differ significantly from the original",
-  summarizr_extractive_strategy_label: "<i>Extracted summaries</i> keep the original sentences and remove less relevant content",
-  summarizr_sentences_label: "Sentences",
-  summarizr_generate_button_label: "Generate Summary"
 };
 
 export default WonkiStudioPlugin_properties;

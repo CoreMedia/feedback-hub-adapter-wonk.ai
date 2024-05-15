@@ -29,11 +29,4 @@ ResourceBundleUtil.override(WonkiStudioPlugin_properties, {
   transformr_generate_meta_description_title: "HTML Meta-Beschreibung",
   transformr_generate_meta_description_description: "Generiere eine Meta-Beschreibung basierend auf dem vorhandenen Text.",
 
-  summarizr_strategy_description: "Der wonk.ai SummarizR ist in der Lage, Texte mit verschiedenen Strategien zusammenzufassen.",
-  summarizr_abstract_strategy_label: "<i>Abstract Zusammenfassungen</i> sind umgeschriebene Texte, die erheblich vom Original abweichen können",
-  summarizr_extractive_strategy_label: "<i>Extrahierte Zusammenfassungen</i> behalten die ursprünglichen Sätze bei und entfernen weniger relevante Inhalte",
-  summarizr_sentences_label: "Sätze",
-  summarizr_generate_button_label: "Zusammenfassung generieren",
-  summarizr_default_state_text: "Fasse Texte mit dem AI-Assistenten SummarizR zusammen.",
-
 });

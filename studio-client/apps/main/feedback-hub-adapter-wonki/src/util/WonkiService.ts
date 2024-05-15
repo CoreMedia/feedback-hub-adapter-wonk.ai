@@ -8,9 +8,7 @@ import editorContext from "@coremedia/studio-client.main.editor-components/sdk/e
 class WonkiService {
 
   static readonly DEFAULT_PARAMS = {siteId: "all", groupId: "wonki"};
-
-  static readonly TRANSFORM_JOB = "wonkiTransform";
-  static readonly GENERATE_SUMMARY_JOB = "wonkiGenerateSummary";
+  static readonly OPTIMIZE_JOB = "wonkiTransform";
 
   /**
    * Generate keywords for the given content.
@@ -19,7 +17,7 @@ class WonkiService {
    */
   static generateKeywords(content: Content): Promise<string[]> {
     return new Promise((resolve: AnyFunction, reject: AnyFunction) => {
-      this.executeJob(this.TRANSFORM_JOB, this.buildJobParams(content, {transformType: "keywords"}), resolve, reject);
+      this.executeJob(this.OPTIMIZE_JOB, this.buildJobParams(content, {transformType: "keywords"}), resolve, reject);
     });
   }
 
@@ -30,7 +28,7 @@ class WonkiService {
    */
   static generateTitle(content: Content): Promise<string> {
     return new Promise((resolve: AnyFunction, reject: AnyFunction) => {
-      this.executeJob(this.TRANSFORM_JOB, this.buildJobParams(content, {transformType: "title"}), resolve, reject);
+      this.executeJob(this.OPTIMIZE_JOB, this.buildJobParams(content, {transformType: "title"}), resolve, reject);
     });
   }
 
@@ -41,7 +39,7 @@ class WonkiService {
    */
   static generateMetaDescription(content: Content): Promise<string> {
     return new Promise((resolve: AnyFunction, reject: AnyFunction) => {
-      this.executeJob(this.TRANSFORM_JOB, this.buildJobParams(content, {transformType: "metaDescription"}), resolve, reject);
+      this.executeJob(this.OPTIMIZE_JOB, this.buildJobParams(content, {transformType: "metaDescription"}), resolve, reject);
     });
   }
 
@@ -54,30 +52,10 @@ class WonkiService {
    */
   static generateTeaserText(content: Content, targetAudienceDescription: String, focusKeywords: String[]): Promise<string> {
     return new Promise((resolve: AnyFunction, reject: AnyFunction) => {
-      this.executeJob(this.TRANSFORM_JOB, this.buildJobParams(content, {
+      this.executeJob(this.OPTIMIZE_JOB, this.buildJobParams(content, {
         targetAudienceDescription: targetAudienceDescription,
         focusKeywords: focusKeywords,
         transformType: "teaserText"}), resolve, reject);
-    });
-  }
-
-  /**
-   * Generate summary for the given content.
-   *
-   * @param content
-   * @param strategy strategy to use ("extractive" or "abstractive")
-   * @param sentences number of sentences for the summary
-   * @param greedy
-   * @param siteId
-   * @param groupId
-   */
-  static generateSummary(content: Content, strategy: string = "abstractive", sentences: number = 5, greedy: boolean = false): Promise<string> {
-    return new Promise((resolve: AnyFunction, reject: AnyFunction) => {
-      this.executeJob(this.GENERATE_SUMMARY_JOB, this.buildJobParams(content, {
-        strategy: strategy,
-        sentences: sentences,
-        greedy: greedy,
-      }), resolve, reject);
     });
   }
 

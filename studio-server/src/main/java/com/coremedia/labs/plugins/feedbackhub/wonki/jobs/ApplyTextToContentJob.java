@@ -1,4 +1,4 @@
-package com.coremedia.labs.plugins.feedbackhub.wonki.jobs.ghostwritr;
+package com.coremedia.labs.plugins.feedbackhub.wonki.jobs;
 
 import com.coremedia.cap.common.CapConnection;
 import com.coremedia.cap.content.Content;

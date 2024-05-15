@@ -10,7 +10,6 @@ import resourceManager from "@jangaroo/runtime/l10n/resourceManager";
 import FeedbackHubGhostwritrStudioPlugin_properties from "./WonkiStudioPlugin_properties";
 import GhostwritrPanel from "./custom/itemtypes/ghostwritr/GhostwritrPanel";
 import TransformrPanel from "./custom/itemtypes/transformr/TransformrPanel";
-import SummarizrPanel from "./custom/itemtypes/summarizr/SummarizrPanel";
 
 interface FeedbackHubWonkiStudioPluginConfig extends Config<StudioPlugin> {
 }
@@ -19,12 +18,11 @@ class FeedbackHubWonkiStudioPlugin extends StudioPlugin {
   declare Config: FeedbackHubWonkiStudioPluginConfig;
 
   constructor(config: Config<FeedbackHubWonkiStudioPlugin> = null) {
-    super((()=>{
+    super((() => {
       this.#__initialize__(config);
       return ConfigUtils.apply(Config(FeedbackHubWonkiStudioPlugin, {
 
-        rules: [
-        ],
+        rules: [],
 
         configuration: [
           new CopyResourceBundleProperties({
@@ -39,7 +37,6 @@ class FeedbackHubWonkiStudioPlugin extends StudioPlugin {
 
   #__initialize__(config: Config<FeedbackHubWonkiStudioPlugin>): void {
     feedbackService._.registerFeedbackItemPanel("GhostwritrFeedbackItem", Config(GhostwritrPanel));
-    feedbackService._.registerFeedbackItemPanel("SummarizrFeedbackItem", Config(SummarizrPanel));
     feedbackService._.registerFeedbackItemPanel("TransformrFeedbackItem", Config(TransformrPanel));
   }
 }

@@ -12,9 +12,9 @@ If a project is inactive it means that the development has been discontinued and
 
 # Feedback Hub Adapter wonk.ai
 
-This is an integration for wonk.ai services like GhostwritR, TransformR & SummarizR, a powerful tool for Ai based tasks on natural language processing and content generation.
+This is an integration for wonk.ai services like Write and Optimize, powerful tools for Ai based tasks on natural language processing and content generation.
 
-## GhostwritR
+## Write
 GhostwritR Enables CoreMedia Studio Business users to speed up the content creation process, by providing inspirational texts for given questions or phrases.
 
 Simply type in a question or phrase on your topic of interest. 
@@ -29,7 +29,7 @@ In addition, GhostwritR provides details on the sources used for text generation
 
 ![Feedback Rendering](docs/images/GhostwritR_sources.png "Details on the sources")
 
-## TransformR
+## Optimize
 
 The wonk.ai TransformR service supports the editor with the creation of search optimized content by generating relevant
 keywords and HTML metadata for a given text
