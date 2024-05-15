@@ -72,6 +72,7 @@ class GhostwritrPanel extends FeedbackItemPanel {
     const this$ = this;
     super(ConfigUtils.apply(Config(GhostwritrPanel, {
       cls: GhostwritrPanel.BLOCK_CLASS_NAME,
+      padding: "10 0 0 0",
       items: [
         // Input fields
         Config(FormPanel, {
@@ -150,10 +151,7 @@ class GhostwritrPanel extends FeedbackItemPanel {
                   value: WonkiLabels.ghostwritr_generated_text_header,
                 }),
                 Config(TextArea, {
-                  autoScroll: true,
-                  readOnly: true,
-                  flex: 1,
-                  minHeight: 250,
+                 grow: true,
                   plugins: [
                     Config(BindPropertyPlugin, {
                       bindTo: this$.getGeneratedTextExpression(),
