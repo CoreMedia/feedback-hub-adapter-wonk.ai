@@ -94,7 +94,7 @@ const WonkiStudioPlugin_properties: WonkiStudioPlugin_properties = {
   ghostwritr_loading_state_text: "Please have some patience while GhostwritR generates the text.",
   ghostwritr_sources_title: "Sources",
 
-  transformr_default_state_title: "TransformR",
+  transformr_default_state_title: "Optimize",
   transformr_default_state_text: "Transferring content to new formats or expanding it has never been easier! A bursting toolbox of computational linguistics.",
   transformr_empty_state_title: "No result",
   transformr_empty_state_text: "TransformR was not able to generate a result. Please try again later.",
