@@ -56,6 +56,8 @@ interface WonkiStudioPlugin_properties {
   transformr_generate_title_description:string;
   transformr_generate_meta_description_title:string;
   transformr_generate_meta_description_description:string;
+  transformr_generate_teaser_text_title:string;
+  transformr_generate_teaser_text_description:string;
 
 
   summarizr_default_state_title:string;
@@ -119,6 +121,8 @@ const WonkiStudioPlugin_properties: WonkiStudioPlugin_properties = {
   transformr_generate_title_description: "Generate title based on the existing text.",
   transformr_generate_meta_description_title: "HTML Meta Description",
   transformr_generate_meta_description_description: "Generate meta description based on the existing text.",
+  transformr_generate_teaser_text_title: "Teaser Text",
+  transformr_generate_teaser_text_description: "Generate a teaser text based on the existing text.",
 
   summarizr_default_state_title: "SummarizR",
   summarizr_default_state_text: "Summarize texts with the SummarizR AI assistant.",
