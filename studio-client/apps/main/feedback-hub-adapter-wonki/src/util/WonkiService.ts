@@ -46,6 +46,22 @@ class WonkiService {
   }
 
   /**
+   * Generate teaser text for the given content.
+   *
+   * @param content
+   * @param targetAudienceDescription
+   * @param focusKeywords
+   */
+  static generateTeaserText(content: Content, targetAudienceDescription: String, focusKeywords: String[]): Promise<string> {
+    return new Promise((resolve: AnyFunction, reject: AnyFunction) => {
+      this.executeJob(this.TRANSFORM_JOB, this.buildJobParams(content, {
+        targetAudienceDescription: targetAudienceDescription,
+        focusKeywords: focusKeywords,
+        transformType: "teaserText"}), resolve, reject);
+    });
+  }
+
+  /**
    * Generate summary for the given content.
    *
    * @param content

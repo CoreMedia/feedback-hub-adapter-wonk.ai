@@ -15,6 +15,7 @@ import Bean from "@coremedia/studio-client.client-core/data/Bean";
 import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
 import SwitchingContainer from "@coremedia/studio-client.ext.ui-components/components/SwitchingContainer";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
+import TransformTeaserTextPanel from "./TransformTeaserTextPanel";
 
 interface TransformrPanelConfig extends Config<FeedbackItemPanel> {
 
@@ -51,6 +52,11 @@ class TransformrPanel extends FeedbackItemPanel {
 
         // META description
         Config(TransformrMetaDescriptionPanel, {
+          collapsed: true
+        }),
+
+        // Teaser Text
+        Config(TransformTeaserTextPanel, {
           collapsed: true
         }),
 
