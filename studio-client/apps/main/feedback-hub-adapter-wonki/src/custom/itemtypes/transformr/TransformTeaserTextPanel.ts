@@ -18,13 +18,12 @@ import CollapsiblePanel from "@coremedia/studio-client.ext.ui-components/compone
 import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import WonkiLabels from "../../../WonkiStudioPlugin_properties";
-import TagField from "./TagField";
-import TextField from "@jangaroo/ext-ts/form/field/Text";
 import jobService from "@coremedia/studio-client.cap-rest-client/common/jobService";
 import GenericRemoteJob from "@coremedia/studio-client.cap-rest-client-impl/common/impl/GenericRemoteJob";
 import JobExecutionError from "@coremedia/studio-client.cap-rest-client/common/JobExecutionError";
 import trace from "@jangaroo/runtime/trace";
 import Content from "@coremedia/studio-client.cap-rest-client/content/Content";
+import ContextInformationUtil from "../../../util/ContextInformationUtil";
 
 
 interface TransformTeaserTextPanelConfig extends Config<Panel>, Partial<Pick<TransformTeaserTextPanel,
@@ -36,11 +35,7 @@ class TransformTeaserTextPanel extends CollapsiblePanel {
 
   declare Config: TransformTeaserTextPanelConfig;
 
-  private teserTextExpression: ValueExpression;
-
-  private audienceExpression: ValueExpression;
-
-  private focusKeywordsExpression: ValueExpression;
+  private teaserTextExpression: ValueExpression;
 
   contentExpression: ValueExpression;
 
@@ -57,43 +52,12 @@ class TransformTeaserTextPanel extends CollapsiblePanel {
       ui: PanelSkin.FRAME_PLAIN_200.getSkin(),
       bodyPadding: "10 10 10",
       items: [
-
         Config(Container, {
           items: [
             Config(DisplayField, {
               flex: 1,
               value: WonkiLabels.transformr_generate_teaser_text_description
             }),
-            Config(TextField, {
-              flex: 1,
-              fieldLabel: "Audience",
-              allowBlank: true,
-              emptyText: "Describe your audience",
-              plugins: [
-                Config(BindPropertyPlugin, {
-                  bindTo: this$.#getAudienceExpression(),
-                  bidirectional: true,
-                }),
-              ],
-            }),
-            Config(TagField, {
-              width: '50%',
-              fieldLabel: "Focus Keywords",
-              plugins: [
-                Config(BindPropertyPlugin, {
-                  bindTo: this$.#getFocusKeywordsExpression(),
-                  bidirectional: true,
-                }),
-              ],
-            }),
-          ],
-          layout: Config(VBoxLayout, {
-            align: "stretch",
-          })
-
-        }),
-        Config(Container, {
-          items: [
             Config(Button, {
               text: WonkiLabels.wonki_generate_button_label,
               ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
@@ -106,30 +70,30 @@ class TransformTeaserTextPanel extends CollapsiblePanel {
                     return !value || value === "";
                   }
                 }),]
+            })
+          ],
+          layout: Config(HBoxLayout, {align: "stretch"})
+        }),
+        Config(TextArea, {
+          margin: "6px 0px 6px 0px",
+          grow: true,
+          plugins: [
+            Config(BindPropertyPlugin, {
+              bindTo: this$.#getTeaserTextExpression()
             }),
+            Config(BindPropertyPlugin, {
+              bindTo: this$.#getTeaserTextExpression(),
+              componentProperty: "visible",
+              transformer: (value) => {
+                return value && value !== "";
+              }
+            }),
+          ]
+        }),
+        Config(Container, {
+          items: [
             Config(Button, {
               margin: "0 6 0 6",
-              text: WonkiLabels.wonki_apply_button_label,
-              ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
-              handler: bind(this$, this$.applyToPropertyField),
-              plugins: [
-                Config(BindPropertyPlugin, {
-                  bindTo: this$.#getTeaserTextExpression(),
-                  componentProperty: "visible",
-                  transformer: (value) => {
-                    return value || value !== "";
-                  }
-                }),
-                Config(BindPropertyPlugin, {
-                  bindTo: this$.#getTeaserTextExpression(),
-                  componentProperty: "hidden",
-                  transformer: (value) => {
-                    return !value || value === "";
-                  }
-                }),
-              ]
-            }),
-            Config(Button, {
               text: WonkiLabels.wonki_redo_button_label,
               ui: ButtonSkin.SECONDARY_LIGHT.getSkin(),
               handler: bind(this$, this$.generateTeaserText),
@@ -150,23 +114,32 @@ class TransformTeaserTextPanel extends CollapsiblePanel {
                 }),
               ]
             }),
+            Config(Button, {
+              text: WonkiLabels.wonki_apply_button_label,
+              ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
+              handler: bind(this$, this$.applyToPropertyField),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getTeaserTextExpression(),
+                  componentProperty: "visible",
+                  transformer: (value) => {
+                    return value || value !== "";
+                  }
+                }),
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getTeaserTextExpression(),
+                  componentProperty: "hidden",
+                  transformer: (value) => {
+                    return !value || value === "";
+                  }
+                }),
+              ]
+            }),
           ],
-          layout: Config(HBoxLayout, {align: "stretch"})
-        }),
-        Config(Container, {height: 6}),
-        Config(TextArea, {
-          plugins: [
-            Config(BindPropertyPlugin, {
-              bindTo: this$.#getTeaserTextExpression()
-            }),
-            Config(BindPropertyPlugin, {
-              bindTo: this$.#getTeaserTextExpression(),
-              componentProperty: "visible",
-              transformer: (value) => {
-                return value && value !== "";
-              }
-            }),
-          ]
+          layout: Config(HBoxLayout, {
+            pack: "end",
+            align: "stretch"
+          })
         }),
       ],
       layout: Config(VBoxLayout, {
@@ -182,33 +155,20 @@ class TransformTeaserTextPanel extends CollapsiblePanel {
 
 
   #getTeaserTextExpression(): ValueExpression {
-    if (!this.teserTextExpression) {
-      this.teserTextExpression = ValueExpressionFactory.createFromValue("");
+    if (!this.teaserTextExpression) {
+      this.teaserTextExpression = ValueExpressionFactory.createFromValue("");
     }
-    return this.teserTextExpression;
+    return this.teaserTextExpression;
   }
 
-  #getAudienceExpression(): ValueExpression {
-    if (!this.audienceExpression) {
-      this.audienceExpression = ValueExpressionFactory.createFromValue("");
-    }
-    return this.audienceExpression;
-  }
-
-  #getFocusKeywordsExpression(): ValueExpression {
-    if (!this.focusKeywordsExpression) {
-      this.focusKeywordsExpression = ValueExpressionFactory.createFromValue([]);
-    }
-    return this.focusKeywordsExpression;
-  }
 
   generateTeaserText(): void {
     console.log("Generate teaser text");
     const content = this.contentExpression.getValue();
-    let audience = this.#getAudienceExpression().getValue();
-    let focusKeywords = this.#getFocusKeywordsExpression().getValue();
+    let audience = ContextInformationUtil.getAudienceExpression().getValue();
+    let focusKeywords = ContextInformationUtil.getFocusKeywordsExpression().getValue();
 
-    WonkService.generateTeaserText(content,audience,focusKeywords).then((teaserText) => {
+    WonkService.generateTeaserText(content, audience, focusKeywords).then((teaserText) => {
       this.#getTeaserTextExpression().setValue(teaserText);
     });
   }

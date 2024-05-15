@@ -16,6 +16,7 @@ import beanFactory from "@coremedia/studio-client.client-core/data/beanFactory";
 import SwitchingContainer from "@coremedia/studio-client.ext.ui-components/components/SwitchingContainer";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
 import TransformTeaserTextPanel from "./TransformTeaserTextPanel";
+import TransformrContextPanel from "./TransformrContextPanel";
 
 interface TransformrPanelConfig extends Config<FeedbackItemPanel> {
 
@@ -39,25 +40,9 @@ class TransformrPanel extends FeedbackItemPanel {
     // @ts-expect-error Ext JS semantics
     const this$ = this;
     super(ConfigUtils.apply(Config(TransformrPanel, {
+      padding: "10 0 0 0",
       items: [
-        // Keywords
-        Config(TransformrKeywordsPanel, {
-          activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel())
-        }),
-
-        // META title
-        Config(TransformrTitlePanel, {
-          collapsed: true,
-        }),
-
-        // META description
-        Config(TransformrMetaDescriptionPanel, {
-          collapsed: true
-        }),
-
-        // Teaser Text
-        Config(TransformTeaserTextPanel, {
-          collapsed: true
+        Config(TransformrContextPanel, {
         }),
 
         Config(SwitchingContainer, {
@@ -90,7 +75,29 @@ class TransformrPanel extends FeedbackItemPanel {
               text: WonkiLabels.transformr_empty_state_text,
             }),
           ]
-        })
+        }),
+
+        // Keywords
+        Config(TransformrKeywordsPanel, {
+          activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel()),
+          collapsed: true,
+
+        }),
+
+        // META title
+        Config(TransformrTitlePanel, {
+          collapsed: true,
+        }),
+
+        // META description
+        Config(TransformrMetaDescriptionPanel, {
+          collapsed: true
+        }),
+
+        // Teaser Text
+        Config(TransformTeaserTextPanel, {
+          collapsed: true
+        }),
 
       ],
       defaultType: Component.xtype,
