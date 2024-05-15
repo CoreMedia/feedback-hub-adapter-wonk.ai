@@ -22,7 +22,8 @@ import WonkiLabels from "../../../WonkiStudioPlugin_properties";
 
 interface TransformrMetaTitlePanelConfig extends Config<Panel>, Partial<Pick<TransformrTitlePanel,
         "contentExpression" | "premular"
->> {}
+>> {
+}
 
 class TransformrTitlePanel extends CollapsiblePanel {
 
@@ -56,51 +57,18 @@ class TransformrTitlePanel extends CollapsiblePanel {
               handler: bind(this$, this$.generateTitle),
               plugins: [
                 Config(BindPropertyPlugin, {
-                bindTo: this$.#getTitleExpression(),
-                componentProperty: "visible",
-                transformer: (value) => {return !value || value === "";}
-              }),]
-            }),
-            Config(Button, {
-              margin: "0 6 0 6",
-              text: WonkiLabels.wonki_apply_button_label,
-              ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
-              handler: bind(this$, this$.applyToPropertyField),
-              plugins: [
-                Config(BindPropertyPlugin, {
                   bindTo: this$.#getTitleExpression(),
                   componentProperty: "visible",
-                  transformer: (value) => {return value || value !== "";}
-                }),
-                Config(BindPropertyPlugin, {
-                  bindTo: this$.#getTitleExpression(),
-                  componentProperty: "hidden",
-                  transformer: (value) => {return !value || value === "";}
-                }),
-              ]
-            }),
-            Config(Button, {
-              text: WonkiLabels.wonki_redo_button_label,
-              ui: ButtonSkin.SECONDARY_LIGHT.getSkin(),
-              handler: bind(this$, this$.generateTitle),
-              plugins: [
-                Config(BindPropertyPlugin, {
-                  bindTo: this$.#getTitleExpression(),
-                  componentProperty: "visible",
-                  transformer: (value) => {return value || value !== "";}
-                }),
-                Config(BindPropertyPlugin, {
-                  bindTo: this$.#getTitleExpression(),
-                  componentProperty: "hidden",
-                  transformer: (value) => {return !value || value === "";}
-                }),
-              ]
+                  transformer: (value) => {
+                    return !value || value === "";
+                  }
+                }),]
             }),
           ],
-          layout: Config(HBoxLayout, { align: "stretch" })
+          layout: Config(HBoxLayout, {align: "stretch"})
         }),
-        Config(Container, { height: 6 }),
         Config(TextArea, {
+          margin: "6px 0px 6px 0px",
           plugins: [
             Config(BindPropertyPlugin, {
               bindTo: this$.#getTitleExpression()
@@ -108,9 +76,61 @@ class TransformrTitlePanel extends CollapsiblePanel {
             Config(BindPropertyPlugin, {
               bindTo: this$.#getTitleExpression(),
               componentProperty: "visible",
-              transformer: (value) => {return value && value !== "";}
+              transformer: (value) => {
+                return value && value !== "";
+              }
             }),
           ]
+        }),
+        Config(Container, {
+          items: [
+            Config(Button, {
+              margin: "0 6 0 6",
+              text: WonkiLabels.wonki_redo_button_label,
+              ui: ButtonSkin.SECONDARY_LIGHT.getSkin(),
+              handler: bind(this$, this$.generateTitle),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getTitleExpression(),
+                  componentProperty: "visible",
+                  transformer: (value) => {
+                    return value || value !== "";
+                  }
+                }),
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getTitleExpression(),
+                  componentProperty: "hidden",
+                  transformer: (value) => {
+                    return !value || value === "";
+                  }
+                }),
+              ]
+            }),
+            Config(Button, {
+              text: WonkiLabels.wonki_apply_button_label,
+              ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
+              handler: bind(this$, this$.applyToPropertyField),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getTitleExpression(),
+                  componentProperty: "visible",
+                  transformer: (value) => {
+                    return value || value !== "";
+                  }
+                }),
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getTitleExpression(),
+                  componentProperty: "hidden",
+                  transformer: (value) => {
+                    return !value || value === "";
+                  }
+                }),
+              ]
+            }),
+          ],
+          layout: Config(HBoxLayout, {
+            pack: "end",
+            align: "stretch"})
         }),
       ],
       layout: Config(VBoxLayout, {

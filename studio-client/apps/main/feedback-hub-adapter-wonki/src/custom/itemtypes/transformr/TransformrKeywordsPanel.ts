@@ -103,6 +103,7 @@ class TransformrKeywordsPanel extends CollapsiblePanel {
 
   refresh() {
     const keywordsProperty = Config(KeywordsPropertyFeedbackItemPanel, {
+      ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
       itemId: TransformrKeywordsPanel.KEYWORDS_PROPERTY_ITEM_ID,
       cls: "wonki-transformr__keywords-property",
       feedbackGroup: new FeedbackGroup("keywords", FeedbackHubPropertyNames.RELOAD_MODE_NONE, []),
