@@ -28,7 +28,6 @@ class TagField extends Tag {
       valueField: 'name',
       createNewOnBlur: true,
       triggerOnClick: false,
-      emptyText: "provide some focus keywords"
     }), config))
 
 
