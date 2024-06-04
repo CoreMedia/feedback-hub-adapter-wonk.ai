@@ -18,23 +18,24 @@ import CollapsiblePanel from "@coremedia/studio-client.ext.ui-components/compone
 import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import WonkiLabels from "../../../WonkiStudioPlugin_properties";
+import TransformrPanel from "./TransformrPanel";
 
 interface TransformrMetaDescriptionPanelConfig extends Config<Panel>, Partial<Pick<TransformrMetaDescriptionPanel,
-        "contentExpression" | "contentProperty" | "premular"
->> {
-}
+        "contentExpression" |
+        "contentProperty" |
+        "premular" |
+        "activeStateExpression"
+>> {}
 
 class TransformrMetaDescriptionPanel extends CollapsiblePanel {
 
   declare Config: TransformrMetaDescriptionPanelConfig;
 
   private metaDescriptionExpression: ValueExpression;
-
   contentExpression: ValueExpression;
-
   contentProperty: string;
-
   premular: Premular;
+  activeStateExpression: ValueExpression;
 
   constructor(config: Config<TransformrMetaDescriptionPanel> = null) {
     // @ts-expect-error Ext JS semantics
@@ -141,11 +142,11 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
         align: "stretch"
       })
     }), config));
+    this.activeStateExpression = config.activeStateExpression;
 
     if (!config.contentProperty) {
       this$.contentProperty = "htmlDescription";
     }
-
   }
 
   #getMetaDescriptionExpression(): ValueExpression {
@@ -158,9 +159,15 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
   generateMetaDescription(): void {
     console.log("Generate META description");
     const content = this.contentExpression.getValue();
-    WonkiService.generateMetaDescription(content).then((metaDescription) => {
-      this.#getMetaDescriptionExpression().setValue(metaDescription);
-    });
+    this.activeStateExpression.setValue(TransformrPanel.LOADING_STATE);
+    WonkiService.generateMetaDescription(content)
+            .then((metaDescription) => {
+              this.#getMetaDescriptionExpression().setValue(metaDescription);
+              this.activeStateExpression.setValue(TransformrPanel.SUCCESS_STATE);
+            })
+            .catch(() => {
+              this.activeStateExpression.setValue(TransformrPanel.EMPTY_STATE);
+            });
   }
 
   applyToPropertyField(): void {

@@ -44,6 +44,7 @@ class TransformrPanel extends FeedbackItemPanel {
       items: [
         // Teaser Text
         Config(TransformTeaserTextPanel, {
+          activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel()),
           collapsed: true
         }),
 
@@ -56,11 +57,13 @@ class TransformrPanel extends FeedbackItemPanel {
 
         // META title
         Config(TransformrTitlePanel, {
+          activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel()),
           collapsed: true,
         }),
 
         // META description
         Config(TransformrMetaDescriptionPanel, {
+          activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel()),
           collapsed: true
         }),
 

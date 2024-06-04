@@ -25,24 +25,27 @@ import trace from "@jangaroo/runtime/trace";
 import Content from "@coremedia/studio-client.cap-rest-client/content/Content";
 import ContextInformationUtil from "../../../util/ContextInformationUtil";
 import TransformrContextPanel from "./TransformrContextPanel";
+import TransformrPanel from "./TransformrPanel";
+import WonkiService from "../../../util/WonkiService";
 
 
 interface TransformTeaserTextPanelConfig extends Config<Panel>, Partial<Pick<TransformTeaserTextPanel,
-        "contentExpression" | "premular" | "contentProperty"
+        "contentExpression" |
+        "premular" |
+        "contentProperty" |
+        "activeStateExpression"
+
 >> {
 }
 
 class TransformTeaserTextPanel extends CollapsiblePanel {
 
   declare Config: TransformTeaserTextPanelConfig;
-
   private teaserTextExpression: ValueExpression;
-
   contentExpression: ValueExpression;
-
   contentProperty: string;
-
   premular: Premular;
+  activeStateExpression: ValueExpression;
 
   constructor(config: Config<TransformTeaserTextPanel> = null) {
     // @ts-expect-error Ext JS semantics
@@ -149,6 +152,7 @@ class TransformTeaserTextPanel extends CollapsiblePanel {
         align: "stretch"
       })
     }), config));
+    this.activeStateExpression = config.activeStateExpression;
 
     if (!config.contentProperty) {
       this$.contentProperty = "teaserText";
@@ -170,10 +174,15 @@ class TransformTeaserTextPanel extends CollapsiblePanel {
     const content = this.contentExpression.getValue();
     let audience = ContextInformationUtil.getAudienceExpression().getValue();
     let focusKeywords = ContextInformationUtil.getFocusKeywordsExpression().getValue();
-
-    WonkService.generateTeaserText(content, audience, focusKeywords).then((teaserText) => {
-      this.#getTeaserTextExpression().setValue(teaserText);
-    });
+    this.activeStateExpression.setValue(TransformrPanel.LOADING_STATE);
+    WonkiService.generateTeaserText(content,audience, focusKeywords)
+            .then((teaserText) => {
+              this.#getTeaserTextExpression().setValue(teaserText);
+              this.activeStateExpression.setValue(TransformrPanel.SUCCESS_STATE);
+            })
+            .catch(() => {
+              this.activeStateExpression.setValue(TransformrPanel.EMPTY_STATE);
+            });
   }
 
   applyToPropertyField(): void {

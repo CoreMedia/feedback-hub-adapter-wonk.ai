@@ -18,22 +18,23 @@ import CollapsiblePanel from "@coremedia/studio-client.ext.ui-components/compone
 import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import WonkiLabels from "../../../WonkiStudioPlugin_properties";
+import TransformrPanel from "./TransformrPanel";
 
 
 interface TransformrMetaTitlePanelConfig extends Config<Panel>, Partial<Pick<TransformrTitlePanel,
-        "contentExpression" | "premular"
->> {
-}
+        "contentExpression" |
+        "premular" |
+        "activeStateExpression"
+>> {}
 
 class TransformrTitlePanel extends CollapsiblePanel {
 
   declare Config: TransformrMetaTitlePanelConfig;
-
   private titleExpression: ValueExpression;
-
   contentExpression: ValueExpression;
-
   premular: Premular;
+  activeStateExpression: ValueExpression;
+
 
   constructor(config: Config<TransformrTitlePanel> = null) {
     // @ts-expect-error Ext JS semantics
@@ -138,6 +139,7 @@ class TransformrTitlePanel extends CollapsiblePanel {
         align: "stretch"
       })
     }), config));
+    this.activeStateExpression = config.activeStateExpression;
 
   }
 
@@ -151,9 +153,15 @@ class TransformrTitlePanel extends CollapsiblePanel {
   generateTitle(): void {
     console.log("Generate title");
     const content = this.contentExpression.getValue();
-    WonkiService.generateTitle(content).then((metaDescription) => {
-      this.#getTitleExpression().setValue(metaDescription);
-    });
+    this.activeStateExpression.setValue(TransformrPanel.LOADING_STATE);
+    WonkiService.generateTitle(content)
+            .then((title) => {
+              this.#getTitleExpression().setValue(title);
+              this.activeStateExpression.setValue(TransformrPanel.SUCCESS_STATE);
+            })
+            .catch(() => {
+              this.activeStateExpression.setValue(TransformrPanel.EMPTY_STATE);
+            });
   }
 
   applyToPropertyField(): void {

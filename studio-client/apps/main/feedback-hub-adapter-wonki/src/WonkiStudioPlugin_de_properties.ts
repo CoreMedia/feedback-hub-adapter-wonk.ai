@@ -5,14 +5,14 @@ import WonkiStudioPlugin_properties from "./WonkiStudioPlugin_properties";
  * Overrides of ResourceBundle "WonkiStudioPlugin" for Locale "de".
  */
 ResourceBundleUtil.override(WonkiStudioPlugin_properties, {
-  wonki_tooltip: "AI basierte Text-Generierung",
+  wonki_tooltip: "KI basierte Text-Generierung",
   wonki_credit_link: "service bereitgestellt von <a href=\"https://wonk.ai/\" target=\"_blank\">wonk.ai</a>.",
   wonki_generate_button_label: "Generieren",
   wonki_redo_button_label: "Generieren",
   wonki_apply_button_label: "Übernehmen",
 
 
-  ghostwritr_default_state_text: "Erstelle Inhalte schnell und einfach mit dem GhostwriteR-AI-Assistenten. Beginne mit einer Idee oder Frage und wir erledigen den Rest.",
+  ghostwritr_default_state_text: "Erstelle Inhalte schnell und einfach mit dem KI-Assistenten. Beginne mit einer Idee oder Frage und wir erledigen den Rest.",
   ghostwritr_question_label: "Deine Frage",
   ghostwritr_question_emptyText: "Gebe eine Frage ein",
   ghostwritr_question_blank_validation_text: "Dies ist ein Pflichtfeld",
