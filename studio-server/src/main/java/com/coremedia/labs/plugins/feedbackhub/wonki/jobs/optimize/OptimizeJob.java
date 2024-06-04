@@ -7,6 +7,7 @@ import com.coremedia.labs.plugins.feedbackhub.wonki.WonkAISettingsProvider;
 import com.coremedia.labs.plugins.feedbackhub.wonki.WonkiSettings;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.OptimizeService;
 import com.coremedia.labs.plugins.feedbackhub.wonki.api.dto.OptimizeGenerationResponse;
+import com.coremedia.labs.plugins.feedbackhub.wonki.api.dto.OptimizeLengthResponse;
 import com.coremedia.rest.cap.jobs.GenericJobErrorCode;
 import com.coremedia.rest.cap.jobs.Job;
 import com.coremedia.rest.cap.jobs.JobContext;
@@ -36,6 +37,7 @@ public class OptimizeJob implements Job {
   private String transformType;
   private String targetAudienceDescription;
   private List<String> focusKeywords;
+  private String text;
   private Content content;
   private String groupId;
   private String siteId;
@@ -75,7 +77,14 @@ public class OptimizeJob implements Job {
   }
 
   @SerializedName("targetAudienceDescription")
-  public void setTargetAudienceDescription(String targetAudienceDescription) {this.targetAudienceDescription = targetAudienceDescription;}
+  public void setTargetAudienceDescription(String targetAudienceDescription) {
+    this.targetAudienceDescription = targetAudienceDescription;
+  }
+
+  @SerializedName("text")
+  public void setText(String text) {
+    this.text = text;
+  }
 
   @Nullable
   @Override
@@ -96,6 +105,8 @@ public class OptimizeJob implements Job {
           return generateMetaDescription(detailText, siteLocale);
         case "teaserText":
           return generateTeaserText(detailText, siteLocale);
+        case "shorten":
+          return shorten(text, siteLocale);
         default:
           throw new NotImplementedException();
       }
@@ -104,6 +115,11 @@ public class OptimizeJob implements Job {
       LOG.error("Failed to generate keywords for content {}: {}", content.getId(), e.getMessage());
       throw new JobExecutionException(GenericJobErrorCode.FAILED);
     }
+  }
+
+  private Map<String, String> shorten(String text, Locale siteLocale) {
+    OptimizeLengthResponse shortenedTextResponse = service.optimizeLength(text, siteLocale, getSettings().getApiKey());
+    return Map.of(DATA, shortenedTextResponse.getResult());
   }
 
   private Map<String, List<String>> generateKeywords(String text, Locale targetLocale) {

@@ -42,6 +42,9 @@ import BindComponentsPlugin from "@coremedia/studio-client.ext.ui-components/plu
 import SourcesPanel from "./SourcesPanel";
 import GhostwritrSource from "./GhostwritrSource";
 import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
+import TransformrPanel from "../transformr/TransformrPanel";
+import WonkService from "../../../util/WonkiService";
+import WonkiStudioPlugin_properties from "../../../WonkiStudioPlugin_properties";
 
 interface GhostwritrPanelConfig extends Config<FeedbackItemPanel> {
 }
@@ -221,6 +224,28 @@ class GhostwritrPanel extends FeedbackItemPanel {
                       ]
                     }),
                     Config(Button, {
+                      margin: "0 6 0 0",
+                      text: WonkiStudioPlugin_properties.wonki_shorten_button_label,
+                      ui: ButtonSkin.SECONDARY_LIGHT.getSkin(),
+                      handler: bind(this$, this$.shorten),
+                      plugins: [
+                        Config(BindPropertyPlugin, {
+                          bindTo: this$.getGeneratedTextExpression(),
+                          componentProperty: "visible",
+                          transformer: (value) => {
+                            return value || value !== "";
+                          }
+                        }),
+                        Config(BindPropertyPlugin, {
+                          bindTo: this$.getGeneratedTextExpression(),
+                          componentProperty: "hidden",
+                          transformer: (value) => {
+                            return !value || value === "";
+                          }
+                        }),
+                      ]
+                    }),
+                    Config(Button, {
                       text: WonkiLabels.wonki_apply_button_label,
                       ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
                       handler: bind(this$, this$.applyTextToContent),
@@ -323,6 +348,20 @@ class GhostwritrPanel extends FeedbackItemPanel {
       this.#activeStateExpression = ValueExpressionFactory.createFromValue(GhostwritrPanel.DEFAULT_STATE);
     }
     return this.#activeStateExpression;
+  }
+
+  shorten(): void {
+    console.log("Shorten text");
+    const content = this.contentExpression.getValue();
+    this.getActiveStateExpression().setValue(GhostwritrPanel.LOADING_STATE);
+    WonkService.shortenText(this.getGeneratedTextExpression().getValue(), content)
+            .then((shortenedText) => {
+              this.getGeneratedTextExpression().setValue(shortenedText)
+              this.getActiveStateExpression().setValue(GhostwritrPanel.SUCCESS_STATE);
+            })
+            .catch(() => {
+              this.getActiveStateExpression().setValue(GhostwritrPanel.EMPTY_STATE);
+            });
   }
 
   createSource(text: string, url: string): GhostwritrSource {

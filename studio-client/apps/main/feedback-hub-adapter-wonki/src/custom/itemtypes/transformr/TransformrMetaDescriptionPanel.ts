@@ -19,6 +19,8 @@ import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSki
 import HBoxLayout from "@jangaroo/ext-ts/layout/container/HBox";
 import WonkiLabels from "../../../WonkiStudioPlugin_properties";
 import TransformrPanel from "./TransformrPanel";
+import WonkService from "../../../util/WonkiService";
+import WonkiStudioPlugin_properties from "../../../WonkiStudioPlugin_properties";
 
 interface TransformrMetaDescriptionPanelConfig extends Config<Panel>, Partial<Pick<TransformrMetaDescriptionPanel,
         "contentExpression" |
@@ -111,6 +113,28 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
               ]
             }),
             Config(Button, {
+              margin: "0 6 0 0",
+              text: WonkiStudioPlugin_properties.wonki_shorten_button_label,
+              ui: ButtonSkin.SECONDARY_LIGHT.getSkin(),
+              handler: bind(this$, this$.shorten),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getMetaDescriptionExpression(),
+                  componentProperty: "visible",
+                  transformer: (value) => {
+                    return value || value !== "";
+                  }
+                }),
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getMetaDescriptionExpression(),
+                  componentProperty: "hidden",
+                  transformer: (value) => {
+                    return !value || value === "";
+                  }
+                }),
+              ]
+            }),
+            Config(Button, {
               text: WonkiLabels.wonki_apply_button_label,
               ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
               handler: bind(this$, this$.applyToPropertyField),
@@ -147,6 +171,20 @@ class TransformrMetaDescriptionPanel extends CollapsiblePanel {
     if (!config.contentProperty) {
       this$.contentProperty = "htmlDescription";
     }
+  }
+
+  shorten(): void {
+    console.log("Shorten text");
+    const content = this.contentExpression.getValue();
+    this.activeStateExpression.setValue(TransformrPanel.LOADING_STATE);
+    WonkService.shortenText(this.#getMetaDescriptionExpression().getValue(), content)
+            .then((shortenedText) => {
+              this.#getMetaDescriptionExpression().setValue(shortenedText)
+              this.activeStateExpression.setValue(TransformrPanel.SUCCESS_STATE);
+            })
+            .catch(() => {
+              this.activeStateExpression.setValue(TransformrPanel.EMPTY_STATE);
+            });
   }
 
   #getMetaDescriptionExpression(): ValueExpression {

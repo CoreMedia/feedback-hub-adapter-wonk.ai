@@ -19,6 +19,7 @@ interface WonkiStudioPlugin_properties {
   wonki_transformr_tab_title: string;
   wonki_generate_button_label:string;
   wonki_redo_button_label: string;
+  wonki_shorten_button_label: string;
   wonki_apply_button_label:string;
 
   /**
@@ -75,6 +76,7 @@ const WonkiStudioPlugin_properties: WonkiStudioPlugin_properties = {
   wonki_transformr_tab_title: "Optimize",
   wonki_generate_button_label: "Generate",
   wonki_redo_button_label: "Redo",
+  wonki_shorten_button_label: "Shorten",
   wonki_apply_button_label: "Apply",
 
 
@@ -87,7 +89,7 @@ const WonkiStudioPlugin_properties: WonkiStudioPlugin_properties = {
   ghostwritr_apply_text_popup_message: "This will override the existing Article Text.",
   ghostwritr_apply_text_popup_submit_button_label: "Confirm",
   ghostwritr_confidence_bar_label: "Confidence",
-  ghostwritr_default_state_title: "GhostwritR",
+  ghostwritr_default_state_title: "Write",
   ghostwritr_default_state_text: "Create content quickly and easily with the write AI assistant. Start with an idea or question and we do the rest.",
   ghostwritr_empty_state_title: "No result",
   ghostwritr_empty_state_text: "The AI was not able to generate a result. Please rephrase your question and try again.",

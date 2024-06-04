@@ -10,6 +10,7 @@ import VBoxLayout from "@jangaroo/ext-ts/layout/container/VBox";
 import TextArea from "@jangaroo/ext-ts/form/field/TextArea";
 import BindPropertyPlugin from "@coremedia/studio-client.ext.ui-components/plugins/BindPropertyPlugin";
 import WonkService from "../../../util/WonkiService";
+import WonkiService from "../../../util/WonkiService";
 import ValueExpression from "@coremedia/studio-client.client-core/data/ValueExpression";
 import ValueExpressionFactory from "@coremedia/studio-client.client-core/data/ValueExpressionFactory";
 import ContentPropertyNames from "@coremedia/studio-client.cap-rest-client/content/ContentPropertyNames";
@@ -26,7 +27,7 @@ import Content from "@coremedia/studio-client.cap-rest-client/content/Content";
 import ContextInformationUtil from "../../../util/ContextInformationUtil";
 import TransformrContextPanel from "./TransformrContextPanel";
 import TransformrPanel from "./TransformrPanel";
-import WonkiService from "../../../util/WonkiService";
+import WonkiStudioPlugin_properties from "../../../WonkiStudioPlugin_properties";
 
 
 interface TransformTeaserTextPanelConfig extends Config<Panel>, Partial<Pick<TransformTeaserTextPanel,
@@ -119,6 +120,28 @@ class TransformTeaserTextPanel extends CollapsiblePanel {
               ]
             }),
             Config(Button, {
+              margin: "0 6 0 0",
+              text: WonkiStudioPlugin_properties.wonki_shorten_button_label,
+              ui: ButtonSkin.SECONDARY_LIGHT.getSkin(),
+              handler: bind(this$, this$.shorten),
+              plugins: [
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getTeaserTextExpression(),
+                  componentProperty: "visible",
+                  transformer: (value) => {
+                    return value || value !== "";
+                  }
+                }),
+                Config(BindPropertyPlugin, {
+                  bindTo: this$.#getTeaserTextExpression(),
+                  componentProperty: "hidden",
+                  transformer: (value) => {
+                    return !value || value === "";
+                  }
+                }),
+              ]
+            }),
+            Config(Button, {
               text: WonkiLabels.wonki_apply_button_label,
               ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
               handler: bind(this$, this$.applyToPropertyField),
@@ -145,8 +168,7 @@ class TransformTeaserTextPanel extends CollapsiblePanel {
             align: "stretch"
           })
         }),
-        Config(TransformrContextPanel, {
-        }),
+        Config(TransformrContextPanel, {}),
       ],
       layout: Config(VBoxLayout, {
         align: "stretch"
@@ -168,6 +190,19 @@ class TransformTeaserTextPanel extends CollapsiblePanel {
     return this.teaserTextExpression;
   }
 
+  shorten(): void {
+    console.log("Shorten text");
+    const content = this.contentExpression.getValue();
+    this.activeStateExpression.setValue(TransformrPanel.LOADING_STATE);
+    WonkService.shortenText(this.#getTeaserTextExpression().getValue(), content)
+            .then((shortenedText) => {
+              this.#getTeaserTextExpression().setValue(shortenedText)
+              this.activeStateExpression.setValue(TransformrPanel.SUCCESS_STATE);
+            })
+            .catch(() => {
+              this.activeStateExpression.setValue(TransformrPanel.EMPTY_STATE);
+            });
+  }
 
   generateTeaserText(): void {
     console.log("Generate teaser text");
@@ -175,7 +210,7 @@ class TransformTeaserTextPanel extends CollapsiblePanel {
     let audience = ContextInformationUtil.getAudienceExpression().getValue();
     let focusKeywords = ContextInformationUtil.getFocusKeywordsExpression().getValue();
     this.activeStateExpression.setValue(TransformrPanel.LOADING_STATE);
-    WonkiService.generateTeaserText(content,audience, focusKeywords)
+    WonkiService.generateTeaserText(content, audience, focusKeywords)
             .then((teaserText) => {
               this.#getTeaserTextExpression().setValue(teaserText);
               this.activeStateExpression.setValue(TransformrPanel.SUCCESS_STATE);

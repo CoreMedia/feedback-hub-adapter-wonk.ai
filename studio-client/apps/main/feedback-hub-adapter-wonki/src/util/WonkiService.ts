@@ -60,6 +60,21 @@ class WonkiService {
   }
 
   /**
+   * Shorten the given text.
+   *
+   * @param text
+   * @param content
+   */
+  static shortenText(text: String, content: Content): Promise<string> {
+    return new Promise((resolve: AnyFunction, reject: AnyFunction) => {
+      this.executeJob(this.OPTIMIZE_JOB, this.buildJobParams(content, {
+        transformType: "shorten",
+        text: text
+      }), resolve, reject);
+    });
+  }
+
+  /**
    * Trigger remote job execution.
    *
    * @param jobType job type identifier
