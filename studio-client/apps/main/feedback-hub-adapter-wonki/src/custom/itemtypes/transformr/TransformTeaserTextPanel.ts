@@ -24,6 +24,7 @@ import JobExecutionError from "@coremedia/studio-client.cap-rest-client/common/J
 import trace from "@jangaroo/runtime/trace";
 import Content from "@coremedia/studio-client.cap-rest-client/content/Content";
 import ContextInformationUtil from "../../../util/ContextInformationUtil";
+import TransformrContextPanel from "./TransformrContextPanel";
 
 
 interface TransformTeaserTextPanelConfig extends Config<Panel>, Partial<Pick<TransformTeaserTextPanel,
@@ -140,6 +141,8 @@ class TransformTeaserTextPanel extends CollapsiblePanel {
             pack: "end",
             align: "stretch"
           })
+        }),
+        Config(TransformrContextPanel, {
         }),
       ],
       layout: Config(VBoxLayout, {

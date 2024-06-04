@@ -13,6 +13,7 @@ import TextField from "@jangaroo/ext-ts/form/field/Text";
 import TagField from "./TagField";
 import VerticalSpacingPlugin from "@coremedia/studio-client.ext.ui-components/plugins/VerticalSpacingPlugin";
 import ContextInformationUtil from "../../../util/ContextInformationUtil";
+import WonkiStudioPlugin_properties from "../../../WonkiStudioPlugin_properties";
 
 
 interface TransformrContextPanelConfig extends Config<Panel>, Partial<Pick<TransformrContextPanel,
@@ -36,13 +37,14 @@ class TransformrContextPanel extends Panel {
     // @ts-expect-error Ext JS semantics
     const this$ = this;
     super(ConfigUtils.apply(Config(TransformrContextPanel, {
-      margin: "10 0 10 0",
+      margin: "25 0 10 0",
       ui: PanelSkin.FORM_LIGHT.getSkin(),
       items: [
         Config(DisplayField, {
+          margin: "0 0 5 0",
           ui: DisplayFieldSkin.INFO_REGULAR.getSkin(),
           flex: 1,
-          value: "Provide some context information for the AI. With a short description of the content audience and some additional focus keywords you can further tailor and improve the results."
+          value: WonkiStudioPlugin_properties.transformr_generate_teaser_text_context_title
         }),
         Config(TextField, {
           flex: 1,

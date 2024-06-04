@@ -56,6 +56,7 @@ interface WonkiStudioPlugin_properties {
   transformr_generate_meta_description_title:string;
   transformr_generate_meta_description_description:string;
   transformr_generate_teaser_text_title:string;
+  transformr_generate_teaser_text_context_title:string;
   transformr_generate_teaser_text_description:string;
 
 }
@@ -107,6 +108,7 @@ const WonkiStudioPlugin_properties: WonkiStudioPlugin_properties = {
   transformr_generate_meta_description_title: "HTML Meta Description",
   transformr_generate_meta_description_description: "Generate meta description based on the existing text.",
   transformr_generate_teaser_text_title: "Teaser Text",
+  transformr_generate_teaser_text_context_title: "Context Information",
   transformr_generate_teaser_text_description: "Generate a teaser text based on the existing text.",
 };
 

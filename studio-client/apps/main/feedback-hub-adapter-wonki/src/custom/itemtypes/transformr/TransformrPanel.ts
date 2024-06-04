@@ -42,7 +42,26 @@ class TransformrPanel extends FeedbackItemPanel {
     super(ConfigUtils.apply(Config(TransformrPanel, {
       padding: "10 0 0 0",
       items: [
-        Config(TransformrContextPanel, {
+        // Teaser Text
+        Config(TransformTeaserTextPanel, {
+          collapsed: true
+        }),
+
+        // Keywords
+        Config(TransformrKeywordsPanel, {
+          activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel()),
+          collapsed: true,
+
+        }),
+
+        // META title
+        Config(TransformrTitlePanel, {
+          collapsed: true,
+        }),
+
+        // META description
+        Config(TransformrMetaDescriptionPanel, {
+          collapsed: true
         }),
 
         Config(SwitchingContainer, {
@@ -75,28 +94,6 @@ class TransformrPanel extends FeedbackItemPanel {
               text: WonkiLabels.transformr_empty_state_text,
             }),
           ]
-        }),
-
-        // Keywords
-        Config(TransformrKeywordsPanel, {
-          activeStateExpression: ValueExpressionFactory.create(TransformrPanel.ACTIVE_STATE, this$.#getModel()),
-          collapsed: true,
-
-        }),
-
-        // META title
-        Config(TransformrTitlePanel, {
-          collapsed: true,
-        }),
-
-        // META description
-        Config(TransformrMetaDescriptionPanel, {
-          collapsed: true
-        }),
-
-        // Teaser Text
-        Config(TransformTeaserTextPanel, {
-          collapsed: true
         }),
 
       ],

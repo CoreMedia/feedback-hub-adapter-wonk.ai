@@ -28,5 +28,8 @@ ResourceBundleUtil.override(WonkiStudioPlugin_properties, {
   transformr_generate_title_description: "Titel basierend auf dem vorhandenen Text generieren.",
   transformr_generate_meta_description_title: "HTML Meta-Beschreibung",
   transformr_generate_meta_description_description: "Generiere eine Meta-Beschreibung basierend auf dem vorhandenen Text.",
+  transformr_generate_teaser_text_title: "Teasertext",
+  transformr_generate_teaser_text_context_title: "Kontextinformationen für die KI.",
+  transformr_generate_teaser_text_description: "Erzeuge einen Teasertext auf der Grundlage des vorhandenen Textes.",
 
 });
