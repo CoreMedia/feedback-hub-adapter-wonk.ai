@@ -41,6 +41,7 @@ import Panel from "@jangaroo/ext-ts/panel/Panel";
 import BindComponentsPlugin from "@coremedia/studio-client.ext.ui-components/plugins/BindComponentsPlugin";
 import SourcesPanel from "./SourcesPanel";
 import GhostwritrSource from "./GhostwritrSource";
+import PanelSkin from "@coremedia/studio-client.ext.ui-components/skins/PanelSkin";
 
 interface GhostwritrPanelConfig extends Config<FeedbackItemPanel> {
 }
@@ -105,6 +106,22 @@ class GhostwritrPanel extends FeedbackItemPanel {
               text: WonkiLabels.ghostwritr_question_submit_button_label,
             }),
           ],
+          plugins: [
+      Config(BindPropertyPlugin, {
+        bindTo: this$.getGeneratedTextExpression(),
+        componentProperty: "visible",
+        transformer: (value) => {
+          return !value || value === "";
+        }
+      }),
+      Config(BindPropertyPlugin, {
+        bindTo: this$.getGeneratedTextExpression(),
+        componentProperty: "hidden",
+        transformer: (value) => {
+          return value || value !== "";
+        }
+      }),
+          ],
           layout: Config(HBoxLayout, {
             align: "stretch",
             pack: "start",
@@ -158,18 +175,101 @@ class GhostwritrPanel extends FeedbackItemPanel {
                     }),
                   ],
                 }),
-                Config(Container, { height: 6 }),
-                Config(Button, {
-                  formBind: true,
-                  ui: ButtonSkin.VIVID.getSkin(),
-                  handler: bind(this$, this$.applyTextToContent),
-                  text: WonkiLabels.ghostwritr_apply_text_button_label,
+                Config(Container, { height: 10 }),
+                Config(FormPanel, {
+                  items: [
+                    Config(TextField, {
+                      flex: 1,
+                      fieldLabel: WonkiLabels.ghostwritr_question_label,
+                      allowBlank: false,
+                      blankText: WonkiLabels.ghostwritr_question_blank_validation_text,
+                      emptyText: WonkiLabels.ghostwritr_question_emptyText,
+                      plugins: [
+                        Config(BindPropertyPlugin, {
+                          bindTo: this$.getQuestionInputExpression(),
+                          bidirectional: true,
+                        }),
+                      ],
+                      listeners: {
+                        "specialkey": (field: BaseField, e: ExtEvent) => {
+                          if (e.getKey() === ExtEvent.ENTER) {
+                            this.applyQuestion();
+                          }
+                        }
+                      },
+                    }),
+                    Config(Button, {
+                      margin: "0 6 0 6",
+                      text: WonkiLabels.wonki_redo_button_label,
+                      ui: ButtonSkin.SECONDARY_LIGHT.getSkin(),
+                      handler: bind(this$, this$.applyQuestion),
+                      plugins: [
+                        Config(BindPropertyPlugin, {
+                          bindTo: this$.getGeneratedTextExpression(),
+                          componentProperty: "visible",
+                          transformer: (value) => {
+                            return value || value !== "";
+                          }
+                        }),
+                        Config(BindPropertyPlugin, {
+                          bindTo: this$.getGeneratedTextExpression(),
+                          componentProperty: "hidden",
+                          transformer: (value) => {
+                            return !value || value === "";
+                          }
+                        }),
+                      ]
+                    }),
+                    Config(Button, {
+                      text: WonkiLabels.wonki_apply_button_label,
+                      ui: ButtonSkin.PRIMARY_LIGHT.getSkin(),
+                      handler: bind(this$, this$.applyTextToContent),
+                      plugins: [
+                        Config(BindPropertyPlugin, {
+                          bindTo: this$.getGeneratedTextExpression(),
+                          componentProperty: "visible",
+                          transformer: (value) => {
+                            return value || value !== "";
+                          }
+                        }),
+                        Config(BindPropertyPlugin, {
+                          bindTo: this$.getGeneratedTextExpression(),
+                          componentProperty: "hidden",
+                          transformer: (value) => {
+                            return !value || value === "";
+                          }
+                        }),
+                      ]
+                    }),
+                  ],
+                  plugins: [
+                    Config(BindPropertyPlugin, {
+                      bindTo: this$.getGeneratedTextExpression(),
+                      componentProperty: "visible",
+                      transformer: (value) => {
+                        return value || value !== "";
+                      }
+                    }),
+                    Config(BindPropertyPlugin, {
+                      bindTo: this$.getGeneratedTextExpression(),
+                      componentProperty: "hidden",
+                      transformer: (value) => {
+                        return !value || value === "";
+                      }
+                    }),
+                  ],
+                  layout: Config(HBoxLayout, {
+                    align: "stretch",
+                    pack: "start",
+                  }),
                 }),
                 Config(Panel, {
+                  margin: "10 0 10 0",
                   itemId: "sourcesPanel",
+                  ui: PanelSkin.FRAME_PLAIN_200.getSkin(),
                   title: WonkiLabels.ghostwritr_sources_title,
                   collapsible: true,
-                  collapsed: false,
+                  collapsed: true,
                   flex: 1,
                   minHeight: 100,
                   plugins: [Config(BindComponentsPlugin, {

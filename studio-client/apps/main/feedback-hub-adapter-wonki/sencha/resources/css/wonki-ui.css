@@ -1,9 +1,6 @@
 .ghostwritr-general-panel__default-state-icon:before,
 .ghostwritr-general-panel__empty-state-icon:before,
 .ghostwritr-general-panel__loading-state-icon:before,
-.wonki-summarizr__default-state-icon:before,
-.wonki-summarizr__empty-state-icon:before,
-.wonki-summarizr__loading-state-icon:before,
 .wonki-transformr__default-state-icon:before,
 .wonki-transformr__empty-state-icon:before,
 .wonki-transformr__loading-state-icon:before {
@@ -18,15 +15,15 @@
 }
 
 .ghostwritr-general-panel__default-state-icon:before {
-   background-image: url('../img/wonkighost.png');
+   background-image: url('../img/wonkifant.png');
 }
 
 .ghostwritr-general-panel__empty-state-icon:before {
-  background-image: url('../img/wonkighost-error.png');
+  background-image: url('../img/wonkifant-error.png');
 }
 
 .ghostwritr-general-panel__loading-state-icon:before {
-  background-image: url('../img/wonkighost-loader.gif');
+  background-image: url('../img/wonkifant-loader.gif');
 }
 
 .wonki-summarizr__default-state-icon:before,
