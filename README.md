@@ -12,33 +12,33 @@ If a project is inactive it means that the development has been discontinued and
 
 # Feedback Hub Adapter wonk.ai
 
-This is an integration for wonk.ai services like Write and Optimize, powerful tools for Ai based tasks on natural language processing and content generation.
+This is an integration for the wonk.ai services Write and Optimize, powerful tools for Ai based tasks on natural language processing and content generation.
 
 ## Write
-GhostwritR Enables CoreMedia Studio Business users to speed up the content creation process, by providing inspirational texts for given questions or phrases.
+The Write service enables CoreMedia Studio Business users to speed up the content creation process, by providing inspirational texts for given questions or phrases.
 
 Simply type in a question or phrase on your topic of interest. 
 
-![Question Tab](docs/images/GhostwritR_question.png "Provide a question or phrase")
+![Question Tab](docs/images/write_question.png "Provide a question or phrase")
 
-Based on your input GhostwritR will generate a text an entirely new text based on knowledge graphs and web searches. This text can then be applied to the content with a simple click of a button.
+Based on your input the AI will generate an entirely new text based on knowledge graphs and web searches. This text can then be applied to the content with a simple click of a button.
 
-![Feedback Rendering](docs/images/GhostwritR_answer.png "Generated text based on the input")
+![Feedback Rendering](docs/images/write_answer.png "Generated text based on the input")
 
 In addition, GhostwritR provides details on the sources used for text generation.
 
-![Feedback Rendering](docs/images/GhostwritR_sources.png "Details on the sources")
+![Feedback Rendering](docs/images/write_sources.png "Details on the sources")
 
 ## Optimize
 
-The wonk.ai TransformR service supports the editor with the creation of search optimized content by generating relevant
-keywords and HTML metadata for a given text
+The wonk.ai Optimize service supports the editor with the creation of search optimized content by generating relevant teaser texts for different audiences, keywords and HTML metadata for a given text
 
-![Generate Keywords](docs/images/TransformR_keywords.png "Generate Keywords")
+![Generate Teaser Texts](docs/images/optimize_teaser_text.png "Generate Teaser Texts")
 
-![Generate HTML Title](docs/images/TransformR_title.png "Generate HTML Title")
+![Generate Keywords](docs/images/optimize_keywords.png "Generate Keywords")
 
-![Generate HTML Meta Description](docs/images/TransformR_description.png "Generate HTML Meta Description")
+![Generate HTML Title](docs/images/optimize_html_title_and_description.png "Generate HTML Title & Description")
+
 
 ___
 
